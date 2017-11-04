@@ -8,6 +8,8 @@
 # install dependencies
 npm install
 
+(For installing semantic-ui, choose 'automatic' with default directory)
+
 # serve with hot reload at localhost:8080
 npm run dev
 
