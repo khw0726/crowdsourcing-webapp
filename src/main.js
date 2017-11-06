@@ -3,12 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import semantic from 'semantic'
+import '../node_modules/semantic-ui/dist/semantic.css'
+import store from './store/store'
+import $ from 'jquery'
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   template: '<App/>',
   components: { App }

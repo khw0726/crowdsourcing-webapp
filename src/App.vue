@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <div class="ui top inverted fixed menu">
+      <div class="item">
+        ASDF
+      </div>
+    </div>
+    <!-- <img src="./assets/logo.png"> -->
     <router-view/>
   </div>
 </template>
