@@ -6,6 +6,7 @@ import Annotate from '@/components/PostQuestion/Annotate'
 import WriteQuestion from '@/components/PostQuestion/WriteQuestion'
 import Privacy from '@/components/PostQuestion/Privacy'
 import Categorize from '@/components/PostQuestion/Categorize'
+import Stats from '@/components/Stats'
 
 Vue.use(Router)
 
@@ -15,6 +16,11 @@ export default new Router({
       path: '/',
       name: 'Hello',
       component: HelloWorld
+    },
+    {
+      path: '/stats',
+      name: 'stats',
+      component: Stats
     },
     {
       path: '/postQuestion',
