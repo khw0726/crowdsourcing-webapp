@@ -6,7 +6,7 @@ import Annotate from '@/components/PostQuestion/Annotate'
 import WriteQuestion from '@/components/PostQuestion/WriteQuestion'
 import Privacy from '@/components/PostQuestion/Privacy'
 import Categorize from '@/components/PostQuestion/Categorize'
-
+import PostAnswer from '@/components/PostAnswer/PostAnswer'
 Vue.use(Router)
 
 export default new Router({
@@ -38,6 +38,11 @@ export default new Router({
           component: Annotate
         }
       ]
+    },
+    {
+      path: '/postAnswer',
+      name: 'postAnswer',
+      component: PostAnswer
     }
   ]
 })
