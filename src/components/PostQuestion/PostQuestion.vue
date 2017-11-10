@@ -1,10 +1,12 @@
 <template>
   <div class="ui container">
+  	<div id="divCanvas">
     <canvas id="talkCanvas" v-canvas-added 
     @touchstart.prevent="onTouchStart"
     @touchmove.prevent="onTouchMove"
     @touchend.prevent="onTouchEnd"
     @touchcancel.prevent="onTouchCancel"></canvas>
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -24,7 +26,7 @@
             const xOffset = el.width * 0.1
             context.drawImage(img, 0, 0, el.width  , el.height)
           }, false)
-          img.src = '/static/asdf.jpg'
+          img.src = '/static/question.jpg'
         }
       }
     },
@@ -96,8 +98,12 @@
 </script>
 
 <style scoped>
+	#divCanvas {
+	margin: auto;
+	width: 80%;
+	}
   #talkCanvas {
-    width: 80%;
+  	max-width: 100%;
     /* height: 80%; */
   }
 </style>

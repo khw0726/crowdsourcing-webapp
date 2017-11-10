@@ -7,6 +7,7 @@ import WriteQuestion from '@/components/PostQuestion/WriteQuestion'
 import Privacy from '@/components/PostQuestion/Privacy'
 import Categorize from '@/components/PostQuestion/Categorize'
 import PostAnswer from '@/components/PostAnswer/PostAnswer'
+import AnswerComplete from '@/components/PostAnswer/AnswerComplete'
 import Stats from '@/components/Stats'
 
 Vue.use(Router)
@@ -50,6 +51,17 @@ export default new Router({
       path: '/postAnswer',
       name: 'postAnswer',
       component: PostAnswer
+    },
+    {
+      path: '/answerComplete',
+      name: 'answerComplete',
+      component: AnswerComplete
+    },
+    {
+      path: '/status',
+      name: 'status',
+      component: Stats
     }
+
   ]
 })
