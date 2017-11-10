@@ -74,8 +74,8 @@ export default new Router({
       component: AnswerComplete
     },
     {
-      path: '/status',
-      name: 'status',
+      path: '/stats',
+      name: 'stats',
       component: Stats
     }
 
