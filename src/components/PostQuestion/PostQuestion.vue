@@ -1,13 +1,13 @@
 <template>
   <div class="ui container">
   	<div id="divCanvas">
-      <canvas id="talkCanvas" v-canvas-added 
+      <canvas v-if="canvasLoaded" id="talkCanvas" v-canvas-added 
       @touchstart="onTouchStart"
       @touchmove="onTouchMove"
       @touchend="onTouchEnd"
       @touchcancel="onTouchCancel"></canvas>
     </div>
-    <router-view></router-view>
+    <router-view @refreshCanvas="onRefreshCanvas"></router-view>
   </div>
 </template>
 
@@ -27,6 +27,9 @@
             context.drawImage(img, 0, 0, el.width  , el.height)
           }, false)
           img.src = '/static/question.png'
+          this.paths.forEach(function(path){
+            context.stroke(path)
+          })
         }
       }
     },
@@ -38,16 +41,48 @@
           return 'red'
         }
       },
+      width: function () {
+        if(this.$route.name === 'privacy') {
+          return 8
+        } else if (this.$route.name === 'annotate') {
+          return 2
+        }
+      },
       isPathAvailable: function () {
         return this.$route.name === 'privacy' || this.$route.name ==='annotate'
       }
     },
     data: function () {
       return {
-        touches: []
+        touches: [],
+        paths: [],
+        canvasLoaded: true
       }
     },
+    // watch: {
+    //   paths: function (val) {
+        
+    //   }
+    // },
     methods: {
+      onRefreshCanvas: function () {
+        this.canvasLoaded = false
+        this.paths.pop()
+        
+        setTimeout(()=>this.canvasLoaded = true, 1)
+        // this.canvasLoaded = true
+        // const el = document.getElementById('talkCanvas')
+        // const context = el.getContext('2d')
+        // const img = new Image()
+        // img.addEventListener('load', function () {
+        //   // console.log(img)
+        //   // el.width = img.naturalWidth
+        //   el.height = el.width * img.naturalHeight / img.naturalWidth
+        //   const xOffset = el.width * 0.1
+        //   context.drawImage(img, 0, 0, el.width  , el.height)
+        // }, false)
+        // img.src = '/static/question.png'
+      },
       onTouchStart: function (ev) {
         if(this.isPathAvailable) {
           ev.preventDefault()
@@ -56,12 +91,19 @@
           const canvasY = ev.target.offsetTop
           console.log(ev.target.offsetLeft)
           for(let i = 0; i < ev.touches.length; i++) {
+            console.log(ev.touches)
             const touch = ev.touches[i]
-            context.beginPath()
-            context.arc(touch.pageX - canvasX, touch.pageY - canvasY, 4, 0, 2 * Math.PI, false)
-            context.fillStyle = this.color
-            context.fill()
-            this.touches.push(touch)
+            const newPath = new Path2D()
+            newPath.moveTo(touch.pageX - canvasX, touch.pageY - canvasY)
+            this.touches.push({
+              identifier: touch.identifier,
+              path: newPath
+            })
+            // context.beginPath()
+            // context.arc(touch.pageX - canvasX, touch.pageY - canvasY, 4, 0, 2 * Math.PI, false)
+            // context.fillStyle = this.color
+            // context.fill()
+            // this.touches.push(touch)
           }
         }
       },
@@ -77,14 +119,20 @@
               return touch.identifier === newTouch.identifier
             })
             const oldTouch = this.touches[oldTouchIdx]
-            context.strokeStyle = this.color
-            context.beginPath()
-            context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
-            context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
-            context.lineWidth = 8
-            context.stroke()
-            this.touches.splice(oldTouchIdx, 1, newTouch)
+            oldTouch.path.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
+            // context.strokeStyle = this.color
+            // context.beginPath()
+            // context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
+            // context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
+            // context.lineWidth = 8
+            // context.stroke()
+            // this.touches.splice(oldTouchIdx, 1, newTouch)
           }
+          this.touches.forEach((val) => {
+            context.strokeStyle = this.color
+            context.lineWidth = this.width
+            context.stroke(val.path)
+          })
         }
       },
       onTouchEnd: function (ev) {
@@ -99,14 +147,21 @@
               return touch.identifier === newTouch.identifier
             })
             const oldTouch = this.touches[oldTouchIdx]
-            context.strokeStyle = this.color
-            context.beginPath()
-            context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
-            context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
-            context.lineWidth = 8
-            context.stroke()
+            oldTouch.path.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
+            this.paths.push(oldTouch.path)
+            // context.strokeStyle = this.color
+            // context.beginPath()
+            // context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
+            // context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
+            // context.lineWidth = 8
+            // context.stroke()
             this.touches.splice(oldTouchIdx, 1)
           }
+          this.touches.forEach((val) => {
+            context.strokeStyle = this.color
+            context.lineWidth = this.width
+            context.stroke(val.path)
+          })
         }
       },
       onTouchCancel: function(ev) {
@@ -124,12 +179,12 @@
 </script>
 
 <style scoped>
-	#divCanvas {
+	/* #divCanvas {
 	margin: auto;
 	width: 80%;
 	}
   #talkCanvas {
   	max-width: 100%;
-    /* height: 80%; */
-  }
+    /* height: 80%;
+  } */
 </style>

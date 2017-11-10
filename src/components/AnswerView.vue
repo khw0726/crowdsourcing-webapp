@@ -31,7 +31,7 @@ export default {
       return ['절교해야겠네요', '애매한데...', '괜찮은 것 같아요']
     },
     imgSrc: function () {
-      return '/static/question.png'
+      return '/static/answer.jpg'
     }
   }
 }
@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
 img {
-  max-width: 100%;
+  max-width: 80%;
 }
 #text {
   line-height: 180%;
