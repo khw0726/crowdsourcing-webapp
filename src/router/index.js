@@ -7,8 +7,12 @@ import WriteQuestion from '@/components/PostQuestion/WriteQuestion'
 import Privacy from '@/components/PostQuestion/Privacy'
 import Categorize from '@/components/PostQuestion/Categorize'
 import PostAnswer from '@/components/PostAnswer/PostAnswer'
+<<<<<<< HEAD
 import PostFinished from '@/components/PostQuestion/PostFinished'
 import AnswerView from '@/components/AnswerView'
+=======
+import AnswerComplete from '@/components/PostAnswer/AnswerComplete'
+>>>>>>> 6a615b26cbe524959fd5cf160f4b050c47bb5e1a
 import Stats from '@/components/Stats'
 
 Vue.use(Router)
@@ -63,9 +67,21 @@ export default new Router({
       component: PostAnswer
     },
     {
+<<<<<<< HEAD
       path: '/answerView',
       name: 'answerView',
       component: AnswerView
+=======
+      path: '/answerComplete',
+      name: 'answerComplete',
+      component: AnswerComplete
+    },
+    {
+      path: '/status',
+      name: 'status',
+      component: Stats
+>>>>>>> 6a615b26cbe524959fd5cf160f4b050c47bb5e1a
     }
+
   ]
 })
