@@ -5,7 +5,7 @@
 
   </div>
   <div>
-    <button class="ui button" @click="$router.push('status')">나의 현황 보기</button>
+    <button class="ui button" @click="$router.push('stats')">나의 현황 보기</button>
     </div>
   </div>
 </template>

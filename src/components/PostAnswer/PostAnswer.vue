@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ui container">
   	<div id="answerimg">
   		<img src="/static/answer.jpg"/>
   	</div>

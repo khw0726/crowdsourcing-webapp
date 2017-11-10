@@ -21,11 +21,7 @@ export default new Router({
       name: 'Hello',
       component: HelloWorld
     },
-    {
-      path: '/stats',
-      name: 'stats',
-      component: Stats
-    },
+
     {
       path: '/postQuestion',
       name: 'postQuestion',
@@ -81,7 +77,7 @@ export default new Router({
     {
       path: '/stats',
       name: 'stats',
-      component: Stats
+      component: HelloWorld
     }
 
   ]
