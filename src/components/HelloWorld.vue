@@ -1,5 +1,8 @@
 <template>
 <div class="container-fluid">
+  <div>
+    <h3 class="ui header">내 답변 현황</h3>
+
 <vue-tabs>
 <v-tab title="답변 분석">
 <div class="animated fadeIn">
@@ -403,20 +406,23 @@
 <v-tab title="나의 상태">
 <div class="animated fadeIn">
   <div class="card-columns cols-2">
-
+    <div>
+      <img style="width: 80%" src="/static/face.png">
+    </div>
     <b-card header="카테고리별 누적 답변">
       <div class="chart-wrapper">
         <bar-example/>
       </div>
     </b-card>
-
-
-
+    <b-card header="내 도전 과제">
+      <img style="width: 80%;" src="/static/badges.png">
+    </b-card>
   </div>
 </div>
 </v-tab>
 
 </vue-tabs>
+</div>
 </div>
 </template>
 
