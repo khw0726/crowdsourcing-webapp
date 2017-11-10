@@ -7,8 +7,14 @@ import semantic from 'semantic'
 import '../node_modules/semantic-ui/dist/semantic.css'
 import store from './store/store'
 import $ from 'jquery'
+import BootstrapVue from 'bootstrap-vue'
+import VueTabs from 'vue-nav-tabs'
+import 'vue-nav-tabs/themes/vue-tabs.css'
 
 Vue.config.productionTip = false
+
+Vue.use(VueTabs)
+Vue.use(BootstrapVue)
 
 /* eslint-disable no-new */
 new Vue({
