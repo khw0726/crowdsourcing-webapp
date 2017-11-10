@@ -1,7 +1,7 @@
 <template>
 <div class="container-fluid">
 <vue-tabs>
-<v-tab title="First tab">
+<v-tab title="답변 분석">
 <div class="animated fadeIn">
   <div class="row">
 
@@ -17,8 +17,8 @@
             <b-dropdown-item>Something else here...</b-dropdown-item>
             <b-dropdown-item disabled>Disabled action</b-dropdown-item>
           </b-dropdown>
-          <h4 class="mb-0">9.823</h4>
-          <p>Members online</p>
+          <h4 class="mb-0">23초</h4>
+          <p>답변 속도</p>
         </div>
         <card-line1-chart-example :data="[1,2,3,4,5]"  class="chart-wrapper px-3" style="height:70px;" height="70"/>
       </b-card>
@@ -35,8 +35,8 @@
             <b-dropdown-item>Something else here...</b-dropdown-item>
             <b-dropdown-item disabled>Disabled action</b-dropdown-item>
           </b-dropdown>
-          <h4 class="mb-0">9.823</h4>
-          <p>Members online</p>
+          <h4 class="mb-0">294번째</h4>
+          <p>'상사'카테고리의 답변</p>
         </div>
         <card-line2-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/>
       </b-card>
@@ -53,10 +53,11 @@
             <b-dropdown-item>Something else here...</b-dropdown-item>
             <b-dropdown-item disabled>Disabled action</b-dropdown-item>
           </b-dropdown>
-          <h4 class="mb-0">9.823</h4>
-          <p>Members online</p>
+          <h4 class="mb-0">73.6%</h4>
+          <p>당신과 같은 의견을 가진 사람의 비율</p>
         </div>
-        <card-line3-chart-example class="chart-wrapper" style="height:70px;" height="70"/>
+        <card-bar-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/>
+
       </b-card>
     </div><!--/.col-->
     <div class="col-sm-6 col-lg-3">
@@ -71,10 +72,10 @@
             <b-dropdown-item>Something else here...</b-dropdown-item>
             <b-dropdown-item disabled>Disabled action</b-dropdown-item>
           </b-dropdown>
-          <h4 class="mb-0">9.823</h4>
-          <p>Members online</p>
+          <h4 class="mb-0">287위</h4>
+          <p>'상사'카테고리의 랭킹</p>
         </div>
-        <card-bar-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/>
+        <card-line3-chart-example class="chart-wrapper" style="height:70px;" height="70"/>
       </b-card>
     </div><!--/.col-->
   </div><!--/.row-->
@@ -82,8 +83,8 @@
   <b-card>
     <div class="row">
       <div class="col-sm-5">
-        <h4 class="card-title mb-0">Traffic</h4>
-        <div class="small text-muted">November 2016</div>
+        <h4 class="card-title mb-0">답변 수</h4>
+        <div class="small text-muted">November 2017</div>
       </div><!--/.col-->
       <div class="col-sm-7 d-none d-md-block">
         <b-button type="button" variant="primary" class="float-right"><i class="icon-cloud-download"></i></b-button>
@@ -98,39 +99,13 @@
     </div><!--/.row-->
     <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" height="300"></main-chart-example>
     <div slot="footer">
-      <ul>
-        <li>
-          <div class="text-muted">Visits</div>
-          <strong>29.703 Users (40%)</strong>
-          <b-progress class="progress-xs mt-2" :precision="1" variant="success" :value="40"></b-progress>
-        </li>
-        <li class="d-none d-md-table-cell">
-          <div class="text-muted">Unique</div>
-          <strong>24.093 Users (20%)</strong>
-          <b-progress class="progress-xs mt-2" :precision="1" variant="info" :value="20"></b-progress>
-        </li>
-        <li>
-          <div class="text-muted">Pageviews</div>
-          <strong>78.706 Views (60%)</strong>
-          <b-progress class="progress-xs mt-2" :precision="1" variant="warning" :value="60"></b-progress>
-        </li>
-        <li class="d-none d-md-table-cell">
-          <div class="text-muted">New Users</div>
-          <strong>22.123 Users (80%)</strong>
-          <b-progress class="progress-xs mt-2" :precision="1" variant="danger" :value="80"></b-progress>
-        </li>
-        <li class="d-none d-md-table-cell">
-          <div class="text-muted">Bounce Rate</div>
-          <strong>40.15%</strong>
-          <b-progress class="progress-xs mt-2" :precision="1" :value="40"></b-progress>
-        </li>
-      </ul>
+
     </div>
   </b-card>
 </div>
 </v-tab>
 
-<v-tab title="Second tab">
+<v-tab title="답변 통계">
 
 <div class="animated fadeIn">
   <div class="row">
@@ -237,7 +212,7 @@
                 </div>
                 <div class="bars">
                   <b-progress class="progress-xs" :value="34" variant="info"></b-progress>
-                  <b-progress class="progress-xs" :value="78" variant="danger"></b-progress>
+                  <b-progress class="progress-xs" :value="66" variant="danger"></b-progress>
                 </div>
               </li>
               <li>
@@ -246,7 +221,7 @@
                 </div>
                 <div class="bars">
                   <b-progress class="progress-xs" :value="56" variant="info"></b-progress>
-                  <b-progress class="progress-xs" :value="94" variant="danger"></b-progress>
+                  <b-progress class="progress-xs" :value="44" variant="danger"></b-progress>
                 </div>
               </li>
               <li>
@@ -254,8 +229,8 @@
                   친구
                 </div>
                 <div class="bars">
-                  <b-progress class="progress-xs" :value="12" variant="info"></b-progress>
-                  <b-progress class="progress-xs" :value="67" variant="danger"></b-progress>
+                  <b-progress class="progress-xs" :value="88" variant="info"></b-progress>
+                  <b-progress class="progress-xs" :value="12" variant="danger"></b-progress>
                 </div>
               </li>
               <li>
@@ -264,22 +239,22 @@
                 </div>
                 <div class="bars">
                   <b-progress class="progress-xs" :value="43" variant="info"></b-progress>
-                  <b-progress class="progress-xs" :value="91" variant="danger"></b-progress>
+                  <b-progress class="progress-xs" :value="57" variant="danger"></b-progress>
                 </div>
               </li>
               <li>
                 <div class="title">
-                  지인
+                  평균
                 </div>
                 <div class="bars">
-                  <b-progress class="progress-xs" :value="22" variant="info"></b-progress>
-                  <b-progress class="progress-xs" :value="73" variant="danger"></b-progress>
+                  <b-progress class="progress-xs" :value="73" variant="info"></b-progress>
+                  <b-progress class="progress-xs" :value="22" variant="danger"></b-progress>
                 </div>
               </li>
 
 
               <li class="legend">
-                <b-badge pill variant="info"></b-badge> <small>New clients</small> &nbsp; <b-badge pill variant="danger"></b-badge> <small>Recurring clients</small>
+                <b-badge pill variant="info"></b-badge> <small>다수와 일치</small> &nbsp; <b-badge pill variant="danger"></b-badge> <small>소수의견</small>
               </li>
             </ul>
           </div><!--/.col-->
@@ -304,7 +279,7 @@
             <ul class="horizontal-bars type-2">
               <li>
                 <i class="icon-user"></i>
-                <span class="title">Male</span>
+                <span class="title">남성</span>
                 <span class="value">43%</span>
                 <div class="bars">
                   <b-progress class="progress-xs" :value="43" variant="warning"></b-progress>
@@ -312,7 +287,7 @@
               </li>
               <li>
                 <i class="icon-user-female"></i>
-                <span class="title">Female</span>
+                <span class="title">여성</span>
                 <span class="value">37%</span>
                 <div class="bars">
                   <b-progress class="progress-xs" :value="37" variant="warning"></b-progress>
@@ -321,34 +296,34 @@
               <li class="divider"></li>
               <li>
 
-                <span class="title">Organic Search</span>
+                <span class="title">10대</span>
                 <span class="value">191,235 <span class="text-muted small">(56%)</span></span>
                 <div class="bars">
-                  <b-progress class="progress-xs" :value="56" variant="success"></b-progress>
+                  <b-progress class="progress-xs" :value="32" variant="success"></b-progress>
                 </div>
               </li>
               <li>
 
-                <span class="title">Facebook</span>
+                <span class="title">20대</span>
                 <span class="value">51,223 <span class="text-muted small">(15%)</span></span>
                 <div class="bars">
-                  <b-progress class="progress-xs" :value="15" variant="success"></b-progress>
+                  <b-progress class="progress-xs" :value="73" variant="success"></b-progress>
                 </div>
               </li>
               <li>
 
-                <span class="title">Twitter</span>
+                <span class="title">30대</span>
                 <span class="value">37,564 <span class="text-muted small">(11%)</span></span>
                 <div class="bars">
-                  <b-progress class="progress-xs" :value="11" variant="success"></b-progress>
+                  <b-progress class="progress-xs" :value="59" variant="success"></b-progress>
                 </div>
               </li>
               <li>
 
-                <span class="title">LinkedIn</span>
+                <span class="title">40대 이상</span>
                 <span class="value">27,319 <span class="text-muted small">(8%)</span></span>
                 <div class="bars">
-                  <b-progress class="progress-xs" :value="8" variant="success"></b-progress>
+                  <b-progress class="progress-xs" :value="24" variant="success"></b-progress>
                 </div>
               </li>
               <li class="divider text-center">
@@ -415,7 +390,7 @@
           </div>
           <i slot="payment" slot-scope="item" :class="item.value.icon" style="font-size:24px"></i>
           <div slot="activity" slot-scope="item">
-            <div class="small text-muted">Last login</div>
+
             <strong>{{item.value}}</strong>
           </div>
         </b-table>
@@ -425,39 +400,18 @@
 </div>
 </v-tab>
 
-<v-tab title="Third tab">
+<v-tab title="나의 상태">
 <div class="animated fadeIn">
   <div class="card-columns cols-2">
-    <b-card header="Line Chart">
-      <div class="chart-wrapper">
-        <line-example/>
-      </div>
-    </b-card>
-    <b-card header="Bar Chart">
+
+    <b-card header="카테고리별 누적 답변">
       <div class="chart-wrapper">
         <bar-example/>
       </div>
     </b-card>
-    <b-card header="Doughnut Chart">
-      <div class="chart-wrapper">
-        <doughnut-example/>
-      </div>
-    </b-card>
-    <b-card header="Radar Chart">
-      <div class="chart-wrapper">
-        <radar-example/>
-      </div>
-    </b-card>
-    <b-card header="Pie Chart">
-      <div class="chart-wrapper">
-        <pie-example/>
-      </div>
-    </b-card>
-    <b-card header="Polar Area Chart">
-      <div class="chart-wrapper">
-        <polar-area-example/>
-      </div>
-    </b-card>
+
+
+
   </div>
 </div>
 </v-tab>
@@ -507,52 +461,38 @@ export default {
       tableItems: [
         {
           avatar: { url: 'static/img/avatars/1.jpg', status: 'success' },
-          user: { name: 'Yiorgos Avraamu', new: true, registered: 'Jan 1, 2015' },
+          user: { name: '저건 상대방이 화가 나긴 했는데 한번 더 기회를 주려고 기다리는 거예요', registered: '상대방이 화가 났나요?' },
           country: { name: 'USA', flag: 'static/img/flags/USA.png' },
           usage: { value: 50, period: 'Jun 11, 2015 - Jul 10, 2015' },
           payment: { name: 'Mastercard', icon: 'fa fa-cc-mastercard' },
-          activity: '10 sec ago'
+          activity: '63'
         },
         {
           avatar: { url: 'static/img/avatars/2.jpg', status: 'danger' },
-          user: { name: 'Avram Tarasios', new: false, registered: 'Jan 1, 2015' },
+          user: { name: '다른 말 하지 말고 사과만 하시는 게 낫습니다.', new: false, registered: '상대방이 화가 났나요?' },
           country: { name: 'Brazil', flag: 'static/img/flags/Brazil.png' },
           usage: { value: 22, period: 'Jun 11, 2015 - Jul 10, 2015' },
           payment: { name: 'Visa', icon: 'fa fa-cc-visa' },
-          activity: '5 minutes ago'
+          activity: '44'
         },
         {
           avatar: { url: 'static/img/avatars/3.jpg', status: 'warning' },
-          user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2015' },
+          user: { name: '저건 100% 비꼬는 거예요ㅋㅋㅋㅋ', new: true, registered: '저 말 진심인가요?' },
           country: { name: 'India', flag: 'static/img/flags/India.png' },
           usage: { value: 74, period: 'Jun 11, 2015 - Jul 10, 2015' },
           payment: { name: 'Stripe', icon: 'fa fa-cc-stripe' },
-          activity: '1 hour ago'
+          activity: '37'
         },
         {
           avatar: { url: 'static/img/avatars/4.jpg', status: '' },
-          user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2015' },
+          user: { name: '별 생각 없이 던진 농담인데 너무 앞서나가신 것 같네요', new: true, registered: '이 사람 저에게 관심있나요?' },
           country: { name: 'France', flag: 'static/img/flags/France.png' },
           usage: { value: 98, period: 'Jun 11, 2015 - Jul 10, 2015' },
           payment: { name: 'PayPal', icon: 'fa fa-paypal' },
-          activity: 'Last month'
+          activity: '21'
         },
-        {
-          avatar: { url: 'static/img/avatars/5.jpg', status: 'success' },
-          user: { name: 'Agapetus Tadeáš', new: true, registered: 'Jan 1, 2015' },
-          country: { name: 'Spain', flag: 'static/img/flags/Spain.png' },
-          usage: { value: 22, period: 'Jun 11, 2015 - Jul 10, 2015' },
-          payment: { name: 'Google Wallet', icon: 'fa fa-google-wallet' },
-          activity: 'Last week'
-        },
-        {
-          avatar: { url: 'static/img/avatars/6.jpg', status: 'danger' },
-          user: { name: 'Friderik Dávid', new: true, registered: 'Jan 1, 2015' },
-          country: { name: 'Poland', flag: 'static/img/flags/Poland.png' },
-          usage: { value: 43, period: 'Jun 11, 2015 - Jul 10, 2015' },
-          payment: { name: 'Amex', icon: 'fa fa-cc-amex' },
-          activity: 'Last week'
-        }
+
+
       ],
       tableFields: {
         avatar: {
@@ -560,21 +500,11 @@ export default {
           class: 'text-center'
         },
         user: {
-          label: 'User'
+          label: '추천을 많이 받은 주관식 답변'
         },
-        country: {
-          label: 'Country',
-          class: 'text-center'
-        },
-        usage: {
-          label: 'Usage'
-        },
-        payment: {
-          label: 'Payment method',
-          class: 'text-center'
-        },
+
         activity: {
-          label: 'Activity'
+          label: '추천 수'
         }
       }
     }
