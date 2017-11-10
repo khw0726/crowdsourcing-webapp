@@ -31,7 +31,7 @@ export default {
       return ['절교해야겠네요', '애매한데...', '괜찮은 것 같아요']
     },
     imgSrc: function () {
-      return '/static/asdf.jpg'
+      return '/static/question.png'
     }
   }
 }

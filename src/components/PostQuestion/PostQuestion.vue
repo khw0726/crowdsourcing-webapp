@@ -26,7 +26,7 @@
             const xOffset = el.width * 0.1
             context.drawImage(img, 0, 0, el.width  , el.height)
           }, false)
-          img.src = '/static/question.jpg'
+          img.src = '/static/question.png'
         }
       }
     },
