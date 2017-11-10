@@ -4,7 +4,7 @@
     <button class="ui basic red icon button" @click="$emit('refreshCanvas')">
       <i class="undo icon"></i>
     </button>
-    <button class="ui green button" @click="$router.push('privacy')">다음</button>
+    <button class="ui button" @click="$router.push('privacy')">다음</button>
   </div>
 </template>
 
