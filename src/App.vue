@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="ui top inverted fixed menu">
-      <div class="item">
-        ASDF
+      <div class="item" @click="$router.go(-1)">
+        <i class="left arrow icon"/>
       </div>
     </div>
     <!-- <img src="./assets/logo.png"> -->

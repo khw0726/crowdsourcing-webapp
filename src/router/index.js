@@ -7,6 +7,9 @@ import WriteQuestion from '@/components/PostQuestion/WriteQuestion'
 import Privacy from '@/components/PostQuestion/Privacy'
 import Categorize from '@/components/PostQuestion/Categorize'
 import PostAnswer from '@/components/PostAnswer/PostAnswer'
+import PostFinished from '@/components/PostQuestion/PostFinished'
+import AnswerView from '@/components/AnswerView'
+import AnswerComplete from '@/components/PostAnswer/AnswerComplete'
 import Stats from '@/components/Stats'
 
 Vue.use(Router)
@@ -28,28 +31,58 @@ export default new Router({
       name: 'postQuestion',
       component: PostQuestion,
       children: [
-        {
-          path: 'categorize',
-          component: Categorize
-        },
+        // {
+        //   path: 'categorize',
+        //   component: Categorize,
+        //   name: 'categorize'
+        // },
         {
           path: 'privacy',
-          component: Privacy
+          component: Privacy,
+          name: 'privacy'
         },
         {
           path: 'writeQuestion',
-          component: WriteQuestion
+          component: WriteQuestion,
+          name: 'writeQuestion'
         },
         {
           path: 'annotate',
-          component: Annotate
-        }
+          component: Annotate,
+          name: 'annotate'
+        },
+        {
+          path: 'postFinished',
+          name: 'postFinished',
+          component: PostFinished
+        },
+        {
+          path: '',
+          component: Categorize,
+          name: 'categorize'
+        },
       ]
     },
     {
       path: '/postAnswer',
       name: 'postAnswer',
       component: PostAnswer
+    },
+    {
+      path: '/answerView',
+      name: 'answerView',
+      component: AnswerView
+    },
+    {
+      path: '/answerComplete',
+      name: 'answerComplete',
+      component: AnswerComplete
+    },
+    {
+      path: '/stats',
+      name: 'stats',
+      component: Stats
     }
+
   ]
 })
