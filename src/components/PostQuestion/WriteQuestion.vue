@@ -4,6 +4,7 @@
     <div class="ui fluid input">
       <input placeholder="질문">
     </div>
+    <br>
     <button class="ui button" @click="$router.push('annotate')">다음
     </button>
   </div>
