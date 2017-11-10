@@ -31,11 +31,11 @@ export default new Router({
       name: 'postQuestion',
       component: PostQuestion,
       children: [
-        {
-          path: 'categorize',
-          component: Categorize,
-          name: 'categorize'
-        },
+        // {
+        //   path: 'categorize',
+        //   component: Categorize,
+        //   name: 'categorize'
+        // },
         {
           path: 'privacy',
           component: Privacy,
@@ -55,7 +55,12 @@ export default new Router({
           path: 'postFinished',
           name: 'postFinished',
           component: PostFinished
-        }
+        },
+        {
+          path: '',
+          component: Categorize,
+          name: 'categorize'
+        },
       ]
     },
     {
