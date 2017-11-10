@@ -5,7 +5,7 @@
       <input name="example" type="checkbox">
       <label>민감한 개인 정보가 없는지 확인하셨나요?</label>
     </div>
-    <button class="ui button">다음</button>
+    <button class="ui button" @click="$router.push('postFinished')">다음</button>
   </div>
 </template>
 

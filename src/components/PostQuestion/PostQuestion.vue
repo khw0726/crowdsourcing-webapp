@@ -1,10 +1,10 @@
 <template>
   <div class="ui container">
     <canvas id="talkCanvas" v-canvas-added 
-    @touchstart.prevent="onTouchStart"
-    @touchmove.prevent="onTouchMove"
-    @touchend.prevent="onTouchEnd"
-    @touchcancel.prevent="onTouchCancel"></canvas>
+    @touchstart="onTouchStart"
+    @touchmove="onTouchMove"
+    @touchend="onTouchEnd"
+    @touchcancel="onTouchCancel"></canvas>
     <router-view></router-view>
   </div>
 </template>
@@ -28,6 +28,18 @@
         }
       }
     },
+    computed: {
+      color: function() {
+        if(this.$route.name === 'privacy') {
+          return 'black'
+        } else if (this.$route.name === 'annotate') {
+          return 'red'
+        }
+      },
+      isPathAvailable: function () {
+        return this.$route.name === 'privacy' || this.$route.name ==='annotate'
+      }
+    },
     data: function () {
       return {
         touches: []
@@ -35,60 +47,74 @@
     },
     methods: {
       onTouchStart: function (ev) {
-        const context = ev.target.getContext('2d')
-        const canvasX = ev.target.offsetLeft
-        const canvasY = ev.target.offsetTop
-        console.log(ev.target.offsetLeft)
-        for(let i = 0; i < ev.touches.length; i++) {
-          const touch = ev.touches[i]
-          context.beginPath()
-          context.arc(touch.pageX - canvasX, touch.pageY - canvasY, 4, 0, 2 * Math.PI, false)
-          context.fill()
-          this.touches.push(touch)
+        if(this.isPathAvailable) {
+          ev.preventDefault()
+          const context = ev.target.getContext('2d')
+          const canvasX = ev.target.offsetLeft
+          const canvasY = ev.target.offsetTop
+          console.log(ev.target.offsetLeft)
+          for(let i = 0; i < ev.touches.length; i++) {
+            const touch = ev.touches[i]
+            context.beginPath()
+            context.arc(touch.pageX - canvasX, touch.pageY - canvasY, 4, 0, 2 * Math.PI, false)
+            context.fillStyle = this.color
+            context.fill()
+            this.touches.push(touch)
+          }
         }
       },
       onTouchMove: function (ev) {
-        const context = ev.target.getContext('2d')
-        const canvasX = ev.target.offsetLeft
-        const canvasY = ev.target.offsetTop
-        for(let i = 0; i< ev.changedTouches.length; i++){
-          const newTouch = ev.changedTouches[i]
-          const oldTouchIdx = this.touches.findIndex(function (touch){
-            return touch.identifier === newTouch.identifier
-          })
-          const oldTouch = this.touches[oldTouchIdx]
-          context.beginPath()
-          context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
-          context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
-          context.lineWidth = 8
-          context.stroke()
-          this.touches.splice(oldTouchIdx, 1, newTouch)
+        if(this.isPathAvailable){
+          ev.preventDefault()
+          const context = ev.target.getContext('2d')
+          const canvasX = ev.target.offsetLeft
+          const canvasY = ev.target.offsetTop
+          for(let i = 0; i< ev.changedTouches.length; i++){
+            const newTouch = ev.changedTouches[i]
+            const oldTouchIdx = this.touches.findIndex(function (touch){
+              return touch.identifier === newTouch.identifier
+            })
+            const oldTouch = this.touches[oldTouchIdx]
+            context.strokeStyle = this.color
+            context.beginPath()
+            context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
+            context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
+            context.lineWidth = 8
+            context.stroke()
+            this.touches.splice(oldTouchIdx, 1, newTouch)
+          }
         }
       },
       onTouchEnd: function (ev) {
-        const context = ev.target.getContext('2d')
-        const canvasX = ev.target.offsetLeft
-        const canvasY = ev.target.offsetTop
-        for(let i = 0; i< ev.changedTouches.length; i++) {
-          const newTouch = ev.changedTouches[i]
-          const oldTouchIdx = this.touches.findIndex(function (touch){
-            return touch.identifier === newTouch.identifier
-          })
-          const oldTouch = this.touches[oldTouchIdx]
-          context.beginPath()
-          context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
-          context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
-          context.lineWidth = 8
-          context.stroke()
-          this.touches.splice(oldTouchIdx, 1)
+        if(this.isPathAvailable){
+          ev.preventDefault()
+          const context = ev.target.getContext('2d')
+          const canvasX = ev.target.offsetLeft
+          const canvasY = ev.target.offsetTop
+          for(let i = 0; i< ev.changedTouches.length; i++) {
+            const newTouch = ev.changedTouches[i]
+            const oldTouchIdx = this.touches.findIndex(function (touch){
+              return touch.identifier === newTouch.identifier
+            })
+            const oldTouch = this.touches[oldTouchIdx]
+            context.strokeStyle = this.color
+            context.beginPath()
+            context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
+            context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
+            context.lineWidth = 8
+            context.stroke()
+            this.touches.splice(oldTouchIdx, 1)
+          }
         }
       },
       onTouchCancel: function(ev) {
-        for(let i = 0; i< ev.changedTouches.length; i++) {
-          const oldTouchIdx = this.touches.findIndex(function (touch){
-            return touch.identifier === newTouch.identifier
-          })
-          this.touches.splice(oldTouchIdx, 1)
+        if(this.isPathAvailable){
+          for(let i = 0; i< ev.changedTouches.length; i++) {
+            const oldTouchIdx = this.touches.findIndex(function (touch){
+              return touch.identifier === newTouch.identifier
+            })
+            this.touches.splice(oldTouchIdx, 1)
+          }
         }
       }
     }
@@ -97,7 +123,7 @@
 
 <style scoped>
   #talkCanvas {
-    width: 80%;
+    /* width: 80%; */
     /* height: 80%; */
   }
 </style>
