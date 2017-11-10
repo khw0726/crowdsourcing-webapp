@@ -51,7 +51,7 @@ export default new Router({
           name: 'annotate'
         },
         {
-          path: '/postFinished',
+          path: 'postFinished',
           name: 'postFinished',
           component: PostFinished
         }
