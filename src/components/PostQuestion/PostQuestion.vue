@@ -129,11 +129,7 @@
 	width: 80%;
 	}
   #talkCanvas {
-<<<<<<< HEAD
-    /* width: 80%; */
-=======
   	max-width: 100%;
->>>>>>> 6a615b26cbe524959fd5cf160f4b050c47bb5e1a
     /* height: 80%; */
   }
 </style>
