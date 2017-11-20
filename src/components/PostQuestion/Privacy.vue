@@ -9,12 +9,20 @@
     <button class="ui basic red icon button" @click="$emit('refreshCanvas')">
       <i class="undo icon"></i>
     </button>
-    <button class="ui button" @click="$router.push('postFinished')">다음</button>
+    <button class="ui button" @click="onClick">다음</button>
   </div>
 </template>
 
 <script>
-  
+  export default {
+    name: 'privacy',
+    methods: {
+      onClick: function () {
+        this.$emit('postFinished')
+        this.$router.push('postFinished')
+      }
+    }
+  }
 </script>
 
 <style lang="css">

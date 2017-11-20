@@ -26,12 +26,8 @@ export default new Router({
       path: '/postQuestion',
       name: 'postQuestion',
       component: PostQuestion,
+      // props: true,
       children: [
-        // {
-        //   path: 'categorize',
-        //   component: Categorize,
-        //   name: 'categorize'
-        // },
         {
           path: 'privacy',
           component: Privacy,
@@ -65,9 +61,10 @@ export default new Router({
       component: PostAnswer
     },
     {
-      path: '/answerView',
+      path: '/:imgID/answerView',
       name: 'answerView',
-      component: AnswerView
+      component: AnswerView,
+      props: true
     },
     {
       path: '/answerComplete',

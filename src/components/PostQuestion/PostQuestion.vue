@@ -1,19 +1,21 @@
 <template>
   <div class="ui container">
   	<div id="divCanvas">
-      <canvas v-if="canvasLoaded" id="talkCanvas" v-canvas-added 
+      <canvas v-if="canvasLoaded" id="talkCanvas" ref="talkCanvas" v-canvas-added 
       @touchstart="onTouchStart"
       @touchmove="onTouchMove"
       @touchend="onTouchEnd"
       @touchcancel="onTouchCancel"></canvas>
     </div>
-    <router-view @refreshCanvas="onRefreshCanvas"></router-view>
+    <router-view @refreshCanvas="onRefreshCanvas" @postFinished="onPostFinished" ></router-view>
   </div>
 </template>
 
 <script>
+
   export default {
     name: 'postQuestion',
+    // props: ['imgID'],
     directives: {
       canvasAdded: {
         inserted: function (el) {
@@ -27,6 +29,7 @@
             context.drawImage(img, 0, 0, el.width  , el.height)
           }, false)
           img.src = '/static/question.png'
+          console.log(this)
           this.paths.forEach(function(path){
             context.stroke(path)
           })
@@ -59,12 +62,16 @@
         canvasLoaded: true
       }
     },
-    // watch: {
-    //   paths: function (val) {
-        
-    //   }
-    // },
     methods: {
+      onPostFinished: function () {
+        const img =  this.$refs.talkCanvas.toDataURL()
+        const question = {
+          category: this.$store.state.category,
+          question: this.$store.state.question,
+          img: img
+        }
+        this.$root.$firebaseRefs.questions.push(question)
+      },
       onRefreshCanvas: function () {
         this.canvasLoaded = false
         this.paths.pop()
