@@ -74,7 +74,7 @@ export default new Router({
     {
       path: '/stats',
       name: 'stats',
-      component: HelloWorld
+      component: Stats
     }
 
   ]

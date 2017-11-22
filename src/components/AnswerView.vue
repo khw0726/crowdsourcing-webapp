@@ -1,13 +1,14 @@
 <template>
-  <div class="ui container">
-    <img :src="imgSrc">
+
+  <b-container fluid>
+    <b-img :src="imgSrc"/>
     <div id="text">
       <div id="question">{{question}}</div>
       <br>
-      이 질문에 대해 
-      <span id="proportion">{{proportion}}</span>의 사람들이 
+      이 질문에 대해
+      <span id="proportion">{{proportion}}</span>의 사람들이
       <br>
-      <span id="answer">그렇다</span>라고 대답했습니다. 
+      <span id="answer">그렇다</span>라고 대답했습니다.
     </div>
     <div>
       기타 의견은 다음과 같습니다.
@@ -15,7 +16,7 @@
         <li v-for="comment in comments" :key="comment">{{comment}}</li>
       </ul>
     </div>
-  </div>
+  </b-container>
 </template>
 <script>
 export default {
@@ -31,7 +32,7 @@ export default {
       return ['절교해야겠네요', '애매한데...', '괜찮은 것 같아요']
     },
     imgSrc: function () {
-      return '/static/answer.jpg'
+      return 'static/answer.jpg'
     }
   }
 }
@@ -39,7 +40,7 @@ export default {
 
 <style scoped>
 img {
-  max-width: 80%;
+  max-width: 50%;
 }
 #text {
   line-height: 180%;

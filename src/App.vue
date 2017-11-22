@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    <div class="ui top inverted fixed menu">
-      <div class="item" @click="$router.go(-1)">
-        <i class="left arrow icon"/>
-      </div>
-    </div>
+  <b-navbar type="dark" variant="info">
+
+
+
+  <b-navbar-brand href="#">Back</b-navbar-brand>
+
+
+</b-navbar>
+
     <!-- <img src="./assets/logo.png"> -->
     <router-view/>
   </div>
@@ -29,7 +33,6 @@ export default {
   min-height: 100vh;
   color: #2c3e50;
   /*background-color: #e4e5e6;*/
-  margin-top: 60px;
 }
 </style>
 <style>

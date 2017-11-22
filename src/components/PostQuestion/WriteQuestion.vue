@@ -5,8 +5,8 @@
       <input placeholder="질문" v-model="question">
     </div>
     <br>
-    <button class="ui button" @click="onClick">다음
-    </button>
+    
+    <b-button href="/#/postQuestion/annotate">다음</b-button>
   </div>
 </template>
 
@@ -28,5 +28,5 @@
 </script>
 
 <style lang="css">
-  
+
 </style>

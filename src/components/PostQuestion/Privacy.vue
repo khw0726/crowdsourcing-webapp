@@ -9,7 +9,7 @@
     <button class="ui basic red icon button" @click="$emit('refreshCanvas')">
       <i class="undo icon"></i>
     </button>
-    <button class="ui button" @click="onClick">다음</button>
+    <b-button href="/#/postQuestion/postFinished">다음</b-button>
   </div>
 </template>
 
@@ -26,5 +26,5 @@
 </script>
 
 <style lang="css">
-  
+
 </style>
