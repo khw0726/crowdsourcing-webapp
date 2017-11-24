@@ -21,6 +21,11 @@ export default new Router({
       name: 'Hello',
       component: HelloWorld
     },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login
+    },
 
     {
       path: '/postQuestion',
