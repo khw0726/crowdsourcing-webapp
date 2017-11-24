@@ -29,10 +29,10 @@ export default new Router({
     },
 
     {
-      path: '/postQuestion',
+      path: '/:imgID/postQuestion',
       name: 'postQuestion',
       component: PostQuestion,
-      // props: true,
+      props: true,
       children: [
         {
           path: 'privacy',

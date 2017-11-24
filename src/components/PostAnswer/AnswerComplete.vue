@@ -4,7 +4,8 @@
     <span>답변이 완료되었습니다.</span>
 
   </div>
-  <div><b-button href="/#/stats">나의 현황 보기</b-button>
+  <div>
+    <b-button :to="stats">나의 현황 보기</b-button>
 
     </div>
   </div>

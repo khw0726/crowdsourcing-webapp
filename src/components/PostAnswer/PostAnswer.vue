@@ -15,7 +15,7 @@
                    type="text"
                    placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
     <div>
-    	 <b-button href="/#/answerComplete">완료</b-button>
+    	 <b-button :to="answerComplete">완료</b-button>
     </div>
   </div>
 </template>
