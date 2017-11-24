@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 id="registration">회원가입</h3>
-    <b-form @submit="onSubmit">
+    <b-form @submit.prevent="onSubmit">
       <b-form-group id="exampleInputGroup1" label="아이디:" label-for="exampleInput1" description="아이디는 본인 식별 용도로만 사용됩니다.">
         <b-form-input id="exampleInput1" type="text" :state="isValidName" v-model="form.name" required placeholder="네 자 이상의 아이디를 입력해주세요"></b-form-input>
       </b-form-group>
