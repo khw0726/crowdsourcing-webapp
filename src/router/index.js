@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import Login from '@/components/Login'
 import PostQuestion from '@/components/PostQuestion/PostQuestion'
 import Annotate from '@/components/PostQuestion/Annotate'
 import WriteQuestion from '@/components/PostQuestion/WriteQuestion'
@@ -21,17 +22,18 @@ export default new Router({
       name: 'Hello',
       component: HelloWorld
     },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login
+    },
 
     {
       path: '/postQuestion',
       name: 'postQuestion',
       component: PostQuestion,
+      // props: true,
       children: [
-        // {
-        //   path: 'categorize',
-        //   component: Categorize,
-        //   name: 'categorize'
-        // },
         {
           path: 'privacy',
           component: Privacy,
@@ -65,9 +67,10 @@ export default new Router({
       component: PostAnswer
     },
     {
-      path: '/answerView',
+      path: '/:imgID/answerView',
       name: 'answerView',
-      component: AnswerView
+      component: AnswerView,
+      props: true
     },
     {
       path: '/answerComplete',
@@ -77,7 +80,7 @@ export default new Router({
     {
       path: '/stats',
       name: 'stats',
-      component: HelloWorld
+      component: Stats
     }
 
   ]

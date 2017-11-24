@@ -1,19 +1,32 @@
 <template>
   <div>
     <h3 class="ui header">무엇을 물어보고 싶은 지 적어주세요.</h3>
-    <div class="ui fluid action input">
-      <input placeholder="질문">
-      <button class="ui icon button" @click="$router.push('annotate')">
-        <i class="angle right icon"/>
-      </button>
+    <div class="ui fluid input">
+      <input placeholder="질문" v-model="question">
     </div>
+    <br>
+    
+    <b-button href="/#/postQuestion/annotate">다음</b-button>
   </div>
 </template>
 
 <script>
-  
+  export default {
+    name: 'writeQuestion',
+    data: function () {
+      return {
+        question: ''
+      }
+    },
+    methods: {
+      onClick: function () {
+        this.$store.commit('setQuestion', this.question)
+        this.$router.push({name: 'annotate'})
+      }
+    }
+  }
 </script>
 
 <style lang="css">
-  
+
 </style>

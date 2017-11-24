@@ -1,19 +1,21 @@
 <template>
-  <div class="ui container">
+  <div>
   	<div id="answerimg">
   		<img src="/static/answer.jpg"/>
-  	</div>
+  	</div><br>
   	<div><span>상대방이 화가 났나요?</span></div>
-  	<div class="ui buttons">
-      <button class="ui button" v-bind:class="{ active: yActive}" value="y" @click="onYActive">네</button>
-      <button class="ui button" v-bind:class="{ active: nActive}" value="n" @click="onNActive">아니요</button>
+  	<div>
+    <b-button-group>
+    <b-button>네</b-button>
+    <b-button>아니오</b-button>
+    </b-button-group>
      </div>
-    
-    <div class="ui fluid action input">
-      <input placeholder="다른 의견이 있다면 말해주세요."/>
-    </div>
+     <br>
+     <b-form-input v-model="text1"
+                   type="text"
+                   placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
     <div>
-    	<button class="ui button" @click="$router.push('answerComplete')">완료</button>
+    	 <b-button href="/#/answerComplete">완료</b-button>
     </div>
   </div>
 </template>
@@ -42,10 +44,10 @@
 
 <style scoped>
 	#answerimg {
-	width: 80%;
+	width: 50%;
 	margin: auto;
 	}
   #answerimg img{
-  	max-width:100%;
+  	max-width:60%;
   }
 </style>
