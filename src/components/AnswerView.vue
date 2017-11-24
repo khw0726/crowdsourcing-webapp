@@ -23,6 +23,7 @@
 <script>
 export default {
   name: 'answerView',
+  // DB-TODO: Show answers
   computed: {
     question: function () {
       return '상대방이 지금 저에게 화가 났나요?'

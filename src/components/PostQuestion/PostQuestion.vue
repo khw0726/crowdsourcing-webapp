@@ -79,6 +79,8 @@ import fb from '@/fb.js'
     },
     methods: {
       onPostFinished: function () {
+        // DB-TODO: Update existing entry
+
         // const img =  this.$refs.talkCanvas.toDataURL()
         // const question = {
         //   category: this.$store.state.category,
