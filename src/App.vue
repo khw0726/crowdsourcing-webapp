@@ -25,7 +25,6 @@ export default {
   font-family: 'Noto Sans CJK KR', '나눔바른고딕', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   font-size: .875rem;
   font-weight: 400;
   line-height: 1.5;
