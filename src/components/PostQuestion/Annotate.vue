@@ -1,10 +1,10 @@
 <template>
-  <div><br>
-    <h3 i class="header">속뜻이 궁금한 말풍선을 표시해주세요.</h3>
-    <button class="ui basic red icon button" @click="$emit('refreshCanvas')">
-      <i class="undo icon"></i>
-    </button>
-    <b-button href="/#/postQuestion/privacy">다음</b-button>
+  <div>
+    <h5>속뜻이 궁금한 말풍선에 동그라미를 쳐주세요.</h5>
+    <b-button variant="danger" @click="$emit('refreshCanvas')">
+      <i class="fa fa-undo" aria-hidden="true"></i>
+    </b-button>
+    <b-button :to="{name:'privacy'}">다음</b-button>
   </div>
 </template>
 

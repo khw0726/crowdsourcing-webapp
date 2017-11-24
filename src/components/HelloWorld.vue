@@ -50,25 +50,27 @@ export default {
         selected: []
 
       },
-
+      age: [{
+          text: 'Select One',
+          value: null
+        },
+        '10대', '20대', '30대', '40대', '50대 이상'
+      ],
+      // isValidName: null
+    }
+  },
+  computed: {
+    isValidName: function () {
+      if(this.form.name.length < 4){
+        return null
+      }
+      let idx = this.$root.users.findIndex((element) => {
+        return element.name === this.form.name
+      })
+      return (idx === -1) 
     }
   },
   methods: {
-    checkNameValidity: function() {
-      this.$root.$firebaseRefs.users.once('value').then(snapshot => {
-        const users = snapshot.val()
-        console.log(users)
-        for (let user in users) {
-          console.log(user)
-          if (users[user].name === this.form.name) {
-            this.isValidName = false
-            return
-          }
-        }
-        this.isValidName = true
-      })
-
-    },
     onSubmit(evt) {
       this.$root.$firebaseRefs.users.push(this.form)
       this.$store.commit('setAnswererInfo', this.form)

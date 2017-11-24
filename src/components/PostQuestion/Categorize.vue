@@ -5,10 +5,12 @@
   더 좋은 답변을 드리는 데 도움이 됩니다.</h3>
   </header>
   <div>
-    <b-button @click="onClick('연애')">연애</b-button>
-    <b-button class="ui button" @click="onClick('직장')">직장</b-button>
-    <b-button class="ui button" @click="onClick('친구')">친구</b-button>
-    <b-button class="ui button" @click="onClick('가족')">가족</b-button>
+    <b-button-group>
+      <b-button class="ui button" @click="onClick('love')">연애</b-button>
+      <b-button class="ui button" @click="onClick('friend')">친구</b-button>
+      <b-button class="ui button" @click="onClick('business')">직장</b-button>
+      <b-button class="ui button" @click="onClick('family')">가족</b-button>
+    </b-button-group>
   </div>
 </div>
 </template>

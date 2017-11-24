@@ -1,6 +1,7 @@
 <template>
 
-  <b-container fluid>
+  <!-- <b-container fluid> -->
+    <div>
     <b-img :src="imgSrc"/>
     <div id="text">
       <div id="question">{{question}}</div>
@@ -16,7 +17,8 @@
         <li v-for="comment in comments" :key="comment">{{comment}}</li>
       </ul>
     </div>
-  </b-container>
+    </div>
+  <!-- </b-container> -->
 </template>
 <script>
 export default {
