@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
+import QuestionList from '@/components/QuestionList'
 import PostQuestion from '@/components/PostQuestion/PostQuestion'
 import Annotate from '@/components/PostQuestion/Annotate'
 import WriteQuestion from '@/components/PostQuestion/WriteQuestion'
@@ -26,6 +27,11 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/QuestionList',
+      name: 'QuestionList',
+      component: QuestionList
     },
 
     {
