@@ -1,6 +1,6 @@
 <template>
-  <div class="ui container">
-  	<div id="divCanvas">
+  <div>
+    <div id="divCanvas">
       <canvas v-if="canvasLoaded" id="talkCanvas" ref="talkCanvas" v-canvas-added="{paths: paths, img: img, color: color, width: width}"
       @touchstart="onTouchStart"
       @touchmove="onTouchMove"
@@ -200,6 +200,9 @@ import fb from '@/fb.js'
 </script>
 
 <style scoped>
+template {
+  text-align: center
+}
 	/* #divCanvas {
 	margin: auto;
 	width: 80%;

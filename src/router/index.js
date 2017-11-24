@@ -62,9 +62,10 @@ export default new Router({
       ]
     },
     {
-      path: '/postAnswer',
+      path: '/:imgID/postAnswer',
       name: 'postAnswer',
-      component: PostAnswer
+      component: PostAnswer,
+      props: true
     },
     {
       path: '/:imgID/answerView',
