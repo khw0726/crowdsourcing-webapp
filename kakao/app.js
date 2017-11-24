@@ -1,5 +1,33 @@
+
+
+var db = require('../src/fb.js')
 var express    = require('express');
+console.log("here");
 var app        = express();
+var base64 = require('node-base64-image');
+
+function makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 10; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
+console.log(makeid());
+
+function writeUserData(id, response) {
+  console.log("here3");
+  console.log(response);
+  
+
+  db.db.ref('questions/' + id).set({
+
+    'img' : response
+  });
+}
+
 
 var bodyParser = require('body-parser');
 // parse application/json
@@ -20,7 +48,6 @@ app.get('/keyboard', function(req, res){
   }).send(JSON.stringify(menu));
 });
 
-
 app.post('/message',function (req, res) {
 
     const _obj = {
@@ -28,11 +55,23 @@ app.post('/message',function (req, res) {
         type: req.body.type,
         content: req.body.content
     };
-    let id = 1
+    let id = makeid();
     // content -> db ->get (ramdom)key id ->
+    if (_obj.type == 'photo') {
+      console.log(_obj.content);
+      var contentArray = _obj.content.split('.');
+      console.log(contentArray);
+      base64.encode(_obj.content, {string: true, local: false}, function(error, res) {
+        var contentArray = _obj.content.split('.');
+        console.log(contentArray);
+        var string = "data:image/"+contentArray[contentArray.length-1]+";base64, "+res;
+        console.log(string);
+        writeUserData(id, string);});
+
+    }
     let massage = {
             "message": {
-                "text": '이 곳에서 마저 질문을 작성해 보세요.\nhttps://url/id='+id
+                "text": '이 곳에서 마저 질문을 작성해 보세요.\nhttps://34.208.245.104:8090/#/'+id+'/postQuestion'
             },
             "keyboard": {
                 "type": "text"
