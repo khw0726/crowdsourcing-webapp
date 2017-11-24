@@ -1,44 +1,26 @@
 <template>
-<div>
-  <div id="answerimg">
-    <img src="/static/answer.jpg" />
-  </div><br>
-  <div><span>상대방이 화가 났나요?</span></div>
   <div>
-<<<<<<< HEAD
   	<div id="answerimg">
   		<img :src="img">
   	</div><br>
   	<div><span>상대방이 화가 났나요?</span></div>
   	<div>
-=======
->>>>>>> 59983a3a7b40bfc24b2e26a6446101d24eb439a5
     <b-button-group>
       <b-btn>네</b-btn>
       <b-btn>아니오</b-btn>
     </b-button-group>
-<<<<<<< HEAD
      </div>
      <br>
      <b-form-input v-model="answer"
                    type="text"
                    placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
     <div>
-    	 <b-button :to="'answerComplete'">완료</b-button>
+    	 <b-button >완료</b-button>
     </div>
-=======
->>>>>>> 59983a3a7b40bfc24b2e26a6446101d24eb439a5
   </div>
-  <br>
-  <b-form-input v-model="text1" type="text" placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
-  <div>
-    <b-button href="/#/answerComplete">완료</b-button>
-  </div>
-</div>
 </template>
 
 <script>
-<<<<<<< HEAD
 import fb from "@/fb.js";
 export default {
   name: "postAnswer",
@@ -51,7 +33,8 @@ export default {
     };
   },
   firebase: {
-    questions: fb.db.ref('questions')
+    questions: fb.db.ref('questions'),
+    answers: fb.db.ref('answers')
   },
   computed: {
     img: function() {
@@ -75,42 +58,27 @@ export default {
     onNActive: function() {
       this.nActive = true;
       this.yActive = false;
+    },
+    onSubmit: function () {
+      const answerObj = {
+        isYes: this.yActive,
+        answer: this.answer,
+        name: this.$store.state.answererInfo.name,
+        questionID: this.imgID
+      }
+      this.$firebaseRefs.answers.push(answerObj)
+      this.$router.push('answerComplete')
     }
   }
 };
-=======
-export default {
-  name: 'postAnswer',
-  data: function() {
-    return {
-      yActive: false,
-      nActive: false
-    }
-  },
-  methods: {
-    onYActive: function() {
-      this.yActive = true;
-      this.nActive = false;
-    },
-    onNActive: function() {
-      this.nActive = true;
-      this.yActive = false;
-    }
-  }
-}
->>>>>>> 59983a3a7b40bfc24b2e26a6446101d24eb439a5
 </script>
 
 <style scoped>
 #answerimg {
-  width: 50%;
+  width: 80%;
   margin: auto;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 59983a3a7b40bfc24b2e26a6446101d24eb439a5
 #answerimg img {
-  max-width: 60%;
+  max-width: 100%;
 }
 </style>

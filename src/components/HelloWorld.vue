@@ -50,7 +50,6 @@ export default {
         selected: []
 
       },
-<<<<<<< HEAD
       age: [{
           text: 'Select One',
           value: null
@@ -69,27 +68,9 @@ export default {
         return element.name === this.form.name
       })
       return (idx === -1) 
-=======
-
->>>>>>> 59983a3a7b40bfc24b2e26a6446101d24eb439a5
     }
   },
   methods: {
-    checkNameValidity: function() {
-      this.$root.$firebaseRefs.users.once('value').then(snapshot => {
-        const users = snapshot.val()
-        console.log(users)
-        for (let user in users) {
-          console.log(user)
-          if (users[user].name === this.form.name) {
-            this.isValidName = false
-            return
-          }
-        }
-        this.isValidName = true
-      })
-
-    },
     onSubmit(evt) {
       this.$root.$firebaseRefs.users.push(this.form)
       this.$store.commit('setAnswererInfo', this.form)

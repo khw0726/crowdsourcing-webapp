@@ -7,7 +7,7 @@
     </b-navbar>
     <!-- <img src="./assets/logo.png"> -->
     <b-container fluid>
-    <router-view/>
+      <router-view/>
     </b-container>
   </div>
 </template>

@@ -7,6 +7,7 @@
       @touchend="onTouchEnd"
       @touchcancel="onTouchCancel"></canvas>
     </div>
+    <br/>
     <router-view @refreshCanvas="onRefreshCanvas" @postFinished="onPostFinished" ></router-view>
   </div>
 </template>
@@ -27,8 +28,8 @@ import fb from '@/fb.js'
           // console.log(img)
           // el.width = img.naturalWidth
           el.height = el.width * img.naturalHeight / img.naturalWidth
-          const xOffset = el.width * 0.1
-          context.drawImage(img, 0, 0, el.width  , el.height)
+          // const xOffset = el.width * 0.1
+          context.drawImage(img, 0, 0, el.width, el.height)
           context.strokeStyle = binding.value.color
           context.lineWidth = binding.value.width
           binding.value.paths.forEach(function(path){
@@ -200,15 +201,22 @@ import fb from '@/fb.js'
 </script>
 
 <style scoped>
-template {
+/* template {
   text-align: center
-}
-	/* #divCanvas {
+} */
+#divCanvas {
 	margin: auto;
-	width: 80%;
-	}
-  #talkCanvas {
-  	max-width: 100%;
-    /* height: 80%;
-  } */
+  /* width: 80%; */
+  /* position:relative; */
+}
+
+canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  max-width: 100%;
+}
+
 </style>
