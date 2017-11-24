@@ -8,18 +8,18 @@
     <b-input-group-button slot="right">
       <b-btn variant="info">중복확인</b-btn>
     </b-input-group-button>
-    <h7 class="mt-2">관심 카테고리:</h7>
+    <h6 class="mt-2">관심 카테고리:</h6>
     <b-form-checkbox-group id="checkboxes1" name="interest" v-model="selected">
       <b-form-checkbox value="love">연애</b-form-checkbox>
       <b-form-checkbox value="friend">친구</b-form-checkbox>
       <b-form-checkbox value="boss">상사</b-form-checkbox>
       <b-form-checkbox value="family">가족</b-form-checkbox>
       <b-form-checkbox value="business">업무관계</b-form-checkbox><br>
-      <h7>관심 카테고리의 질문에 대한 푸시알림을 받으시겠습니까?</h7>
+      <h6>관심 카테고리의 질문에 대한 푸시알림을 받으시겠습니까?</h6>
     </b-form-checkbox-group>
     <b-button variant="success">네</b-button>
     <b-button disabled variant="success">아니요</b-button><br><br>
-    <h7 class="mt-3">성별:</h7>
+    <h6 class="mt-3">성별:</h6>
     <b-form-checkbox-group id="checkboxes2" name="gender" v-model="selected">
       <b-form-checkbox value="man">남</b-form-checkbox>
       <b-form-checkbox value="woman">여</b-form-checkbox>
@@ -38,6 +38,7 @@ export default {
   data() {
     return {
       form: {
+
         email: '',
         name: '',
         food: null,
@@ -49,7 +50,8 @@ export default {
           value: null
         },
         '10대', '20대', '30대', '40대', '50대 이상'
-      ]
+      ],
+      selected: [],
     }
   },
   methods: {
@@ -61,7 +63,5 @@ export default {
 }
 </script>
 <style scoped>
-#registration {
-  float: center;
-}
+
 </style>

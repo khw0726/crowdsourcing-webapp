@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import Login from '@/components/Login'
 import PostQuestion from '@/components/PostQuestion/PostQuestion'
 import Annotate from '@/components/PostQuestion/Annotate'
 import WriteQuestion from '@/components/PostQuestion/WriteQuestion'
