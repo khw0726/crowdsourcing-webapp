@@ -139,6 +139,7 @@ data: function() {
             // context.fill()
             // this.touches.push(touch)
           }
+
         }
       }
     },
@@ -146,7 +147,7 @@ data: function() {
       if (this.isPathAvailable) {
         ev.preventDefault()
         const context = ev.target.getContext('2d')
-        const canvasX = ev.target.offsetCenter
+        const canvasX = ev.target.offsetLeft
         const canvasY = ev.target.offsetTop
         for (let i = 0; i < ev.changedTouches.length; i++) {
           const newTouch = ev.changedTouches[i]
@@ -174,7 +175,7 @@ data: function() {
       if (this.isPathAvailable) {
         ev.preventDefault()
         const context = ev.target.getContext('2d')
-        const canvasX = ev.target.offsetCenter
+        const canvasX = ev.target.offsetLeft
         const canvasY = ev.target.offsetTop
         for (let i = 0; i < ev.changedTouches.length; i++) {
           const newTouch = ev.changedTouches[i]
