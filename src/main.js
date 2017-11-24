@@ -26,7 +26,8 @@ new Vue({
   store,
   router,
   firebase: {
-    questions: fb.db.ref('questions')
+    questions: fb.db.ref('questions'),
+    users: fb.db.ref('users')
   },
   template: '<App/>',
   components: { App }

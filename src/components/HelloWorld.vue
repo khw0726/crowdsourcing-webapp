@@ -3,12 +3,12 @@
   <h3 id="registration">회원가입</h3>
   <b-form @submit="onSubmit">
     <b-form-group id="exampleInputGroup1" label="아이디:" label-for="exampleInput1" description="아이디는 본인 식별 용도로만 사용됩니다.">
-      <b-form-input id="exampleInput1" type="text" :state="isValidName" v-model="form.name" required placeholder="네 자 이상의 아이디를 입력해주세요"></b-form-input>
+      <b-form-input id="exampleInput1" type="text" :state="isValidName" v-model="form.name" required placeholder="네 자 이상의 아이디를 입력해주세요">
+      </b-form-input>
     </b-form-group>
-    <b-input-group-button slot="right">
-      <b-btn variant="info" @click="checkNameValidity">중복확인</b-btn>
-    </b-input-group-button>
-    관심 카테고리:
+    <b-btn variant="info" @click="checkNameValidity">중복확인</b-btn>
+
+    <br>관심 카테고리:
     <b-form-checkbox-group id="checkboxes1" label-for="checkboxes1" name="interest" v-model="form.selected">
       <b-form-checkbox value="love">연애</b-form-checkbox>
       <b-form-checkbox value="friend">친구</b-form-checkbox>
@@ -20,7 +20,7 @@
     <b-form-checkbox v-model="form.pushSubscribed">관심 카테고리의 질문에 대한 알림을 받으시겠습니까?</b-form-checkbox>
     <!-- <b-button variant="success">네</b-button>
       <b-button disabled variant="success">아니요</b-button><br><br> -->
-    성별:
+    <br>성별:
     <b-form-radio-group id="checkboxes2" name="gender" v-model="form.gender">
       <b-form-radio value="man">남</b-form-radio>
       <b-form-radio value="woman">여</b-form-radio>
