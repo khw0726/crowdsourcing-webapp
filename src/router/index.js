@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
+import QuestionList from '@/components/QuestionList'
 import PostQuestion from '@/components/PostQuestion/PostQuestion'
 import Annotate from '@/components/PostQuestion/Annotate'
 import WriteQuestion from '@/components/PostQuestion/WriteQuestion'
@@ -27,12 +28,17 @@ export default new Router({
       name: 'Login',
       component: Login
     },
+    {
+      path: '/QuestionList',
+      name: 'QuestionList',
+      component: QuestionList
+    },
 
     {
-      path: '/postQuestion',
+      path: '/:imgID/postQuestion',
       name: 'postQuestion',
       component: PostQuestion,
-      // props: true,
+      props: true,
       children: [
         {
           path: 'privacy',
@@ -62,9 +68,10 @@ export default new Router({
       ]
     },
     {
-      path: '/postAnswer',
+      path: '/:imgID/postAnswer',
       name: 'postAnswer',
-      component: PostAnswer
+      component: PostAnswer,
+      props: true
     },
     {
       path: '/:imgID/answerView',

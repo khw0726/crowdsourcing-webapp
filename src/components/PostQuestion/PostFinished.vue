@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="ui header" id="prompt">질문이 등록되었습니다. 답변은 5분 뒤 카카오톡에서 확인해주세요.</h3>
+    <h5 id="prompt">질문이 등록되었습니다. 답변은 5분 뒤 카카오톡에서 확인해주세요.</h5>
   </div>
 </template>
 <script>

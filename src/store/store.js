@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     category: '',
-    question: ''
+    question: '',
+    answererInfo: {} 
   },
   mutations: {
     setCategory: function(state, payload){
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     setQuestion: function(state, payload){
       state.question = payload
+    },
+    setAnswererInfo: function (state, payload) {
+      state.answererInfo = payload
     }
   }
 })
