@@ -90,7 +90,13 @@ data: function() {
       this.$root.$firebaseRefs.questions.push(question)
     },
     methods: {
+<<<<<<< HEAD
       onPostFinished: function() {
+=======
+      onPostFinished: function () {
+        // DB-TODO: Update existing entry
+
+>>>>>>> 993ecec2055a52e46294552a2d92acfaa870d7a7
         // const img =  this.$refs.talkCanvas.toDataURL()
         // const question = {
         //   category: this.$store.state.category,

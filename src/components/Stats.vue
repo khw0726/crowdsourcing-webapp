@@ -417,6 +417,8 @@
 </template>
 
 <script>
+        // DB-TODO: Connect with ranking system
+
 import BarExample from './charts/BarExample'
 import LineExample from './charts/LineExample'
 import DoughnutExample from './charts/DoughnutExample'
