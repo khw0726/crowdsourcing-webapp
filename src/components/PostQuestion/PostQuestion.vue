@@ -6,8 +6,6 @@
   <br/>
   <router-view @refreshCanvas="onRefreshCanvas" @postFinished="onPostFinished"></router-view>
 </div>
-<router-view @refreshCanvas="onRefreshCanvas" @postFinished="onPostFinished"></router-view>
-</div>
 </template>
 
 <script>
@@ -68,10 +66,7 @@ export default {
       return this.$route.name === 'privacy' || this.$route.name === 'annotate'
     }
   },
-  isPathAvailable: function() {
-    return this.$route.name === 'privacy' || this.$route.name === 'annotate'
-  }
-},
+
 data: function() {
     return {
       touches: [],

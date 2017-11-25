@@ -11,7 +11,7 @@
 
 <script>
 export default{
-firebase {
+firebase: {
   questions: fb.db.ref('questions')
 }
 }
