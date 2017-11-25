@@ -44,6 +44,7 @@ export default {
     return {
       form: {
         name: '',
+        interest: null,
         age: null,
         gender: null,
         pushSubscribed: false,
@@ -60,14 +61,14 @@ export default {
     }
   },
   computed: {
-    isValidName: function () {
-      if(this.form.name.length < 4){
+    isValidName: function() {
+      if (this.form.name.length < 4) {
         return null
       }
       let idx = this.$root.users.findIndex((element) => {
         return element.name === this.form.name
       })
-      return (idx === -1) 
+      return (idx === -1)
     }
   },
   methods: {
