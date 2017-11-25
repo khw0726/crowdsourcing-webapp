@@ -11,6 +11,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'logIn',
   data: function() {
@@ -21,6 +22,7 @@ export default {
   },
   methods: {
     onSubmit: function() {
+      document.cookie = "username="+this.name+";";
       this.$root.$firebaseRefs.users.once('value').then(snapshot => {
         const users = snapshot.val()
         console.log(users)

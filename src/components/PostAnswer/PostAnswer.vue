@@ -6,8 +6,8 @@
   	<div><span>상대방이 화가 났나요?</span></div>
   	<div>
     <b-button-group>
-      <b-btn>네</b-btn>
-      <b-btn>아니오</b-btn>
+      <b-btn @click="onYActive()">네</b-btn>
+      <b-btn @click="onNActive()">아니오</b-btn>
     </b-button-group>
      </div>
      <br>
@@ -15,13 +15,14 @@
                    type="text"
                    placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
     <div>
-    	 <b-button >완료</b-button>
+    	 <b-button @click="onSubmit()">완료</b-button>
     </div>
   </div>
 </template>
 
 <script>
 import fb from "@/fb.js";
+
 export default {
   name: "postAnswer",
   props: ['imgID'],
@@ -50,6 +51,29 @@ export default {
       return img.img;
     }
   },
+  mounted() {
+    console.log(document.cookie);
+    if ((!this.$store.state.answererInfo.name)&(!document.cookie)){
+      alert("Please Log-in")
+      console.log("dddd");
+      this.$router.push('Login');
+    }
+    else if (!this.$store.state.answererInfo.name){
+      this.name = document.cookie.split('=')[1];
+      this.$root.$firebaseRefs.users.once('value').then(snapshot => {
+          const users = snapshot.val()
+          console.log(users)
+          for (let user in users) {
+            console.log(user)
+            if (users[user].name === this.name) {
+              this.$store.commit('setAnswererInfo', users[user])
+              this.$router.push('questionsList')
+            }
+          }
+        })
+    }
+  },
+
   methods: {
     onYActive: function() {
       this.yActive = true;
@@ -64,9 +88,10 @@ export default {
         isYes: this.yActive,
         answer: this.answer,
         name: this.$store.state.answererInfo.name,
-        questionID: this.imgID
+
       }
-      this.$firebaseRefs.answers.push(answerObj)
+      
+      this.$firebaseRefs.answers.child(this.imgID).set(answerObj)
       this.$router.push('answerComplete')
     }
   }
