@@ -16,9 +16,10 @@ admin.initializeApp({
 admin.database().ref('users').on('child_added', function(snapshot) {
     // subscribe
     const user = snapshot.val()
+    console.log(user)
     if(user.pushSubscribed === true) {
         const registrationToken = user.pushToken
-        user.selected.forEach(function(topic){
+        user.interest.forEach(function(topic){
             admin.messaging().subscribeToTopic(registrationToken, topic)
             .then(function(response) {
               // See the MessagingTopicManagementResponse reference documentation
