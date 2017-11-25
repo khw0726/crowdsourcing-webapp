@@ -5,14 +5,14 @@
 
   </div>
   <div>
-    <b-button :to="stats">나의 현황 보기</b-button>
+    <b-button :to="{name:'dashboard'}">나의 현황 보기</b-button>
 
     </div>
   </div>
 </template>
 <script>
 export default {
-
+  name: "answerComplete"
 }
 </script>
 <style scoped>

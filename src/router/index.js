@@ -85,8 +85,8 @@ export default new Router({
       component: AnswerComplete
     },
     {
-      path: '/stats',
-      name: 'stats',
+      path: '/dashboard',
+      name: 'dashboard',
       component: Stats
     }
 
