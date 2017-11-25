@@ -87,7 +87,7 @@ export default {
       fb.messaging.requestPermission()
       .then(() => {
         console.log('Notification permission granted.');
-        messaging.getToken()
+        fb.messaging.getToken()
         .then((currentToken) => {
           if (currentToken) {
             this.form.pushToken = currentToken
