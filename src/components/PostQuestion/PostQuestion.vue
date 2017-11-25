@@ -76,52 +76,48 @@ export default {
       canvasLoaded: true
     };
   },
+  
   methods: {
     onPostFinished: function() {
-      const img = this.$refs.talkCanvas.toDataURL();
-      const question = {
-        category: this.$store.state.category,
-        question: this.$store.state.question,
-        img: img
-      };
-      this.$root.$firebaseRefs.questions.push(question);
+      console.log("post finished");
+
+       const img =  this.$refs.talkCanvas.toDataURL();
+       
+       const question = 
+       {
+         category: this.$store.state.category,
+         question: this.$store.state.question,
+         img: img
+       };
+       var updates = {};
+        updates[this.imgID] = question;
+       console.log(question)
+       this.$root.$firebaseRefs.questions.update(updates);
     },
-    methods: {
-      onPostFinished: function() {
-        // DB-TODO: Update existing entry
-        // const img =  this.$refs.talkCanvas.toDataURL()
-        // const question = {
-        //   category: this.$store.state.category,
-        //   question: this.$store.state.question,
-        //   img: img
-        // }
-        // // this.$root.$firebaseRefs.questions.push(question)
-      },
-      onRefreshCanvas: function() {
-        this.paths.pop();
-      },
-      onTouchStart: function(ev) {
-        if (this.isPathAvailable) {
-          ev.preventDefault();
-          const context = ev.target.getContext("2d");
-          const canvasX = ev.target.offsetLeft;
-          const canvasY = ev.target.offsetTop;
-          console.log(ev.target.offsetLeft);
-          for (let i = 0; i < ev.touches.length; i++) {
-            console.log(ev.touches);
-            const touch = ev.touches[i];
-            const newPath = new Path2D();
-            newPath.moveTo(touch.pageX - canvasX, touch.pageY - canvasY);
-            this.touches.push({
-              identifier: touch.identifier,
-              path: newPath
-            })
-            // context.beginPath()
-            // context.arc(touch.pageX - canvasX, touch.pageY - canvasY, 4, 0, 2 * Math.PI, false)
-            // context.fillStyle = this.color
-            // context.fill()
-            // this.touches.push(touch)
-          }
+    onRefreshCanvas: function() {
+      this.paths.pop();
+    },
+    onTouchStart: function(ev) {
+      if (this.isPathAvailable) {
+        ev.preventDefault();
+        const context = ev.target.getContext("2d");
+        const canvasX = ev.target.offsetLeft;
+        const canvasY = ev.target.offsetTop;
+        console.log(ev.target.offsetLeft);
+        for (let i = 0; i < ev.touches.length; i++) {
+          console.log(ev.touches);
+          const touch = ev.touches[i];
+          const newPath = new Path2D();
+          newPath.moveTo(touch.pageX - canvasX, touch.pageY - canvasY);
+          this.touches.push({
+            identifier: touch.identifier,
+            path: newPath
+          })
+          // context.beginPath()
+          // context.arc(touch.pageX - canvasX, touch.pageY - canvasY, 4, 0, 2 * Math.PI, false)
+          // context.fillStyle = this.color
+          // context.fill()
+          // this.touches.push(touch)
         }
       }
     },

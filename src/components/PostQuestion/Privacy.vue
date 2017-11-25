@@ -11,7 +11,7 @@
   <button class="ui basic red icon button" @click="$emit('refreshCanvas')">
       <i class="undo icon"></i>
     </button>
-  <b-button href="/#/postQuestion/postFinished">다음</b-button>
+  <b-button @click="onClick()">다음</b-button>
 </div>
 </template>
 
