@@ -1,12 +1,14 @@
 <script>
-import { Line } from 'vue-chartjs'
+import {
+  Line
+} from 'vue-chartjs'
 
 // const brandPrimary = '#20a8d8'
 const brandSuccess = '#4dbd74'
 const brandInfo = '#63c2de'
 const brandDanger = '#f86c6b'
 
-function convertHex (hex, opacity) {
+function convertHex(hex, opacity) {
   hex = hex.replace('#', '')
   const r = parseInt(hex.substring(0, 2), 16)
   const g = parseInt(hex.substring(2, 4), 16)
@@ -16,14 +18,14 @@ function convertHex (hex, opacity) {
   return result
 }
 
-function random (min, max) {
+function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 export default {
   extends: Line,
   props: ['height'],
-  mounted () {
+  mounted() {
     var elements = 27
     var data1 = []
     var data2 = []
@@ -35,10 +37,9 @@ export default {
       data3.push(65)
     }
     this.renderChart({
-      labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
-      datasets: [
-        {
-          label: 'My First dataset',
+      labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
+      datasets: [{
+          label: 'My Answer',
           backgroundColor: convertHex(brandInfo, 10),
           borderColor: brandInfo,
           pointHoverBackgroundColor: '#fff',
@@ -46,7 +47,8 @@ export default {
           data: data1
         },
         {
-          label: 'My Second dataset',
+          label: 'Other Users'
+          Average ',
           backgroundColor: 'transparent',
           borderColor: brandSuccess,
           pointHoverBackgroundColor: '#fff',
