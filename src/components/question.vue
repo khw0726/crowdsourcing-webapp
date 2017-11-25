@@ -1,8 +1,9 @@
 <template>
   <div>
     <b-card :title="question"
-            :sub-title="category">
-
+            :sub-title="category"
+            bg-variant="white"
+            text-variant="#416e79">
   </b-card>
   </div>
 
