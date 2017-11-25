@@ -14,6 +14,9 @@ export default{
   },
   firebase: {
     questions: fb.db.ref('questions')
+  },
+  mounted() {
+    this.$emit('questionsChecked')
   }
 }
 </script>

@@ -13,14 +13,28 @@
     </b-navbar>
     <!-- <img src="./assets/logo.png"> -->
     <b-container fluid>
-      <router-view/>
+      <router-view @questionsChecked="onQuestionsChecked" />
     </b-container>
   </div>
 </template>
 
 <script>
+import fb from '@/fb.js'
 export default {
-  name: 'app'
+  name: 'app',
+  // mounted() {
+
+  // },
+  data: function () {
+    return {
+      navbarText: '질문 보기'
+    }
+  },
+  methods: {
+    onQuestionsChecked: function () {
+      this.navbarText = '질문 보기'
+    }
+  }
 }
 </script>
 
