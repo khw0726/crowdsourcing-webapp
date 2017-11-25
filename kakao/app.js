@@ -1,6 +1,6 @@
 
 
-var db = require('../src/fb.js')
+// var db = require('../src/fb.js')
 var express    = require('express');
 console.log("here");
 var app        = express();
@@ -68,7 +68,7 @@ function writeUserData(id, response) {
   console.log(response);
   
 
-  db.db.ref('questions/' + id).set({
+  admin.database().ref('questions/' + id).set({
 
     'img' : response
   });
@@ -142,8 +142,6 @@ app.post('/friend', (req, res) => {
         'content-type': 'application/json'
     }).send(JSON.stringify({success:true}));
 });
-
-db.db.on
 
 //9000포트 서버 ON
 app.listen(9000, function() {
