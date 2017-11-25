@@ -4,6 +4,7 @@
 var express    = require('express');
 console.log("here");
 var app        = express();
+/*
 var base64 = require('node-base64-image');
 var admin = require('firebase-admin')
 var serviceAccount = require('../crowdsourcing-664f1-firebase-adminsdk-pj0tv-5b39ddf8c3.json')
@@ -18,7 +19,7 @@ admin.database().ref('users').on('child_added', function(snapshot) {
     const user = snapshot.val()
     if(user.pushSubscribed === true) {
         const registrationToken = user.pushToken
-        user.selected.forEach(function(topic){
+        user.interest.forEach(function(topic){
             admin.messaging().subscribeToTopic(registrationToken, topic)
             .then(function(response) {
               // See the MessagingTopicManagementResponse reference documentation
@@ -66,14 +67,12 @@ console.log(makeid());
 function writeUserData(id, response) {
   console.log("here3");
   console.log(response);
-  
-
   admin.database().ref('questions/' + id).set({
 
     'img' : response
   });
 }
-
+*/
 
 var bodyParser = require('body-parser');
 // parse application/json
@@ -83,17 +82,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //초기 상태 get
 app.get('/keyboard', function(req, res){
+  console.log("dfsafdf");
   const menu = {
       "type": 'buttons',
       "buttons" : ["시작하기"]
-
   };
 
   res.set({
       'content-type': 'application/json'
   }).send(JSON.stringify(menu));
 });
-
+/*
 app.post('/message',function (req, res) {
 
     const _obj = {
@@ -142,7 +141,7 @@ app.post('/friend', (req, res) => {
         'content-type': 'application/json'
     }).send(JSON.stringify({success:true}));
 });
-
-//9000포트 서버 ON
-app.listen(9000, function() {
+*/
+//8000포트 서버 ON
+app.listen(8000, function() {
 });

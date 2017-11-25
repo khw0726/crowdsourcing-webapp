@@ -88,6 +88,7 @@ export default {
          question: this.$store.state.question,
          imgEdited: img
        }
+       
        var updates = {}
         updates[this.imgID] = question
        console.log(question)
