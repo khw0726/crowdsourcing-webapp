@@ -17,6 +17,7 @@
     "chart.js": "^2.7.1",
     "coreui.io-vue": "^1.0.0-alpha.6",
     "firebase": "^4.6.2",
+    "firebase-admin": "^5.5.1",
     "font-awesome": "^4.7.0",
     "node-base64-image": "^1.0.4",
     "node-sass": "^4.6.0",

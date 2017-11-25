@@ -1,11 +1,12 @@
 <template>
+<div>
+  <div id="answerimg">
+    <img :src="img">
+  </div><br>
+  <div><span>상대방이 화가 났나요?</span></div>
   <div>
-  	<div id="answerimg">
-  		<img :src="img">
-  	</div><br>
-  	<div><span>상대방이 화가 났나요?</span></div>
-  	<div>
     <b-button-group>
+<<<<<<< HEAD
       <b-btn @click="onYActive()">네</b-btn>
       <b-btn @click="onNActive()">아니오</b-btn>
     </b-button-group>
@@ -17,7 +18,18 @@
     <div>
     	 <b-button @click="onSubmit()">완료</b-button>
     </div>
+=======
+      <b-button :pressed.sync="Toggle1" variant="primary">네</b-button>
+      <b-button :pressed.sync="Toggle2" variant="primary">아니오</b-button>
+    </b-button-group>
+>>>>>>> 800083955a01eacc268ffb1e38d23aba1dcef5c5
   </div>
+  <br>
+  <b-form-input v-model="answer" type="text" placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
+  <div>
+    <b-button>완료</b-button>
+  </div>
+</div>
 </template>
 
 <script>
@@ -28,6 +40,8 @@ export default {
   props: ['imgID'],
   data: function() {
     return {
+      Toggle1: false,
+      Toggle2: false,
       yActive: false,
       nActive: false,
       answer: ''
@@ -83,7 +97,7 @@ export default {
       this.nActive = true;
       this.yActive = false;
     },
-    onSubmit: function () {
+    onSubmit: function() {
       const answerObj = {
         isYes: this.yActive,
         answer: this.answer,
@@ -103,6 +117,7 @@ export default {
   width: 80%;
   margin: auto;
 }
+
 #answerimg img {
   max-width: 100%;
 }
