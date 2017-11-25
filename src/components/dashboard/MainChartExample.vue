@@ -55,7 +55,7 @@ export default {
           data: data2
         },
         {
-          label: 'My Third dataset',
+          label: 'Baseline',
           backgroundColor: 'transparent',
           borderColor: brandDanger,
           pointHoverBackgroundColor: '#fff',

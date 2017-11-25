@@ -14,7 +14,7 @@
         <div class="card-body pb-0">
 
           <h4 class="mb-0">294번째</h4>
-          <p>'상사'카테고리의 답변</p>
+          <p>'직장'카테고리의 답변</p>
         </div>
         <card-line2-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/>
       </b-card>
@@ -66,7 +66,7 @@
           <div width = "234"></div>
         <ul>
           <li>
-            <strong>89</strong>
+            <strong>29</strong>
             <span>오늘의 답변</span>
           </li>
           <li>
@@ -82,7 +82,7 @@
         <div width = "234"></div>
         <ul>
           <li>
-            <strong>97</strong>
+            <strong>37</strong>
             <span>오늘의 답변</span>
           </li>
           <li>
@@ -114,7 +114,7 @@
         <div width = "234"></div>
         <ul>
           <li>
-            <strong>92</strong>
+            <strong>52</strong>
             <span>오늘의 답변</span>
           </li>
           <li>
@@ -160,7 +160,7 @@
               </li>
               <li>
                 <div class="title">
-                  상사
+                  직장
                 </div>
                 <div class="bars">
                   <b-progress class="progress-xs" :value="56" variant="info"></b-progress>
