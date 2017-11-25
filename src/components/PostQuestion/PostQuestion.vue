@@ -78,8 +78,7 @@ export default {
   },
   methods: {
     onPostFinished: function() {
-<<<<<<< HEAD
-      console.log("post finished");
+      console.log("post finished")
 
        const img =  this.$refs.talkCanvas.toDataURL();
        
@@ -88,58 +87,34 @@ export default {
          category: this.$store.state.category,
          question: this.$store.state.question,
          imgEdited: img
-       };
-       var updates = {};
-        updates[this.imgID] = question;
+       }
+       var updates = {}
+        updates[this.imgID] = question
        console.log(question)
-       this.$root.$firebaseRefs.questions.update(updates);
+       this.$root.$firebaseRefs.questions.update(updates)
     },
     onRefreshCanvas: function() {
-      this.paths.pop();
-=======
-      const img = this.$refs.talkCanvas.toDataURL()
-      const question = {
-        category: this.$store.state.category,
-        question: this.$store.state.question,
-        img: img
-      }
-      this.$root.$firebaseRefs.questions.push(question)
->>>>>>> 800083955a01eacc268ffb1e38d23aba1dcef5c5
+      this.paths.pop()
+
     },
-    methods: {
-      onPostFinished: function () {
-        // DB-TODO: Update existing entry
-
-        // const img =  this.$refs.talkCanvas.toDataURL()
-        // const question = {
-        //   category: this.$store.state.category,
-        //   question: this.$store.state.question,
-        //   img: img
-        // }
-        // // this.$root.$firebaseRefs.questions.push(question)
-      },
-      onRefreshCanvas: function() {
-        this.paths.pop()
-      },
-      onTouchStart: function(ev) {
-        if (this.isPathAvailable) {
-          ev.preventDefault()
-          const context = ev.target.getContext('2d')
-          const canvasX = ev.target.offsetLeft
-          const canvasY = ev.target.offsetTop
-          console.log(ev.target.offsetLeft)
-          for (let i = 0; i < ev.touches.length; i++) {
-            console.log(ev.touches)
-            const touch = ev.touches[i]
-            const newPath = new Path2D()
-            newPath.moveTo(touch.pageX - canvasX, touch.pageY - canvasY)
-            this.touches.push({
-              identifier: touch.identifier,
-              path: newPath
-            })
-          }
-
+    onTouchStart: function(ev) {
+      if (this.isPathAvailable) {
+        ev.preventDefault()
+        const context = ev.target.getContext('2d')
+        const canvasX = ev.target.offsetLeft
+        const canvasY = ev.target.offsetTop
+        console.log(ev.target.offsetLeft)
+        for (let i = 0; i < ev.touches.length; i++) {
+          console.log(ev.touches)
+          const touch = ev.touches[i]
+          const newPath = new Path2D()
+          newPath.moveTo(touch.pageX - canvasX, touch.pageY - canvasY)
+          this.touches.push({
+            identifier: touch.identifier,
+            path: newPath
+          })
         }
+
       }
     },
     onTouchMove: function(ev) {
