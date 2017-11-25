@@ -6,8 +6,8 @@
   <div><span>상대방이 화가 났나요?</span></div>
   <div>
     <b-button-group>
-      <b-button :pressed.sync="myToggle1" variant="primary">네</b-button>
-      <b-button :pressed.sync="myToggle2" variant="primary">아니오</b-button>
+      <b-button :pressed.sync="Toggle1" variant="primary">네</b-button>
+      <b-button :pressed.sync="Toggle2" variant="primary">아니오</b-button>
     </b-button-group>
   </div>
   <br>
@@ -25,8 +25,8 @@ export default {
   props: ['imgID'],
   data: function() {
     return {
-      myToggle1: false,
-      myToggle2: false,
+      Toggle1: false,
+      Toggle2: false,
       yActive: false,
       nActive: false,
       answer: ''

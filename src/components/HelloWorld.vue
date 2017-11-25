@@ -9,14 +9,14 @@
       <b-btn variant="info" @click="checkNameValidity">중복확인</b-btn>
     </b-input-group-button>
     <br>관심 카테고리:
-    <b-form-checkbox-group id="checkboxes1" name="interest" v-model="form.selected">
+    <b-form-checkbox-group id="checkboxes1" name="interest" v-model="interest">
       <b-form-checkbox value="love">연애</b-form-checkbox>
       <b-form-checkbox value="friend">친구</b-form-checkbox>
       <b-form-checkbox value="business">직장</b-form-checkbox>
       <b-form-checkbox value="family">가족</b-form-checkbox>
     </b-form-checkbox-group>
     <br>
-    <b-form-checkbox id="checkbox1" v-model="form.selected" value="accepted" unchecked-value="not_accepted">
+    <b-form-checkbox id="checkbox1" v-model="status" value="accepted" unchecked-value="not_accepted">
       관심 카테고리의 질문에 대한 알림을 받겠습니다.
     </b-form-checkbox>
     <br><br>성별:
@@ -26,7 +26,7 @@
       <b-form-radio value="etc">기타</b-form-radio>
     </b-form-radio-group>
     <br>연령대:
-    <b-form-radio-group id="radio2" label="checkboxes2" name="age" v-model="form.selected">
+    <b-form-radio-group id="radio2" label="checkboxes2" name="age" v-model="age">
       <b-form-radio value="10">10대</b-form-radio>
       <b-form-radio value="20">20대</b-form-radio>
       <b-form-radio value="30">30대</b-form-radio>
@@ -42,21 +42,18 @@
 export default {
   data() {
     return {
+      interest: [],
+      age: [],
       form: {
         name: '',
         interest: null,
         age: null,
         gender: null,
         pushSubscribed: false,
-        selected: []
+        status: 'not_accepted'
 
       },
-      age: [{
-          text: 'Select One',
-          value: null
-        },
-        '10대', '20대', '30대', '40대', '50대 이상'
-      ],
+
       // isValidName: null
     }
   },
