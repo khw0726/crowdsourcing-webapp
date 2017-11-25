@@ -47,8 +47,8 @@ export default {
           data: data1
         },
         {
-          label: 'Other Users'
-          Average ',
+          label: 'Other Users',
+          // Average ',
           backgroundColor: 'transparent',
           borderColor: brandSuccess,
           pointHoverBackgroundColor: '#fff',
