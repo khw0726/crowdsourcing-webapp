@@ -1,7 +1,7 @@
 <template>
 <div>
   <div id="divCanvas">
-    <canvas v-if="canvasLoaded" id="talkCanvas" ref="talkCanvas" v-canvas-added="{paths: paths, img: img, color: color, width: width}" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchCancel"></canvas>
+    <canvas v-if="canvasLoaded" id="talkCanvas" ref="talkCanvas" v-canvas-added="{paths: paths, img: img}" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchCancel"></canvas>
   </div>
   <br/>
   <router-view @refreshCanvas="onRefreshCanvas" @postFinished="onPostFinished"></router-view>
@@ -18,22 +18,25 @@ export default {
   },
   directives: {
     canvasAdded: function(el, binding) {
-      const context = el.getContext('2d')
-      const img = new Image()
-      img.addEventListener('load', function() {
-        // console.log(img)
-        // el.width = img.naturalWidth
-        el.height = el.width * img.naturalHeight / img.naturalWidth
-        // const xOffset = el.width * 0.1
-        context.drawImage(img, 0, 0, el.width, el.height)
-        context.strokeStyle = binding.value.color
-        context.lineWidth = binding.value.width
-        binding.value.paths.forEach(function(path) {
-          context.stroke(path)
-        })
-      }, false)
-      img.src = binding.value.img
-
+      const context = el.getContext("2d");
+      const img = new Image();
+      img.addEventListener(
+        "load",
+        function() {
+          // console.log(img)
+          // el.width = img.naturalWidth
+          el.height = el.width * img.naturalHeight / img.naturalWidth;
+          // const xOffset = el.width * 0.1
+          context.drawImage(img, 0, 0, el.width, el.height);
+          binding.value.paths.forEach(function(path) {
+            context.strokeStyle = path.color;
+            context.lineWidth = path.width;
+            context.stroke(path.path);
+          });
+        },
+        false
+      );
+      img.src = binding.value.img;
     }
   },
   computed: {
@@ -66,8 +69,7 @@ export default {
       return this.$route.name === 'privacy' || this.$route.name === 'annotate'
     }
   },
-
-data: function() {
+  data: function() {
     return {
       touches: [],
       paths: [],
@@ -97,22 +99,7 @@ data: function() {
         // // this.$root.$firebaseRefs.questions.push(question)
       },
       onRefreshCanvas: function() {
-        // this.canvasLoaded = false
         this.paths.pop()
-
-        // setTimeout(()=>this.canvasLoaded = true, 1)
-        // this.canvasLoaded = true
-        // const el = document.getElementById('talkCanvas')
-        // const context = el.getContext('2d')
-        // const img = new Image()
-        // img.addEventListener('load', function () {
-        //   // console.log(img)
-        //   // el.width = img.naturalWidth
-        //   el.height = el.width * img.naturalHeight / img.naturalWidth
-        //   const xOffset = el.width * 0.1
-        //   context.drawImage(img, 0, 0, el.width  , el.height)
-        // }, false)
-        // img.src = '/static/question.png'
       },
       onTouchStart: function(ev) {
         if (this.isPathAvailable) {
@@ -130,11 +117,6 @@ data: function() {
               identifier: touch.identifier,
               path: newPath
             })
-            // context.beginPath()
-            // context.arc(touch.pageX - canvasX, touch.pageY - canvasY, 4, 0, 2 * Math.PI, false)
-            // context.fillStyle = this.color
-            // context.fill()
-            // this.touches.push(touch)
           }
 
         }
@@ -153,13 +135,6 @@ data: function() {
           })
           const oldTouch = this.touches[oldTouchIdx]
           oldTouch.path.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
-          // context.strokeStyle = this.color
-          // context.beginPath()
-          // context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
-          // context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
-          // context.lineWidth = 8
-          // context.stroke()
-          // this.touches.splice(oldTouchIdx, 1, newTouch)
         }
         this.touches.forEach((val) => {
           context.strokeStyle = this.color
@@ -177,24 +152,20 @@ data: function() {
         for (let i = 0; i < ev.changedTouches.length; i++) {
           const newTouch = ev.changedTouches[i]
           const oldTouchIdx = this.touches.findIndex(function(touch) {
-            return touch.identifier === newTouch.identifier
-          })
-          const oldTouch = this.touches[oldTouchIdx]
-          oldTouch.path.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
-          this.paths.push(oldTouch.path)
-          // context.strokeStyle = this.color
-          // context.beginPath()
-          // context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
-          // context.lineTo(newTouch.pageX - canvasX, newTouch.pageY - canvasY)
-          // context.lineWidth = 8
-          // context.stroke()
+            return touch.identifier === newTouch.identifier;
+          });
+          const oldTouch = this.touches[oldTouchIdx];
+          oldTouch.path.lineTo(
+            newTouch.pageX - canvasX,
+            newTouch.pageY - canvasY
+          );
+          this.paths.push({
+            path: oldTouch.path,
+            color: this.color,
+            width: this.width
+          });
           this.touches.splice(oldTouchIdx, 1)
         }
-        this.touches.forEach((val) => {
-          context.strokeStyle = this.color
-          context.lineWidth = this.width
-          context.stroke(val.path)
-        })
       }
     },
     onTouchCancel: function(ev) {
