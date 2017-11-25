@@ -10,7 +10,7 @@
       <b-btn variant="info" @click="checkNameValidity">중복확인</b-btn>
     </b-input-group-button> -->
     <br>관심 카테고리:
-    <b-form-checkbox-group id="checkboxes1" name="interest" v-model="form.selected">
+    <b-form-checkbox-group id="checkboxes1" name="interest" v-model="interest">
       <b-form-checkbox value="love">연애</b-form-checkbox>
       <b-form-checkbox value="friend">친구</b-form-checkbox>
       <b-form-checkbox value="business">직장</b-form-checkbox>
@@ -47,6 +47,8 @@ import fb from '@/fb.js'
 export default {
   data() {
     return {
+      interest: [],
+      age: [],
       form: {
         name: '',
         interest: null,
@@ -56,12 +58,7 @@ export default {
         selected: [],
         pushToken: ''
       },
-      age: [{
-          text: 'Select One',
-          value: null
-        },
-        '10대', '20대', '30대', '40대', '50대 이상'
-      ],
+
       // isValidName: null
     }
   },

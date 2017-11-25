@@ -86,7 +86,7 @@ app.get('/keyboard', function(req, res){
   const menu = {
       "type": 'buttons',
       "buttons" : ["시작하기"]
-      
+
   };
 
   res.set({
