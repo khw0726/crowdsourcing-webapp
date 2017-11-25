@@ -1,7 +1,7 @@
 <template>
 <div class="container-fluid">
   <div>
-    <h3 class="ui header">내 답변 현황</h3>
+    <h3 class="ui header">{{name}} 내 답변 현황</h3>
 
 <vue-tabs>
 <v-tab title="답변 분석">
@@ -424,6 +424,7 @@ export default {
   },
   data: function () {
     return {
+      name: this.$store.state.answererInfo.name,
       tableItems: [
         {
           avatar: { url: 'static/img/avatars/1.jpg', status: 'success' },
@@ -473,6 +474,28 @@ export default {
           label: '추천 수'
         }
       }
+    }
+  },
+  mounted() {
+    console.log(document.cookie);
+    if ((!this.$store.state.answererInfo.name)&(!document.cookie)){
+      alert("Please Log-in")
+      console.log("dddd");
+      this.$router.push({path:'/Login'});
+    }
+    else if (!this.$store.state.answererInfo.name){
+      this.name = document.cookie.split(';')[0].split('=')[1];
+      console.log(this.name)
+      this.$root.$firebaseRefs.users.once('value').then(snapshot => {
+          const users = snapshot.val()
+          console.log(users)
+          for (let user in users) {
+            console.log(user)
+            if (users[user].name === this.name) {
+              this.$store.commit('setAnswererInfo', users[user])
+            }
+          }
+        })
     }
   },
   methods: {
