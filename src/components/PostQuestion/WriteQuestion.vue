@@ -17,6 +17,7 @@ export default {
   },
   methods: {
     onClick: function() {
+      console.log(this.question)
       this.$store.commit('setQuestion', this.question)
       this.$router.push({
         name: 'annotate'
