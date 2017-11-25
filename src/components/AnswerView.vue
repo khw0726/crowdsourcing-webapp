@@ -1,8 +1,8 @@
 <template>
-
-  <!-- <b-container fluid> -->
-    <div>
-    <b-img :src="imgSrc"/>
+  <div>
+    <div id="answerimg">
+      <img :src="imgSrc"/>
+    </div>
     <div id="text">
       <div id="question">{{question}}</div>
       <br>
@@ -17,34 +17,71 @@
         <li v-for="comment in comments" :key="comment">{{comment}}</li>
       </ul>
     </div>
-    </div>
-  <!-- </b-container> -->
+  </div>
 </template>
 <script>
+import fb from '@/fb.js'
 export default {
   name: 'answerView',
+  props: ['imgID'],
+  firebase: function () {
+    return {
+      answers: fb.db.ref('answers').orderByChild('questionID').equalTo(this.imgID), // answers specific to the question ID
+      questions: fb.db.ref('questions').orderByKey().equalTo(this.imgID) // find specific question
+    }
+  },
   // DB-TODO: Show answers
   computed: {
     question: function () {
-      return '상대방이 지금 저에게 화가 났나요?'
+      if(this.questions) {
+        const q = this.questions.find((q) => {
+          return q['.key'] === this.imgID
+        })
+        if(q)
+          return q.question
+        else
+          return ''
+      } else {
+        return ''
+      }
     },
     proportion: function () {
-      return '72%'
+      const totalAnswersCount = this.answers.length
+      const totalYesCount = this.answers.reduce(function(prevValue, curElement) {
+        return prevValue + curElement.isYes ? 1 : 0
+      }, 0)
+      return Math.round(totalYesCount/totalAnswersCount * 100) + '%(' + totalAnswersCount + '명 중 ' + totalYesCount + ' 명)'
     },
     comments: function () {
-      return ['절교해야겠네요', '애매한데...', '괜찮은 것 같아요']
+      if(this.answers){
+        return this.answers.map(function(a) {
+          return a.answer
+        })
+      } else {
+        return []
+      }
     },
     imgSrc: function () {
-      return 'static/answer.jpg'
+      if(this.questions.length === 0) {
+        return null
+      } else {
+        return this.questions[0].img
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-img {
-  max-width: 50%;
+#answerimg {
+  width: 80%;
+  margin: auto;
 }
+
+#answerimg img {
+  max-width: 100%;
+}
+
 #text {
   line-height: 180%;
 }
