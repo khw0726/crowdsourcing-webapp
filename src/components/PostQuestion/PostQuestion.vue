@@ -86,7 +86,8 @@ export default {
        {
          category: this.$store.state.category,
          question: this.$store.state.question,
-         imgEdited: img
+         imgEdited: img,
+         img: this.img
        }
        var updates = {}
         updates[this.imgID] = question

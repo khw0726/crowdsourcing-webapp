@@ -19,7 +19,10 @@ Vue.config.productionTip = false
 Vue.use(VueTabs)
 Vue.use(BootstrapVue)
 Vue.use(VueFire)
-
+fb.messaging.onMessage(function(payload) {
+  console.log("Message received. ", payload);
+  
+});
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

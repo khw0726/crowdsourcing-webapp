@@ -10,7 +10,7 @@
       <b-btn variant="info" @click="checkNameValidity">중복확인</b-btn>
     </b-input-group-button> -->
     <br>관심 카테고리:
-    <b-form-checkbox-group id="checkboxes1" name="interest" v-model="interest">
+    <b-form-checkbox-group id="checkboxes1" name="interest" v-model="form.interest">
       <b-form-checkbox value="love">연애</b-form-checkbox>
       <b-form-checkbox value="friend">친구</b-form-checkbox>
       <b-form-checkbox value="business">직장</b-form-checkbox>
@@ -47,11 +47,11 @@ import fb from '@/fb.js'
 export default {
   data() {
     return {
-      interest: [],
+      // interest: [],
       age: [],
       form: {
         name: '',
-        interest: null,
+        interest: [],
         age: null,
         gender: null,
         pushSubscribed: false,
@@ -87,20 +87,26 @@ export default {
       fb.messaging.requestPermission()
       .then(() => {
         console.log('Notification permission granted.');
-        fb.messaging.getToken()
-        .then((currentToken) => {
-          if (currentToken) {
-            this.form.pushToken = currentToken
-            this.form.pushSubscribed = true
-          } else {
-            // Show permission request.
-            console.log('No Instance ID token available. Request permission to generate one.');
-            // Show permission UI.
+        navigator.serviceWorker.register('/static/sw.js')
+        .then((registration) => {
+          fb.messaging.useServiceWorker(registration);
+          fb.messaging.getToken()
+          .then((currentToken) => {
+            if (currentToken) {
+              console.log(currentToken)
+              this.form.pushToken = currentToken
+              this.form.pushSubscribed = true
+            } else {
+              // Show permission request.
+              console.log('No Instance ID token available. Request permission to generate one.');
+              // Show permission UI.
+              alert('알림 구독을 실패했습니다. 다시 시도해주세요.')
+            }
+          })
+          .catch(function(err) {
+            console.log(err)
             alert('알림 구독을 실패했습니다. 다시 시도해주세요.')
-          }
-        })
-        .catch(function(err) {
-          alert('알림 구독을 실패했습니다. 다시 시도해주세요.')
+          });
         });
       })
       .catch(function(err) {
