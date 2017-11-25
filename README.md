@@ -21,3 +21,32 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Firebase DB
+
+```
+questions:{
+.key : (UNIQUE) imgID,
+category : string,
+img : Base64,
+imgEdited : Base64,
+question : string,
+answers : []
+}
+
+users : {
+name : (UNIQUE) username,
+age : string,
+gender : string,
+interest : [] of string,
+pushSubscribed : bool,
+pushToken : string
+}
+
+answers : {
+questionID : (FOREIGN) questions[“.key”],
+name : (FOREIGN) users/~~~~/name,
+isYes : bool,
+answer : string
+}
+```
