@@ -17,7 +17,7 @@
       <b-form-checkbox value="family">가족</b-form-checkbox>
     </b-form-checkbox-group>
     <br>
-    <b-button @click="registerNotification">
+    <b-button v-if="isPushAvailable && !form.pushSubscribed" @click="registerNotification">
       관심 카테고리의 질문에 대한 알림을 받겠습니다.
     </b-button>
     <!-- <b-form-checkbox id="checkbox1" @click="registerNotification" v-model="form.selected" value="accepted" unchecked-value="not_accepted">
@@ -53,7 +53,8 @@ export default {
         age: null,
         gender: null,
         pushSubscribed: false,
-        selected: []
+        selected: [],
+        pushToken: ''
       },
       age: [{
           text: 'Select One',
@@ -73,6 +74,9 @@ export default {
         return element.name === this.form.name
       })
       return (idx === -1) 
+    },
+    isPushAvailable: function () {
+      return ('serviceWorker' in navigator) && ('PushManager' in window)
     }
   },
   methods: {
@@ -82,12 +86,25 @@ export default {
       this.$router.push('seeQuestions')
     },
     registerNotification: function () {
-      alert('adsf')
+      // alert('adsf')
       fb.messaging.requestPermission()
-      .then(function() {
+      .then(() => {
         console.log('Notification permission granted.');
-        // TODO(developer): Retrieve an Instance ID token for use with FCM.
-        // ...
+        messaging.getToken()
+        .then((currentToken) => {
+          if (currentToken) {
+            this.form.pushToken = currentToken
+            this.form.pushSubscribed = true
+          } else {
+            // Show permission request.
+            console.log('No Instance ID token available. Request permission to generate one.');
+            // Show permission UI.
+            alert('알림 구독을 실패했습니다. 다시 시도해주세요.')
+          }
+        })
+        .catch(function(err) {
+          alert('알림 구독을 실패했습니다. 다시 시도해주세요.')
+        });
       })
       .catch(function(err) {
         console.log('Unable to get permission to notify.', err);
