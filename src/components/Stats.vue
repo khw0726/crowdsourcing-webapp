@@ -8,16 +8,7 @@
 <div class="animated fadeIn">
   <div class="row">
 
-    <div class="col-sm-6 col-lg-3">
-      <b-card class="bg-primary" :no-body="true">
-        <div class="card-body pb-0">
-        
-          <h4 class="mb-0">23초</h4>
-          <p>답변 속도</p>
-        </div>
-        <card-line1-chart-example :data="[1,2,3,4,5]"  class="chart-wrapper px-3" style="height:70px;" height="70"/>
-      </b-card>
-    </div><!--/.col-->
+  <!--/.col-->
     <div class="col-sm-6 col-lg-3">
       <b-card class="bg-info" :no-body="true">
         <div class="card-body pb-0">
@@ -39,16 +30,7 @@
 
       </b-card>
     </div><!--/.col-->
-    <div class="col-sm-6 col-lg-3">
-      <b-card class="bg-danger" :no-body="true">
-        <div class="card-body pb-0">
 
-          <h4 class="mb-0">287위</h4>
-          <p>'상사'카테고리의 랭킹</p>
-        </div>
-        <card-line3-chart-example class="chart-wrapper" style="height:70px;" height="70"/>
-      </b-card>
-    </div><!--/.col-->
   </div><!--/.row-->
 
   <b-card>
@@ -85,7 +67,7 @@
         <ul>
           <li>
             <strong>89</strong>
-            <span>지난주 답변</span>
+            <span>오늘의 답변</span>
           </li>
           <li>
             <strong>459</strong>
@@ -96,12 +78,12 @@
     </div><!--/.col-->
     <div class="col-sm-6 col-lg-3">
       <div class="social-box twitter">
-        <p><br>상사</p>
+        <p><br>직장</p>
         <div width = "234"></div>
         <ul>
           <li>
             <strong>97</strong>
-            <span>지난주 답변</span>
+            <span>오늘의 답변</span>
           </li>
           <li>
             <strong>792</strong>
@@ -117,7 +99,7 @@
         <ul>
           <li>
             <strong>20</strong>
-            <span>지난주 답변</span>
+            <span>오늘의 답변</span>
           </li>
           <li>
             <strong>292</strong>
@@ -133,7 +115,7 @@
         <ul>
           <li>
             <strong>92</strong>
-            <span>지난주 답변</span>
+            <span>오늘의 답변</span>
           </li>
           <li>
             <strong>894</strong>
@@ -287,9 +269,7 @@
                   <b-progress class="progress-xs" :value="24" variant="success"></b-progress>
                 </div>
               </li>
-              <li class="divider text-center">
-                <button type="button" class="btn btn-sm btn-link text-muted"><i class="icon-options"></i></button>
-              </li>
+  
             </ul>
           </div><!--/.col-->
           <div class="col-sm-6 col-lg-4">
