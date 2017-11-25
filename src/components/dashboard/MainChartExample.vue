@@ -48,7 +48,6 @@ export default {
         },
         {
           label: 'Other Users',
-          // Average ',
           backgroundColor: 'transparent',
           borderColor: brandSuccess,
           pointHoverBackgroundColor: '#fff',

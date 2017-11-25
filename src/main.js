@@ -21,7 +21,6 @@ Vue.use(BootstrapVue)
 Vue.use(VueFire)
 fb.messaging.onMessage(function(payload) {
   console.log("Message received. ", payload);
-  
 });
 /* eslint-disable no-new */
 new Vue({
