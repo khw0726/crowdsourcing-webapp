@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import fb from "@/fb.js"
 export default{
 firebase: {
   questions: fb.db.ref('questions')
