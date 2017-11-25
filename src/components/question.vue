@@ -19,6 +19,7 @@ export default {
 
 <style>
  .card-body {
-   margin: 10px 10px 10px 10px;
+   padding: 1.0rem;
  }
+
 </style>

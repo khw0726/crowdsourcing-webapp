@@ -16,7 +16,6 @@ admin.initializeApp({
 admin.database().ref('users').on('child_added', function(snapshot) {
     // subscribe
     const user = snapshot.val()
-    console.log(user)
     if(user.pushSubscribed === true) {
         const registrationToken = user.pushToken
         user.interest.forEach(function(topic){
@@ -74,8 +73,6 @@ console.log(makeid());
 function writeUserData(id, response) {
   console.log("here3");
   console.log(response);
-  
-
   admin.database().ref('questions/' + id).set({
 
     'img' : response
@@ -94,7 +91,6 @@ app.get('/keyboard', function(req, res){
   const menu = {
       "type": 'buttons',
       "buttons" : ["시작하기"]
-
   };
 
   res.set({
@@ -109,34 +105,42 @@ app.post('/message',function (req, res) {
         type: req.body.type,
         content: req.body.content
     };
+
     let id = makeid();
+    let message;
     // content -> db ->get (ramdom)key id ->
     if (_obj.type == 'photo') {
-      console.log(_obj.content);
       var contentArray = _obj.content.split('.');
-      console.log(contentArray);
       base64.encode(_obj.content, {string: true, local: false}, function(error, res) {
         var contentArray = _obj.content.split('.');
-        console.log(contentArray);
         var string = "data:image/"+contentArray[contentArray.length-1]+";base64, "+res;
-        console.log(string);
         writeUserData(id, string);});
-
+      message = {
+        "message": {
+            "text": '이 곳에서 마저 질문을 작성해 보세요.\nhttps://34.208.245.104:8090/#/'+id+'/postQuestion'
+        },
+        "keyboard": {
+            "type": "text"
+        }
+      };
     }
-    let massage = {
-            "message": {
-                "text": '이 곳에서 마저 질문을 작성해 보세요.\nhttps://34.208.245.104:8090/#/'+id+'/postQuestion'
-            },
-            "keyboard": {
-                "type": "text"
-            }
-       };
+    else{
+      message = {
+        "message": {
+            "text": '궁금한 채팅을 캡쳐해 보내보세요.'
+        },
+        "keyboard": {
+            "type": "text"
+        }
+      };
+    }
+    
     console.log(_obj.content)
     console.log(_obj.user_key)
     console.log(_obj.type)
     res.set({
     	'content-type': 'application/json'
-      }).send(JSON.stringify(massage));
+      }).send(JSON.stringify(message));
 
 });
 
@@ -151,6 +155,6 @@ app.post('/friend', (req, res) => {
     }).send(JSON.stringify({success:true}));
 });
 
-//9000포트 서버 ON
+//8000포트 서버 ON
 app.listen(9000, function() {
 });

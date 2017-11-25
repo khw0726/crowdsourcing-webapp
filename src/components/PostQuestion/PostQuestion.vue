@@ -89,6 +89,7 @@ export default {
          imgEdited: img,
          img: this.img
        }
+       
        var updates = {}
         updates[this.imgID] = question
        console.log(question)
