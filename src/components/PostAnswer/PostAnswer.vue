@@ -58,7 +58,7 @@ export default {
     if ((!this.$store.state.answererInfo.name)&(!document.cookie)){
       alert("Please Log-in")
       console.log("dddd");
-      this.$router.push('Login');
+      this.$router.push({path:'/Login'});
     }
     else if (!this.$store.state.answererInfo.name){
       this.name = document.cookie.split('=')[1];
