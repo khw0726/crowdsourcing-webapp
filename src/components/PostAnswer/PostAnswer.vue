@@ -10,13 +10,13 @@
       <b-button :pressed.sync="Toggle2" variant="primary">아니오</b-button>
     </b-button-group>
   </div>
-  <br>
-  <b-form-input v-model="answer"
-               type="text"
-               placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
-  <div>
-    <b-button @click="onSubmit()">완료</b-button>
-  </div>
+     <br>
+     <b-form-input v-model="answer"
+                   type="text"
+                   placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
+    <div>
+       <b-button @click="onSubmit()">완료</b-button>
+    </div>
 </div>
 </template>
 
@@ -69,7 +69,6 @@ export default {
             console.log(user)
             if (users[user].name === this.name) {
               this.$store.commit('setAnswererInfo', users[user])
-              this.$router.push('questionsList')
             }
           }
         })
@@ -94,7 +93,7 @@ export default {
       }
       
       this.$firebaseRefs.answers.child(this.imgID).set(answerObj)
-      this.$router.push('answerComplete')
+      this.$router.push({path:'/answerComplete'})
     }
   }
 };

@@ -11,9 +11,9 @@
 
 <script>
 export default{
-firebase {
-  questions: fb.db.ref('questions')
-}
+//firebase {
+//  questions: fb.db.ref('questions')
+//}
 }
 </script>
 
