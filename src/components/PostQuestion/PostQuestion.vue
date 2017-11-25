@@ -1,7 +1,7 @@
 <template>
 <div>
   <div id="divCanvas">
-    <canvas v-if="canvasLoaded" id="talkCanvas" ref="talkCanvas" v-canvas-added="{paths: paths, img: img, color: color, width: width}" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchCancel"></canvas>
+    <canvas v-if="canvasLoaded" id="talkCanvas" ref="talkCanvas" v-canvas-added="{paths: paths, img: img}" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" @touchcancel="onTouchCancel"></canvas>
   </div>
   <br/>
   <router-view @refreshCanvas="onRefreshCanvas" @postFinished="onPostFinished"></router-view>
@@ -28,10 +28,10 @@ export default {
           el.height = el.width * img.naturalHeight / img.naturalWidth;
           // const xOffset = el.width * 0.1
           context.drawImage(img, 0, 0, el.width, el.height);
-          context.strokeStyle = binding.value.color;
-          context.lineWidth = binding.value.width;
           binding.value.paths.forEach(function(path) {
-            context.stroke(path);
+            context.strokeStyle = path.color;
+            context.lineWidth = path.width;
+            context.stroke(path.path);
           });
         },
         false
@@ -168,7 +168,11 @@ export default {
             newTouch.pageX - canvasX,
             newTouch.pageY - canvasY
           );
-          this.paths.push(oldTouch.path);
+          this.paths.push({
+            path: oldTouch.path,
+            color: this.color,
+            width: this.width
+          });
           // context.strokeStyle = this.color
           // context.beginPath()
           // context.moveTo(oldTouch.pageX - canvasX, oldTouch.pageY - canvasY)
@@ -177,11 +181,11 @@ export default {
           // context.stroke()
           this.touches.splice(oldTouchIdx, 1);
         }
-        this.touches.forEach(val => {
-          context.strokeStyle = this.color;
-          context.lineWidth = this.width;
-          context.stroke(val.path);
-        });
+        // this.touches.forEach(val => {
+        //   context.strokeStyle = this.color;
+        //   context.lineWidth = this.width;
+        //   context.stroke(val.path);
+        // });
       }
     },
     onTouchCancel: function(ev) {
