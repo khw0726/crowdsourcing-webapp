@@ -35,22 +35,29 @@ admin.database().ref('users').on('child_added', function(snapshot) {
 
 admin.database().ref('questions').on('child_changed', function (snapshot) {
     const question = snapshot.val()
-    const topic = question.category
-    const payload = {
-        notification: {
-            title: '눈치백단',
-            body: topic + ' 분야의 새로운 질문이 등록되었습니다. 확인해주세요.'
-        }        
+    if(question.category) {
+        // console.log(question.category)
+        // console.log(question['.key'])
+        // console.log(question.key)
+        const topic = question.category
+        const payload = {
+            notification: {
+                title: '눈치백단',
+                body: topic + ' 분야의 새로운 질문이 등록되었습니다. 확인해주세요.',
+                click_action: 'http://localhost:8090/#/' + snapshot.key + '/postAnswer'
+            },
+        }    
+        admin.messaging().sendToTopic(topic, payload)
+        .then(function(response) {
+          // See the MessagingTopicResponse reference documentation for the
+          // contents of response.
+          console.log("Successfully sent message:", response);
+        })
+        .catch(function(error) {
+          console.log("Error sending message:", error);
+        });
     }
-    admin.messaging().sendToTopic(topic, payload)
-    .then(function(response) {
-      // See the MessagingTopicResponse reference documentation for the
-      // contents of response.
-      console.log("Successfully sent message:", response);
-    })
-    .catch(function(error) {
-      console.log("Error sending message:", error);
-    });
+    
   
 })
 function makeid() {
