@@ -18,6 +18,7 @@
     "coreui.io-vue": "^1.0.0-alpha.6",
     "firebase": "^4.6.2",
     "font-awesome": "^4.7.0",
+    "node-base64-image": "^1.0.4",
     "node-sass": "^4.6.0",
     "sass-loader": "^6.0.6",
     "semantic-ui": "^2.2.13",
