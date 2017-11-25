@@ -1,7 +1,6 @@
 <template>
 <div><br>
   <h3>답변을 기다리는 질문</h3>
-  <question v-for="q in questions" :question="q.question" :category="q.category"></question>
 
 
 </div>

@@ -61,7 +61,8 @@ export default {
       this.$router.push({path:'/Login'});
     }
     else if (!this.$store.state.answererInfo.name){
-      this.name = document.cookie.split('=')[1];
+      this.name = document.cookie.split(';')[0].split('=')[1];
+      console.log(this.name)
       this.$root.$firebaseRefs.users.once('value').then(snapshot => {
           const users = snapshot.val()
           console.log(users)
@@ -89,10 +90,10 @@ export default {
         isYes: this.yActive,
         answer: this.answer,
         name: this.$store.state.answererInfo.name,
-
+        questionID: this.imgID
       }
-      
-      this.$firebaseRefs.answers.child(this.imgID).set(answerObj)
+      console.log(answerObj)
+      this.$firebaseRefs.answers.push(answerObj)
       this.$router.push({path:'/answerComplete'})
     }
   }
