@@ -30,7 +30,7 @@ export default {
           console.log(user)
           if (users[user].name === this.name) {
             this.$store.commit('setAnswererInfo', users[user])
-            this.$router.push({name:'questionsList'})
+            // TO DO this.$router.push({name:'questionsList'})
           }
         }
         this.isValidName = false

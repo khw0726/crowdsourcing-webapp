@@ -54,15 +54,15 @@ export default {
     }
   },
   mounted() {
-    console.log(document.cookie);
-    if ((!this.$store.state.answererInfo.name)&(!document.cookie)){
+    console.log(document.cookie)
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+    if ((!this.$store.state.answererInfo.name)&(!cookieValue)){
       alert("Please Log-in")
       console.log("dddd");
       this.$router.push({path:'/Login'});
     }
     else if (!this.$store.state.answererInfo.name){
-      this.name = document.cookie.split(';')[0].split('=')[1];
-      console.log(this.name)
+      this.name = cookieValue;
       this.$root.$firebaseRefs.users.once('value').then(snapshot => {
           const users = snapshot.val()
           console.log(users)
@@ -87,13 +87,22 @@ export default {
     },
     onSubmit: function() {
       const answerObj = {
-        isYes: this.yActive,
+        isYes: this.Toggle1,
         answer: this.answer,
         name: this.$store.state.answererInfo.name,
-        questionID: this.imgID
+        questionID: this.imgID,
       }
       console.log(answerObj)
-      this.$firebaseRefs.answers.push(answerObj)
+      var newAnswer = [[answerObj.isYes, answerObj.name]]
+      this.$firebaseRefs.questions.child(this.imgID).on('value', function(snapshot) {
+        if (snapshot.val().answers != 0){
+          newAnswer = newAnswer.concat(snapshot.val().answers)
+        }
+      });
+ 
+       var updates = {}
+        updates[this.imgID+"/answers"] = newAnswer
+       this.$root.$firebaseRefs.questions.update(updates)
       this.$router.push({path:'/answerComplete'})
     }
   }
