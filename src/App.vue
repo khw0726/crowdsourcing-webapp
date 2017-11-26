@@ -8,7 +8,7 @@
         <b-nav-item @click="$router.push({name:'questionList'})">질문 보기</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav>
-        <b-nav-item @click="$router.push({name: 'dashboard'})"><i class="fa fa-line-chart" aria-hidden="true"></i></b-nav-item>
+        <b-nav-item @click="$router.push({name: 'dashboard'})">{{name}}</b-nav-item>
       </b-navbar-nav>
     </b-navbar>
     <!-- <img src="./assets/logo.png"> -->
@@ -27,6 +27,7 @@ export default {
   // },
   data: function () {
     return {
+      name: this.$store.state.answererInfo.name,
       navbarText: '질문 보기'
     }
   },

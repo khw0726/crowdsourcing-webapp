@@ -37,7 +37,8 @@ export default {
   },
   firebase: {
     questions: fb.db.ref('questions'),
-    answers: fb.db.ref('answers')
+    answers: fb.db.ref('answers'),
+    users: fb.db.ref('users')
   },
   computed: {
     question: function() {
@@ -86,6 +87,7 @@ export default {
       this.yActive = false;
     },
     onSubmit: function() {
+
       const answerObj = {
         isYes: this.Toggle1,
         answer: this.answer,
@@ -99,9 +101,25 @@ export default {
           newAnswer = newAnswer.concat(snapshot.val().answers)
         }
       });
-       var updates = {}
-        updates[this.imgID+"/answers"] = newAnswer
-       this.$root.$firebaseRefs.questions.update(updates)
+      let userInfo = this.users.find(function(user) {
+        return user.name === answerObj.name
+      })
+      console.log(userInfo)
+      var userUpdates
+      if (userInfo.questions) {
+        userInfo.questions.push(this.imgID)
+        userUpdates = {questions : userInfo.questions}
+      }
+      else{
+        userUpdates = {questions : [this.imgID]}
+
+      }
+      var updates = {}
+      updates[this.imgID+"/answers"] = newAnswer
+      //this.$root.$firebaseRefs.questions.update(updates)
+      
+      //console.log(this.users['-KzrBieCBvao_qb8XhGe'].questions)
+      this.$firebaseRefs.users.child(userInfo[".key"]).update(userUpdates)
       this.$router.push({path:'/answerComplete'})
     }
   }
