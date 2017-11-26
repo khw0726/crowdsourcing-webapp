@@ -23,7 +23,7 @@
       <b-card class="bg-warning" :no-body="true">
         <div class="card-body pb-0">
 
-          <h4 class="mb-0">73.6%</h4>
+          <h4 class="mb-0"></h4>
           <p>당신과 같은 의견을 가진 사람의 비율</p>
         </div>
         <card-bar-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/>
@@ -381,6 +381,7 @@ import MainChartExample from './dashboard/MainChartExample'
 import SocialBoxChartExample from './dashboard/SocialBoxChartExample'
 import CalloutChartExample from './dashboard/CalloutChartExample'
 import { Callout } from './coreui'
+import fb from "@/fb.js";
 
 
 export default {
@@ -402,9 +403,16 @@ export default {
     CalloutChartExample
 
   },
+  firebase: {
+    questions: fb.db.ref('questions'),
+    answers: fb.db.ref('answers'),
+    users: fb.db.ref('users')
+  },
+
   data: function () {
     return {
       name: this.$store.state.answererInfo.name,
+      userInfo: {},
       tableItems: [
         {
           avatar: { url: 'static/img/avatars/1.jpg', status: 'success' },
@@ -454,8 +462,9 @@ export default {
           label: '추천 수'
         }
       }
+
     }
-  },
+  }, 
   mounted() {
     console.log(document.cookie);
     if ((!this.$store.state.answererInfo.name)&(!document.cookie)){
@@ -477,6 +486,10 @@ export default {
           }
         })
     }
+    this.userInfo = this.users.find(function(user) {
+      return user.name === this.name
+    })
+    console.log(this.userInfo)
   },
   methods: {
 
