@@ -1,9 +1,9 @@
 <template>
 <div>
   <div id="answerimg">
-    <img :src="img">
+    <img :src="question.imgEdited">
   </div><br>
-  <div><span>상대방이 화가 났나요?</span></div>
+  <div><span>{{question.question}}</span></div>
   <div>
     <b-button-group>
       <b-button :pressed.sync="Toggle1" variant="primary">네</b-button>
@@ -40,17 +40,17 @@ export default {
     answers: fb.db.ref('answers')
   },
   computed: {
-    img: function() {
+    question: function() {
       if (this.questions.length === 0) {
         return "";
       }
-      let img = this.questions.find(question => {
+      let question = this.questions.find(question => {
         console.log(question['.key'])
         return question['.key'] === this.imgID;
       });
       console.log(this.imgID)
-      console.log(img)
-      return img.img;
+      console.log(question)
+      return question;
     }
   },
   mounted() {
@@ -99,7 +99,6 @@ export default {
           newAnswer = newAnswer.concat(snapshot.val().answers)
         }
       });
-      console.log(newAnswer)
        var updates = {}
         updates[this.imgID+"/answers"] = newAnswer
        this.$root.$firebaseRefs.questions.update(updates)
