@@ -15,6 +15,7 @@
       <b-form-checkbox value="friend">친구</b-form-checkbox>
       <b-form-checkbox value="business">직장</b-form-checkbox>
       <b-form-checkbox value="family">가족</b-form-checkbox>
+      <b-form-checkbox value="etc">기타</b-form-checkbox>
     </b-form-checkbox-group>
     <br>
     <b-button v-if="isPushAvailable && !form.pushSubscribed" @click="registerNotification">
