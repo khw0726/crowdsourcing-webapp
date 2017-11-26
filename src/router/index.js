@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Join from '@/components/Join'
 import Login from '@/components/Login'
 import QuestionList from '@/components/QuestionList'
 import PostQuestion from '@/components/PostQuestion/PostQuestion'
@@ -13,15 +13,20 @@ import PostFinished from '@/components/PostQuestion/PostFinished'
 import AnswerView from '@/components/AnswerView'
 import AnswerComplete from '@/components/PostAnswer/AnswerComplete'
 import Stats from '@/components/Stats'
-
+import Gate from '@/components/Gate'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: HelloWorld
+      name: 'Gate',
+      component: Gate
+    },
+    {
+      path: '/join',
+      name: 'Join',
+      component: Join
     },
     {
       path: '/login',
