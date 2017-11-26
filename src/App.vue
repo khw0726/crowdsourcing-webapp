@@ -4,17 +4,37 @@
       <b-navbar-nav>
         <b-nav-item @click="$router.go(-1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></b-nav-item>
       </b-navbar-nav>
+      <b-navbar-nav>
+        <b-nav-item @click="$router.push({name:'questionList'})">질문 보기</b-nav-item>
+      </b-navbar-nav>
+      <b-navbar-nav>
+        <b-nav-item @click="$router.push({name: 'dashboard'})"><i class="fa fa-line-chart" aria-hidden="true"></i></b-nav-item>
+      </b-navbar-nav>
     </b-navbar>
     <!-- <img src="./assets/logo.png"> -->
     <b-container fluid>
-      <router-view/>
+      <router-view @questionsChecked="onQuestionsChecked" />
     </b-container>
   </div>
 </template>
 
 <script>
+import fb from '@/fb.js'
 export default {
-  name: 'app'
+  name: 'app',
+  // mounted() {
+
+  // },
+  data: function () {
+    return {
+      navbarText: '질문 보기'
+    }
+  },
+  methods: {
+    onQuestionsChecked: function () {
+      this.navbarText = '질문 보기'
+    }
+  }
 }
 </script>
 

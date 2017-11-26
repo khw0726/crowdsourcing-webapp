@@ -14,7 +14,7 @@
         <div class="card-body pb-0">
 
           <h4 class="mb-0">294번째</h4>
-          <p>'상사'카테고리의 답변</p>
+          <p>'직장'카테고리의 답변</p>
         </div>
         <card-line2-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/>
       </b-card>
@@ -66,7 +66,7 @@
           <div width = "234"></div>
         <ul>
           <li>
-            <strong>89</strong>
+            <strong>29</strong>
             <span>오늘의 답변</span>
           </li>
           <li>
@@ -82,7 +82,7 @@
         <div width = "234"></div>
         <ul>
           <li>
-            <strong>97</strong>
+            <strong>37</strong>
             <span>오늘의 답변</span>
           </li>
           <li>
@@ -114,7 +114,7 @@
         <div width = "234"></div>
         <ul>
           <li>
-            <strong>92</strong>
+            <strong>52</strong>
             <span>오늘의 답변</span>
           </li>
           <li>
@@ -160,7 +160,7 @@
               </li>
               <li>
                 <div class="title">
-                  상사
+                  직장
                 </div>
                 <div class="bars">
                   <b-progress class="progress-xs" :value="56" variant="info"></b-progress>
@@ -269,7 +269,7 @@
                   <b-progress class="progress-xs" :value="24" variant="success"></b-progress>
                 </div>
               </li>
-  
+
             </ul>
           </div><!--/.col-->
           <div class="col-sm-6 col-lg-4">
@@ -410,7 +410,7 @@ export default {
           avatar: { url: 'static/img/avatars/1.jpg', status: 'success' },
           user: { name: '저건 상대방이 화가 나긴 했는데 한번 더 기회를 주려고 기다리는 거예요', registered: '상대방이 화가 났나요?' },
           country: { name: 'USA', flag: 'static/img/flags/USA.png' },
-          usage: { value: 50, period: 'Jun 11, 2015 - Jul 10, 2015' },
+          usage: { period: 'Jun 11, 2015 - Jul 10, 2015' },
           payment: { name: 'Mastercard', icon: 'fa fa-cc-mastercard' },
           activity: '63'
         },
@@ -418,7 +418,7 @@ export default {
           avatar: { url: 'static/img/avatars/2.jpg', status: 'danger' },
           user: { name: '다른 말 하지 말고 사과만 하시는 게 낫습니다.', new: false, registered: '상대방이 화가 났나요?' },
           country: { name: 'Brazil', flag: 'static/img/flags/Brazil.png' },
-          usage: { value: 22, period: 'Jun 11, 2015 - Jul 10, 2015' },
+          usage: { period: 'Jun 11, 2015 - Jul 10, 2015' },
           payment: { name: 'Visa', icon: 'fa fa-cc-visa' },
           activity: '44'
         },
@@ -426,7 +426,7 @@ export default {
           avatar: { url: 'static/img/avatars/3.jpg', status: 'warning' },
           user: { name: '저건 100% 비꼬는 거예요ㅋㅋㅋㅋ', new: true, registered: '저 말 진심인가요?' },
           country: { name: 'India', flag: 'static/img/flags/India.png' },
-          usage: { value: 74, period: 'Jun 11, 2015 - Jul 10, 2015' },
+          usage: { period: 'Jun 11, 2015 - Jul 10, 2015' },
           payment: { name: 'Stripe', icon: 'fa fa-cc-stripe' },
           activity: '37'
         },
@@ -434,7 +434,7 @@ export default {
           avatar: { url: 'static/img/avatars/4.jpg', status: '' },
           user: { name: '별 생각 없이 던진 농담인데 너무 앞서나가신 것 같네요', new: true, registered: '이 사람 저에게 관심있나요?' },
           country: { name: 'France', flag: 'static/img/flags/France.png' },
-          usage: { value: 98, period: 'Jun 11, 2015 - Jul 10, 2015' },
+          usage: { period: 'Jun 11, 2015 - Jul 10, 2015' },
           payment: { name: 'PayPal', icon: 'fa fa-paypal' },
           activity: '21'
         },
@@ -479,19 +479,7 @@ export default {
     }
   },
   methods: {
-    variant (value) {
-      let $variant
-      if (value <= 25) {
-        $variant = 'info'
-      } else if (value > 25 && value <= 50) {
-        $variant = 'success'
-      } else if (value > 50 && value <= 75) {
-        $variant = 'warning'
-      } else if (value > 75 && value <= 100) {
-        $variant = 'danger'
-      }
-      return $variant
-    }
+
   }
 }
 </script>

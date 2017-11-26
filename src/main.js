@@ -19,9 +19,11 @@ Vue.config.productionTip = false
 Vue.use(VueTabs)
 Vue.use(BootstrapVue)
 Vue.use(VueFire)
-fb.messaging.onMessage(function(payload) {
-  console.log("Message received. ", payload);
-});
+fb.messaging.onMessage((payload) => {
+  console.log("Message received. ", payload)
+  console.log(this)
+  // this.navbarText = '새 질문이 도착했습니다.'
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

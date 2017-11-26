@@ -1,5 +1,5 @@
 <template>
-<div>
+<div><br>
   <h3 id="registration">회원가입</h3>
   <b-form @submit.prevent="onSubmit">
     <b-form-group id="exampleInputGroup1" label="아이디:" label-for="exampleInput1" description="아이디는 본인 식별 용도로만 사용됩니다.">
@@ -70,7 +70,7 @@ export default {
       let idx = this.$root.users.findIndex((element) => {
         return element.name === this.form.name
       })
-      return (idx === -1) 
+      return (idx === -1)
     },
     isPushAvailable: function () {
       return ('serviceWorker' in navigator) && ('PushManager' in window)
@@ -80,7 +80,7 @@ export default {
     onSubmit(evt) {
       this.$root.$firebaseRefs.users.push(this.form)
       this.$store.commit('setAnswererInfo', this.form)
-      this.$router.push('seeQuestions')
+      this.$router.push('questionList')
     },
     registerNotification: function () {
       // alert('adsf')

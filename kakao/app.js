@@ -16,7 +16,7 @@ admin.initializeApp({
 admin.database().ref('users').on('child_added', function(snapshot) {
     // subscribe
     const user = snapshot.val()
-    if(user.pushSubscribed === true) {
+    if(user.pushSubscribed === true && user.interest && user.interest.length !==0) {
         const registrationToken = user.pushToken
         user.interest.forEach(function(topic){
             admin.messaging().subscribeToTopic(registrationToken, topic)
