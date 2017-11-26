@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar type="dark" variant="info">
+    <b-navbar type="light" variant="info">
       <b-navbar-nav>
         <b-nav-item @click="$router.go(-1)"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></b-nav-item>
       </b-navbar-nav>

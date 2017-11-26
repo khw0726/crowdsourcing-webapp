@@ -30,7 +30,7 @@ export default new Router({
     },
     {
       path: '/questionList',
-      name: 'QuestionList',
+      name: 'questionList',
       component: QuestionList
     },
 
