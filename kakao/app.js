@@ -24,6 +24,8 @@ admin.database().ref('users').on('child_added', function(snapshot) {
               // See the MessagingTopicManagementResponse reference documentation
               // for the contents of response.
               console.log("Successfully subscribed to topic:", response);
+              if(response.errorCount !== 0)
+                console.log(response.errors[0])
             })
             .catch(function(error) {
               console.log("Error subscribing to topic:", error);
