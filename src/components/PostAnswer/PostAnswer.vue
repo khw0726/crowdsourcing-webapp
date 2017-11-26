@@ -94,11 +94,12 @@ export default {
         answer: this.answer,
         name: this.$store.state.answererInfo.name,
         questionID: this.imgID,
-        date: date
+        date: date,
+        category : this.question.category
       }
       console.log(date)
       this.$firebaseRefs.answers.push(answerObj)
-      var newAnswer = [{isYes : answerObj.isYes, name : answerObj.name}]
+      var newAnswer = [answerObj.isYes]
       this.$firebaseRefs.questions.child(this.imgID).on('value', function(snapshot) {
         if (snapshot.val().answers != 0){
           newAnswer = newAnswer.concat(snapshot.val().answers)
@@ -119,7 +120,7 @@ export default {
       }
       var updates = {}
       updates[this.imgID+"/answers"] = newAnswer
-      //this.$root.$firebaseRefs.questions.update(updates)
+      this.$root.$firebaseRefs.questions.update(updates)
       
       //console.log(this.users['-KzrBieCBvao_qb8XhGe'].questions)
       this.$firebaseRefs.users.child(userInfo[".key"]).update(userUpdates)

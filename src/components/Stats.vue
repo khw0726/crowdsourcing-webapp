@@ -15,7 +15,7 @@
                     <!-- TODO: 비율 -->
                   </h4>
                   <p>당신과 같은 의견을 가진 사람의 비율</p>
-                </div>
+               </div>
                 <!-- <card-bar-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/> -->
               </b-card>
             </div>
@@ -211,7 +211,10 @@
         </div>
       </v-tab>
     </vue-tabs>
+  {{this.userAnswers}}
+  {{this.totalCorrect}}
   </div>
+
 </template>
 
 <script>
@@ -236,8 +239,38 @@ export default {
     users: fb.db.ref("users")
   },
   computed: {
+    userInfo: function(){
+      console.log(this.name)
+      let userInfo = this.users.find(user=> {
+
+        return user.name === this.name
+      })
+      return userInfo
+
+    },
+    userAnswers: function() {
+      console.log("ddd")
+      console.log(this.userInfo)
+      let answers = []
+      for(let q in this.userInfo.questions){
+        console.log(this.userInfo.questions[q])
+        let answer = this.answers.find(answer => {
+          return (answer.name === this.name && answer.questionID === this.userInfo.questions[q])
+        })
+        answers.push(answer)
+      }      
+      return answers
+    },
     totalCorrect: function () {
-      return 25
+      //for(let a in this.userAnswers){
+      //  let question = this.questions.find(question => {
+      //    return (question[".key"] === this.userAnswers[a].questionID)
+      //  })
+      //  let answers = []
+      
+      //  }
+      //  
+      //}
     },
     myTotalCount: function () {
       return this.answers.filter((a) => {
@@ -293,42 +326,38 @@ export default {
       return this.answers.filter((a) => {
         return a.category === 'etc'
       }).length
-    },
-    
-    name: function () {
-      return this.$store.state.answererInfo.name
     }
   },
   data: function() {
     return {
-      userInfo: {},
+      name: this.$store.state.answererInfo.name
     };
   },
-  mounted() {
-    console.log(document.cookie);
-    if (!this.$store.state.answererInfo.name & !document.cookie) {
-      alert("Please Log-in");
+  created() {
+    console.log(document.cookie)
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+    if ((!this.$store.state.answererInfo.name)&(!cookieValue)){
+      alert("Please Log-in")
       console.log("dddd");
-      this.$router.push({ path: "/Login" });
-    } else if (!this.$store.state.answererInfo.name) {
-      this.name = document.cookie.split(";")[0].split("=")[1];
-      console.log(this.name);
-      this.$root.$firebaseRefs.users.once("value").then(snapshot => {
-        const users = snapshot.val();
-        console.log(users);
-        for (let user in users) {
-          console.log(user);
-          if (users[user].name === this.name) {
-            this.$store.commit("setAnswererInfo", users[user]);
+      this.$router.push({path:'/Login'});
+    }
+    else if (!this.$store.state.answererInfo.name){
+      this.name = cookieValue;
+      this.$root.$firebaseRefs.users.once('value').then(snapshot => {
+          const users = snapshot.val()
+          console.log(users)
+          for (let user in users) {
+            console.log(user)
+            if (users[user].name === this.name) {
+              console.log(this.name)
+              this.$store.commit('setAnswererInfo', users[user])
+            }
           }
-        }
+        
       });
     }
-    this.userInfo = this.users.find((user) => {
-      return user.name === this.name;
-    });
-    console.log(this.userInfo);
   },
+
   methods: {}
 };
 </script>
