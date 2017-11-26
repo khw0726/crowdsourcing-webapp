@@ -6,8 +6,8 @@
   <div><span>{{question.question}}</span></div>
   <div>
     <b-button-group>
-      <b-button :pressed.sync="Toggle1" variant="primary">네</b-button>
-      <b-button :pressed.sync="Toggle2" variant="primary">아니오</b-button>
+      <b-button :pressed.sync="yActive" @click="onYActive" variant="primary">네</b-button>
+      <b-button :pressed.sync="nActive" @click="onNActive" variant="primary">아니오</b-button>
     </b-button-group>
   </div>
      <br>

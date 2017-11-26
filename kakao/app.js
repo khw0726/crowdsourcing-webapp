@@ -34,7 +34,7 @@ admin.database().ref('users').on('child_added', function(snapshot) {
 
 admin.database().ref('questions').on('child_changed', function (snapshot) {
     const question = snapshot.val()
-    if(question.category) {
+    if(question.category && question.answers && question.answers !== 0) {
         // console.log(question.category)
         // console.log(question['.key'])
         // console.log(question.key)

@@ -201,7 +201,7 @@
           <div class="card-columns cols-2">
             <b-card header="카테고리별 누적 답변">
               <div class="chart-wrapper">
-                <bar-example :numbers="[myLoveCount, myBusinessCount, myFriendCount, myFamilyCount, myEtcCount]"/>
+                <pie-example :numbers="[myLoveCount, myBusinessCount, myFriendCount, myFamilyCount, myEtcCount]"/>
               </div>
             </b-card>
             <b-card header="내 도전 과제">
@@ -217,7 +217,7 @@
 <script>
 // DB-TODO: Connect with ranking system
 
-import BarExample from "./charts/BarExample";
+import PieExample from "./charts/PieExample";
 import LineExample from "./charts/LineExample";
 import MainChartExample from "./dashboard/MainChartExample";
 import { Callout } from "./coreui";
@@ -227,7 +227,7 @@ export default {
   name: "dashboard",
   components: {
     LineExample,
-    BarExample,
+    PieExample,
     MainChartExample
   },
   firebase: {
