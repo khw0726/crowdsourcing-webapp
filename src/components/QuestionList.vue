@@ -43,6 +43,26 @@ export default{
   },
   mounted() {
     this.$emit('questionsChecked')
+    console.log(document.cookie)
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+    if ((!this.$store.state.answererInfo.name)&(!cookieValue)){
+      alert("Please Log-in")
+      console.log("dddd");
+      this.$router.push({path:'/Login'});
+    }
+    else if (!this.$store.state.answererInfo.name){
+      this.name = cookieValue;
+      this.$root.$firebaseRefs.users.once('value').then(snapshot => {
+          const users = snapshot.val()
+          console.log(users)
+          for (let user in users) {
+            console.log(user)
+            if (users[user].name === this.name) {
+              this.$store.commit('setAnswererInfo', users[user])
+            }
+          }
+        })
+    }
   }
 }
 </script>
