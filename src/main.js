@@ -18,7 +18,7 @@ Vue.use(BootstrapVue)
 Vue.use(VueFire)
 fb.messaging.onMessage((payload) => {
   console.log("Message received. ", payload)
-  alert('새 질문이 도착했습니다.')
+  alert('새 질문이 도착했습니다. 상단 바의 "질문 보기"에서 확인해주세요.')
   // this.navbarText = '새 질문이 도착했습니다.'
 })
 /* eslint-disable no-new */
