@@ -80,6 +80,8 @@ export default {
     onSubmit(evt) {
       this.$root.$firebaseRefs.users.push(this.form)
       this.$store.commit('setAnswererInfo', this.form)
+      document.cookie = "username="+this.form.name+";";
+
       this.$router.push('questionList')
     },
     registerNotification: function () {
