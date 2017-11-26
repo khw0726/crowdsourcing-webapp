@@ -3,8 +3,11 @@
     <div id="answerimg">
       <img :src="imgSrc"/>
     </div>
+    <br>
     <div id="text">
-      <div id="question">{{question}}</div>
+      <!-- <div id="question"> -->
+        <h5>{{question}}</h5>
+        <!-- </div> -->
       <br>
       이 질문에 대해
       <span id="proportion">{{proportion}}</span>의 사람들이
@@ -12,7 +15,7 @@
       <span id="answer">그렇다</span>라고 대답했습니다.
     </div>
     <div>
-      기타 의견은 다음과 같습니다.
+      추가로, 다음과 같은 의견을 남겼습니다.
       <ul>
         <li v-for="comment in comments" :key="comment">{{comment}}</li>
       </ul>
