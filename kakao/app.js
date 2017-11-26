@@ -15,7 +15,9 @@ admin.initializeApp({
 
 admin.database().ref('users').on('child_added', function(snapshot) {
     // subscribe
+    console.log('child_added')
     const user = snapshot.val()
+    console.log(user)
     if(user.pushSubscribed === true && user.interest && user.interest.length !==0) {
         const registrationToken = user.pushToken
         user.interest.forEach(function(topic){
@@ -24,8 +26,9 @@ admin.database().ref('users').on('child_added', function(snapshot) {
               // See the MessagingTopicManagementResponse reference documentation
               // for the contents of response.
               console.log("Successfully subscribed to topic:", response);
-              if(response.errorCount !== 0)
+              if(response.errorCount !== 0){
                 console.log(response.errors[0])
+              }
             })
             .catch(function(error) {
               console.log("Error subscribing to topic:", error);
