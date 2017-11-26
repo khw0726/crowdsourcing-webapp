@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-    <h3 class="ui header">{{name}} 내 답변 현황</h3>
+    <h3 class="ui header">내 답변 현황</h3>
     사람들의 생각을 {{totalCorrect}}% 맞추셨습니다.
     <vue-tabs>
       <v-tab title="답변 분석">
@@ -39,20 +39,35 @@
               </div><!--/.col-->
             </div><!--/.row-->
             <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" height="300"></main-chart-example>
-            <div slot="footer"></div>
           </b-card>
           <div class="row">
+            <div class="col-sm-6 col-lg-3">
+              <div class="social-box facebook">
+                <p><br>전체</p>
+                  <div width = "234"></div>
+                <ul>
+                  <li>
+                    <strong>{{myTotalCount}}</strong>
+                    <span>내 답변 수</span>
+                  </li>
+                  <li>
+                    <strong>{{answers.length}}</strong>
+                    <span>누적 답변</span>
+                  </li>
+                </ul>
+              </div><!--/.social-box-->
+            </div><!--/.col-->
             <div class="col-sm-6 col-lg-3">
               <div class="social-box facebook">
                 <p><br>연애</p>
                   <div width = "234"></div>
                 <ul>
                   <li>
-                    <strong>29</strong>
-                    <span>오늘의 답변</span>
+                    <strong>{{myLoveCount}}</strong>
+                    <span>내 답변 수</span>
                   </li>
                   <li>
-                    <strong>459</strong>
+                    <strong>{{loveCount}}</strong>
                     <span>누적 답변</span>
                   </li>
                 </ul>
@@ -64,11 +79,11 @@
                 <div width = "234"></div>
                 <ul>
                   <li>
-                    <strong>37</strong>
-                    <span>오늘의 답변</span>
+                    <strong>{{myBusinessCount}}</strong>
+                    <span>내 답변 수</span>
                   </li>
                   <li>
-                    <strong>792</strong>
+                    <strong>{{businessCount}}</strong>
                     <span>누적 답변</span>
                   </li>
                 </ul>
@@ -80,11 +95,11 @@
                 <div width = "234"></div>
                 <ul>
                   <li>
-                    <strong>20</strong>
-                    <span>오늘의 답변</span>
+                    <strong>{{myFriendCount}}</strong>
+                    <span>내 답변 수</span>
                   </li>
                   <li>
-                    <strong>292</strong>
+                    <strong>{{friendCount}}</strong>
                     <span>누적 답변</span>
                   </li>
                 </ul>
@@ -96,11 +111,27 @@
                 <div width = "234"></div>
                 <ul>
                   <li>
-                    <strong>52</strong>
-                    <span>오늘의 답변</span>
+                    <strong>{{myFamilyCount}}</strong>
+                    <span>내 답변 수</span>
                   </li>
                   <li>
-                    <strong>894</strong>
+                    <strong>{{familyCount}}</strong>
+                    <span>누적 답변</span>
+                  </li>
+                </ul>
+              </div><!--/.social-box-->
+            </div><!--/.col-->
+            <div class="col-sm-6 col-lg-3">
+              <div class="social-box google-plus">
+                <p><br>그 외</p>
+                <div width = "234"></div>
+                <ul>
+                  <li>
+                    <strong>{{myEtcCount}}</strong>
+                    <span>내 답변 수</span>
+                  </li>
+                  <li>
+                    <strong>{{etcCount}}</strong>
                     <span>누적 답변</span>
                   </li>
                 </ul>
@@ -206,7 +237,12 @@ export default {
   },
   computed: {
     totalCorrect: function () {
-
+      return 25
+    },
+    myTotalCount: function () {
+      return this.answers.filter((a) => {
+        return a.name === this.$store.state.answererInfo.name
+      }).length
     },
     myLoveCount: function () {
       return this.answers.filter((a) => {
@@ -232,11 +268,39 @@ export default {
       return this.answers.filter((a) => {
         return a.name === this.$store.state.answererInfo.name && a.category === 'etc'
       }).length
+    },
+    loveCount: function () {
+      return this.answers.filter((a) => {
+        return a.category === 'love'
+      }).length
+    },
+    businessCount: function () {
+      return this.answers.filter((a) => {
+        return a.category === 'business'
+      }).length
+    },
+    friendCount: function () {
+      return this.answers.filter((a) => {
+        return a.category === 'friend'
+      }).length
+    },
+    familyCount: function () {
+      return this.answers.filter((a) => {
+        return a.category === 'family'
+      }).length
+    },
+    etcCount: function () {
+      return this.answers.filter((a) => {
+        return a.category === 'etc'
+      }).length
+    },
+    
+    name: function () {
+      return this.$store.state.answererInfo.name
     }
   },
   data: function() {
     return {
-      name: this.$store.state.answererInfo.name,
       userInfo: {},
     };
   },
@@ -260,7 +324,7 @@ export default {
         }
       });
     }
-    this.userInfo = this.users.find(function(user) {
+    this.userInfo = this.users.find((user) => {
       return user.name === this.name;
     });
     console.log(this.userInfo);
