@@ -32,10 +32,12 @@ export default{
     //   }
     // },
     unansweredQuestions: function () {
-      if(this.questions && this.users && this.users.length !== 0 && this.questions.length !== 0){
+      if(this.questions && this.user && this.user.questions && this.questions.length !== 0){
         return this.questions.filter((q) => {
           return !(this.user.questions.includes(q['.key']))
         })
+      } else if (this.user && !this.user.questions) {
+        return this.questions
       } else {
         return []
       }
@@ -62,7 +64,7 @@ export default{
               this.$store.commit('setAnswererInfo', users[user])
             }
           }
-        })
+      })
     }
   }
 }

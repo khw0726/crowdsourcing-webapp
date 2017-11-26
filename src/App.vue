@@ -25,9 +25,13 @@ export default {
   // mounted() {
 
   // },
+  computed: {
+    name: function () {
+      return this.$store.state.answererInfo.name
+    }
+  },
   data: function () {
     return {
-      name: this.$store.state.answererInfo.name,
       navbarText: '질문 보기'
     }
   },
