@@ -16,6 +16,7 @@
           <h4 class="mb-0">294번째</h4>
           <p>'직장'카테고리의 답변</p>
         </div>
+        {{userAnswers}}
         <card-line2-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/>
       </b-card>
     </div><!--/.col-->
@@ -98,7 +99,7 @@
         <div width = "234"></div>
         <ul>
           <li>
-            <strong>20</strong>
+            <strong>구</strong>
             <span>오늘의 답변</span>
           </li>
           <li>
@@ -408,11 +409,25 @@ export default {
     answers: fb.db.ref('answers'),
     users: fb.db.ref('users')
   },
+  computed: {
+    userInfo: function(){
+      console.log(this.name)
+      let userInfo = this.users.find(user=> {
 
+        return user.name === this.name
+      })
+      return userInfo
+
+    },
+    userAnswers: function() {
+      console.log("ddd")
+      console.log(this.userInfo)
+    }
+  },
   data: function () {
+
     return {
       name: this.$store.state.answererInfo.name,
-      userInfo: {},
       tableItems: [
         {
           avatar: { url: 'static/img/avatars/1.jpg', status: 'success' },
@@ -465,32 +480,31 @@ export default {
 
     }
   }, 
-  mounted() {
-    console.log(document.cookie);
-    if ((!this.$store.state.answererInfo.name)&(!document.cookie)){
+  created() {
+    console.log(document.cookie)
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+    if ((!this.$store.state.answererInfo.name)&(!cookieValue)){
       alert("Please Log-in")
       console.log("dddd");
       this.$router.push({path:'/Login'});
     }
     else if (!this.$store.state.answererInfo.name){
-      this.name = document.cookie.split(';')[0].split('=')[1];
-      console.log(this.name)
+      this.name = cookieValue;
       this.$root.$firebaseRefs.users.once('value').then(snapshot => {
           const users = snapshot.val()
           console.log(users)
           for (let user in users) {
             console.log(user)
             if (users[user].name === this.name) {
+              console.log(this.name)
               this.$store.commit('setAnswererInfo', users[user])
             }
           }
         })
     }
-    this.userInfo = this.users.find(function(user) {
-      return user.name === this.name
-    })
-    console.log(this.userInfo)
+    
   },
+
   methods: {
 
   }

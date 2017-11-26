@@ -41,7 +41,7 @@ export default{
       }
     }
   },
-  mounted() {
+  created() {
     this.$emit('questionsChecked')
     console.log(document.cookie)
     var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")
@@ -58,6 +58,7 @@ export default{
           for (let user in users) {
             console.log(user)
             if (users[user].name === this.name) {
+            	console.log(this.name)
               this.$store.commit('setAnswererInfo', users[user])
             }
           }
