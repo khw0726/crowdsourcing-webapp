@@ -43,7 +43,7 @@ admin.database().ref('questions').on('child_changed', function (snapshot) {
             notification: {
                 title: '눈치백단',
                 body: topic + ' 분야의 새로운 질문이 등록되었습니다. 확인해주세요.',
-                click_action: 'http://localhost:8090/#/' + snapshot.key + '/postAnswer'
+                click_action: 'https://crowdsourcing-664f1.firebaseapp.com/#/' + snapshot.key + '/postAnswer'
             },
         }    
         admin.messaging().sendToTopic(topic, payload)
