@@ -117,7 +117,7 @@ app.post('/message',function (req, res) {
         writeUserData(id, string);});
       message = {
         "message": {
-            "text": '이 곳에서 마저 질문을 작성해 보세요.\nhttps://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/postQuestion\n 등록된 답변은 https://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/answerView에서 확인하실 수 있습니다.'
+            "text": '\nhttps://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/postQuestion에 접속하셔서 질문을 남겨주세요.\n 등록된 답변은 https://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/answerView에서 확인하실 수 있습니다.'
         },
         "keyboard": {
             "type": "text"
@@ -135,7 +135,7 @@ app.post('/message',function (req, res) {
       };
     }
     
-    console.log(_obj.content)
+    // console.log(_obj.content)
     console.log(_obj.user_key)
     console.log(_obj.type)
     res.set({
