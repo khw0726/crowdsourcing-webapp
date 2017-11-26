@@ -93,13 +93,13 @@ export default {
         questionID: this.imgID,
       }
       console.log(answerObj)
-      var newAnswer = [[answerObj.isYes, answerObj.name]]
+      var newAnswer = [{isYes : answerObj.isYes, name : answerObj.name}]
       this.$firebaseRefs.questions.child(this.imgID).on('value', function(snapshot) {
         if (snapshot.val().answers != 0){
           newAnswer = newAnswer.concat(snapshot.val().answers)
         }
       });
- 
+      console.log(newAnswer)
        var updates = {}
         updates[this.imgID+"/answers"] = newAnswer
        this.$root.$firebaseRefs.questions.update(updates)
