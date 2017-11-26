@@ -15,15 +15,15 @@ export default{
   firebase() {
     return {
       questions: fb.db.ref('questions'),
-      users: fb.db.ref('users').orderByChild('name').equalTo(this.$store.state.answererInfo.name)
+      users: fb.db.ref('users').orderByChild('name')
     }
   },
   computed: {
-    // user: function () {
-    //   return this.users.find((u) => {
-    //     return u.name === this.$store.state.answererInfo.name
-    //   })
-    // },
+    user: function () {
+      return this.users.find((u) => {
+        return u.name === this.$store.state.answererInfo.name
+      })
+    },
     // answeredQuestions: function () {
     //   if(this.users && this.users.length !== 0) {
     //     return this.users[0].questions
@@ -34,7 +34,7 @@ export default{
     unansweredQuestions: function () {
       if(this.questions && this.users && this.users.length !== 0 && this.questions.length !== 0){
         return this.questions.filter((q) => {
-          return !(this.users[0].questions.includes(q['.key']))
+          return !(this.user.questions.includes(q['.key']))
         })
       } else {
         return []
