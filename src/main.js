@@ -3,10 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import semantic from 'semantic'
-
 import store from './store/store'
-import $ from 'jquery'
 import BootstrapVue from 'bootstrap-vue'
 import VueTabs from 'vue-nav-tabs'
 import 'vue-nav-tabs/themes/vue-tabs.css'
