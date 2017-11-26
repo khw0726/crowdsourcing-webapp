@@ -8,6 +8,7 @@
         <b-button class="ui button" @click="onClick('friend')">친구</b-button>
         <b-button class="ui button" @click="onClick('business')">직장</b-button>
         <b-button class="ui button" @click="onClick('family')">가족</b-button>
+        <b-button class="ui button" @click="onClick('etc')">그 외</b-button>
       </b-button-group>
     </div>
   </div>
