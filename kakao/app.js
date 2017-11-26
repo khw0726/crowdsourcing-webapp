@@ -39,7 +39,7 @@ admin.database().ref('users').on('child_added', function(snapshot) {
 
 admin.database().ref('questions').on('child_changed', function (snapshot) {
     const question = snapshot.val()
-    if(question.category && question.answers !== 0) {
+    if(question.category && question.answers === 0) {
         console.log(question.category)
         // console.log(question['.key'])
         // console.log(question.key)
@@ -122,7 +122,7 @@ app.post('/message',function (req, res) {
         writeUserData(id, string);});
       message = {
         "message": {
-            "text": '\nhttps://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/postQuestion 에 접속하셔서 질문을 남겨주세요.\n 등록된 답변은 https://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/answerView에서 확인하실 수 있습니다.'
+            "text": '\nhttps://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/postQuestion 에 접속하셔서 질문을 남겨주세요.\n 등록된 답변은 https://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/answerView 에서 확인하실 수 있습니다.'
         },
         "keyboard": {
             "type": "text"
