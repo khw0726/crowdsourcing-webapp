@@ -87,14 +87,17 @@ export default {
       this.yActive = false;
     },
     onSubmit: function() {
+      var date = new Date().toISOString().slice(0,10); 
 
       const answerObj = {
         isYes: this.Toggle1,
         answer: this.answer,
         name: this.$store.state.answererInfo.name,
         questionID: this.imgID,
+        date: date
       }
-      console.log(answerObj)
+      console.log(date)
+      this.$firebaseRefs.answers.push(answerObj)
       var newAnswer = [{isYes : answerObj.isYes, name : answerObj.name}]
       this.$firebaseRefs.questions.child(this.imgID).on('value', function(snapshot) {
         if (snapshot.val().answers != 0){
