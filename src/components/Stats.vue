@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <br>
     <h3 class="ui header">내 답변 현황</h3>
@@ -21,7 +22,286 @@
             </div>
           <!--/.col-->
           </div><!--/.row-->
-          <b-card>
+        </div>
+      </v-tab>
+    </vue-tabs>
+  </div>
+         
+<div class="container-fluid">
+  <div><br>
+    <h3 class="ui header">{{name}}님의 답변 현황</h3>
+
+<vue-tabs>
+<v-tab title="답변 분석">
+<div class="animated fadeIn">
+  <div class="row">
+
+  <!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <b-card class="bg-info" :no-body="true">
+        <div class="card-body pb-0">
+
+          <h4 class="mb-0">294번째</h4>
+          <p>'직장'카테고리의 답변</p>
+        </div>
+        <card-line2-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/>
+      </b-card>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <b-card class="bg-warning" :no-body="true">
+        <div class="card-body pb-0">
+
+          <h4 class="mb-0">73.6%</h4>
+          <p>당신과 같은 의견을 가진 사람의 비율</p>
+        </div>
+        <card-bar-chart-example class="chart-wrapper px-3" style="height:70px;" height="70"/>
+
+      </b-card>
+    </div><!--/.col-->
+
+  </div><!--/.row-->
+
+  <b-card>
+    <div class="row">
+      <div class="col-sm-5">
+        <h4 class="card-title mb-0">답변 수</h4>
+        <div class="small text-muted">November 2017</div>
+      </div><!--/.col-->
+      <div class="col-sm-7 d-none d-md-block">
+        <b-button type="button" variant="primary" class="float-right"><i class="icon-cloud-download"></i></b-button>
+        <b-button-toolbar class="float-right" aria-label="Toolbar with button groups">
+          <b-button-group class="mr-3" aria-label="First group">
+            <b-button variant="outline-secondary">Day</b-button>
+            <b-button variant="outline-secondary" :pressed="true">Month</b-button>
+            <b-button variant="outline-secondary">Year</b-button>
+          </b-button-group>
+        </b-button-toolbar>
+      </div><!--/.col-->
+    </div><!--/.row-->
+    <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" height="300"></main-chart-example>
+    <div slot="footer"></div>
+  </b-card>
+</div>
+</v-tab>
+
+<v-tab title="답변 통계">
+
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-lg-3">
+      <div class="social-box facebook">
+        <p><br>연애</p>
+          <div width = "234"></div>
+        <ul>
+          <li>
+            <strong>29</strong>
+            <span>오늘의 답변</span>
+          </li>
+          <li>
+            <strong>459</strong>
+            <span>누적 답변</span>
+          </li>
+        </ul>
+      </div><!--/.social-box-->
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="social-box twitter">
+        <p><br>직장</p>
+        <div width = "234"></div>
+        <ul>
+          <li>
+            <strong>37</strong>
+            <span>오늘의 답변</span>
+          </li>
+          <li>
+            <strong>792</strong>
+            <span>누적 답변</span>
+          </li>
+        </ul>
+      </div><!--/.social-box-->
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="social-box linkedin">
+        <p><br>친구</p>
+        <div width = "234"></div>
+        <ul>
+          <li>
+            <strong>20</strong>
+            <span>오늘의 답변</span>
+          </li>
+          <li>
+            <strong>292</strong>
+            <span>누적 답변</span>
+          </li>
+        </ul>
+      </div><!--/.social-box-->
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="social-box google-plus">
+        <p><br>가족</p>
+        <div width = "234"></div>
+        <ul>
+          <li>
+            <strong>52</strong>
+            <span>오늘의 답변</span>
+          </li>
+          <li>
+            <strong>894</strong>
+            <span>누적 답변</span>
+          </li>
+        </ul>
+      </div><!--/.social-box-->
+    </div><!--/.col-->
+  </div><!--/.row-->
+  <div class="row">
+    <div class="col-md-12">
+      <b-card header="답변 유사도">
+        <div class="row">
+          <div class="col-sm-12 col-lg-4">
+            <div class="row">
+              <div class="col-sm-6">
+                <Callout variant="info">
+
+
+                  <div class="chart-wrapper">
+                  </div>
+                </Callout>
+              </div><!--/.col-->
+              <div class="col-sm-6">
+                <Callout variant="danger">
+
+                  <div class="chart-wrapper">
+                  </div>
+                </Callout>
+              </div><!--/.col-->
+            </div><!--/.row-->
+            <hr class="mt-0">
+            <ul class="horizontal-bars">
+              <li>
+                <div class="title">
+                  연애
+                </div>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="34" variant="info"></b-progress>
+                  <b-progress class="progress-xs" :value="66" variant="danger"></b-progress>
+                </div>
+              </li>
+              <li>
+                <div class="title">
+                  직장
+                </div>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="56" variant="info"></b-progress>
+                  <b-progress class="progress-xs" :value="44" variant="danger"></b-progress>
+                </div>
+              </li>
+              <li>
+                <div class="title">
+                  친구
+                </div>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="88" variant="info"></b-progress>
+                  <b-progress class="progress-xs" :value="12" variant="danger"></b-progress>
+                </div>
+              </li>
+              <li>
+                <div class="title">
+                  가족
+                </div>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="43" variant="info"></b-progress>
+                  <b-progress class="progress-xs" :value="57" variant="danger"></b-progress>
+                </div>
+              </li>
+              <li>
+                <div class="title">
+                  평균
+                </div>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="73" variant="info"></b-progress>
+                  <b-progress class="progress-xs" :value="22" variant="danger"></b-progress>
+                </div>
+              </li>
+
+
+              <li class="legend">
+                <b-badge pill variant="info"></b-badge> <small>다수와 일치</small> &nbsp; <b-badge pill variant="danger"></b-badge> <small>소수의견</small>
+              </li>
+            </ul>
+          </div><!--/.col-->
+          <div class="col-sm-6 col-lg-4">
+            <div class="row">
+              <div class="col-sm-6">
+                <Callout variant="warning">
+
+                  <div class="chart-wrapper">
+                  </div>
+                </Callout>
+              </div><!--/.col-->
+              <div class="col-sm-6">
+                <Callout variant="success">
+
+                  <div class="chart-wrapper">
+                  </div>
+                </Callout>
+              </div><!--/.col-->
+            </div><!--/.row-->
+            <hr class="mt-0">
+            <ul class="horizontal-bars type-2">
+              <li>
+                <i class="icon-user"></i>
+                <span class="title">남성</span>
+                <span class="value">43%</span>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="43" variant="warning"></b-progress>
+                </div>
+              </li>
+              <li>
+                <i class="icon-user-female"></i>
+                <span class="title">여성</span>
+                <span class="value">37%</span>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="37" variant="warning"></b-progress>
+                </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+
+                <span class="title">10대</span>
+                <span class="value">191,235 <span class="text-muted small">(56%)</span></span>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="32" variant="success"></b-progress>
+                </div>
+              </li>
+              <li>
+
+                <span class="title">20대</span>
+                <span class="value">51,223 <span class="text-muted small">(15%)</span></span>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="73" variant="success"></b-progress>
+                </div>
+              </li>
+              <li>
+
+                <span class="title">30대</span>
+                <span class="value">37,564 <span class="text-muted small">(11%)</span></span>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="59" variant="success"></b-progress>
+                </div>
+              </li>
+              <li>
+
+                <span class="title">40대 이상</span>
+                <span class="value">27,319 <span class="text-muted small">(8%)</span></span>
+                <div class="bars">
+                  <b-progress class="progress-xs" :value="24" variant="success"></b-progress>
+                </div>
+              </li>
+
+            </ul>
+          </div><!--/.col-->
+          <div class="col-sm-6 col-lg-4">
+>>>>>>> Stashed changes
             <div class="row">
               <div class="col-sm-5">
                 <h4 class="card-title mb-0">답변 수</h4>

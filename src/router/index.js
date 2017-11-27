@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
+import Gate from '@/components/Gate'
 import QuestionList from '@/components/QuestionList'
 import PostQuestion from '@/components/PostQuestion/PostQuestion'
 import Annotate from '@/components/PostQuestion/Annotate'
@@ -29,11 +30,15 @@ export default new Router({
       component: Login
     },
     {
+      path: '/Gate',
+      name: 'Gateway',
+      component: Gate
+    },
+    {
       path: '/questionList',
       name: 'questionList',
       component: QuestionList
     },
-
     {
       path: '/:imgID/postQuestion',
       name: 'postQuestion',

@@ -17,7 +17,7 @@
       <b-form-checkbox value="family">가족</b-form-checkbox>
       <b-form-checkbox value="etc">기타</b-form-checkbox>
     </b-form-checkbox-group>
-    <br>
+
     <b-button v-if="isPushAvailable && !form.pushSubscribed" @click="registerNotification">
       관심 카테고리의 질문에 대한 알림을 받겠습니다.
     </b-button>
@@ -37,7 +37,7 @@
       <b-form-radio value="30">30대</b-form-radio>
       <b-form-radio value="40">40대</b-form-radio>
       <b-form-radio value="50">50대 이상</b-form-radio>
-    </b-form-radio-group>
+    </b-form-radio-group><br>
     <b-button type="submit" variant="primary">제출</b-button>
     <b-button type="reset" variant="secondary">되돌리기</b-button>
   </b-form>

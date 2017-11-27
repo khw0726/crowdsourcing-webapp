@@ -1,5 +1,5 @@
 <template>
-<div>
+<div><br>
   <h3 id="login">로그인</h3>
   <b-form @submit.prevent="onSubmit">
     <b-form-group id="exampleInputGroup1" label="아이디:" label-for="exampleInput1">
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'logIn',
   data: function() {
@@ -22,7 +21,7 @@ export default {
   },
   methods: {
     onSubmit: function() {
-      document.cookie = "username="+this.name+";";
+      document.cookie = "username=" + this.name + ";";
       this.$root.$firebaseRefs.users.once('value').then(snapshot => {
         const users = snapshot.val()
         console.log(users)
@@ -31,6 +30,7 @@ export default {
           if (users[user].name === this.name) {
             this.$store.commit('setAnswererInfo', users[user])
             this.$router.push({path:'/questionsList'})
+
           }
         }
         this.isValidName = false
