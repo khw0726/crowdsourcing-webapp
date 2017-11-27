@@ -34,10 +34,12 @@ export default{
     unansweredQuestions: function () {
       if(this.questions && this.user && this.user.questions && this.questions.length !== 0){
         return this.questions.filter((q) => {
-          return !(this.user.questions.includes(q['.key']))
+          return q.question && (!(this.user.questions.includes(q['.key']))) 
         })
       } else if (this.user && !this.user.questions) {
-        return this.questions
+        return this.questions.filter((q) => {
+          return q.question
+        })
       } else {
         return []
       }
