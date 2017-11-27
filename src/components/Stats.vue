@@ -241,52 +241,73 @@ export default {
   computed: {
     userInfo: function(){
       console.log(this.name)
-      let userInfo = this.users.find(user=> {
-
-        return user.name === this.name
-      })
-      return userInfo
-
+      if(this.users){
+        let userInfo = this.users.find(user=> {
+          return user.name === this.name
+        })
+        return userInfo
+      }
+      else {
+        return null
+      }
     },
     userAnswers: function() {
       console.log("ddd")
       console.log(this.userInfo)
+      console.log('name', this.name)
       let answers = []
-      for(let q in this.userInfo.questions){
-        console.log(this.userInfo.questions[q])
-        let answer = this.answers.find(answer => {
-          return (answer.name === this.name && answer.questionID === this.userInfo.questions[q])
+      if(this.userInfo){
+        return this.answers.filter((a) => {
+          return this.userInfo.questions.includes(a.questionID) && a.name === this.userInfo.name
         })
-        answers.push(answer)
-      }      
-      return answers
+        // for(let q in this.userInfo.questions){
+        //   console.log('userAnswers', this.userInfo.questions[q])
+        //   let answer = this.answers.find(answer => {
+        //     console.log(this.name)
+        //     return (answer.name === this.name && answer.questionID === this.userInfo.questions[q])
+        //   })
+        //   console.log(this.answers)
+        //   console.log('userAnswers', answer)
+        //   answers.push(answer)
+        // }      
+        // return answers
+      }
+      else {
+        return []
+      }
     },
     totalCorrect: function () {
       var accurate = 0
-      for(let a in this.userAnswers){
-        let question = this.questions.find(question => {
-          console.log(this.userAnswers[a])
-          return (question[".key"] === this.userAnswers[a].questionID)
-        })
-        let answers = question.answers
-        var ycount = 0
-        var ncount = 0
-        for ( var i = 0; i < answers.length; i++ ) {
-          if (answers[i] ===true){
-            ycount ++
+      if(this.userAnswers.length !== 0) {
+        for(let a in this.userAnswers){
+          let question = this.questions.find(question => {
+            console.log('totalcorrect', this.userAnswers)
+            console.log('totalcorrect', this.userAnswers[a])
+            return (question[".key"] === this.userAnswers[a].questionID)
+          })
+          let answers = question.answers
+          var ycount = 0
+          var ncount = 0
+          for ( var i = 0; i < answers.length; i++ ) {
+            if (answers[i] ===true){
+              ycount ++
+            }
+            else{
+              ncount ++
+            }
           }
-          else{
-            ncount ++
+          let majority = ycount >= ncount ? true : false
+          if (this.userAnswers[a].isYes == majority){
+            accurate ++
           }
+          
         }
-        let majority = ycount >= ncount ? true : false
-        if (this.userAnswers[a].isYes == majority){
-          accurate ++
-        }
-        
+        console.log(this.myTotalCount)
+        return accurate/this.myTotalCount*100
       }
-      console.log(this.myTotalCount)
-      return accurate/this.myTotalCount*100
+      else {
+        return 0
+      }
     },
     myTotalCount: function () {
       return this.answers.filter((a) => {
@@ -342,12 +363,10 @@ export default {
       return this.answers.filter((a) => {
         return a.category === 'etc'
       }).length
+    },
+    name: function () {
+      return this.$store.state.answererInfo.name
     }
-  },
-  data: function() {
-    return {
-      name: this.$store.state.answererInfo.name
-    };
   },
   created() {
     console.log(document.cookie)
