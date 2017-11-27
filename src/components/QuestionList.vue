@@ -35,6 +35,14 @@ export default{
       if(this.questions && this.user && this.user.questions && this.questions.length !== 0){
         return this.questions.filter((q) => {
           return q.question && (!(this.user.questions.includes(q['.key']))) 
+        }).sort(function(a, b){
+          if(a.answers === 0 ){
+            return -1
+          } else if(b.answers === 0){
+            return 1
+          } else {
+            return b.answers.length - a.answers.length
+          }
         })
       } else if (this.user && !this.user.questions) {
         return this.questions.filter((q) => {

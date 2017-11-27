@@ -14,6 +14,7 @@
      <b-form-input v-model="answer"
                    type="text"
                    placeholder="추가로 하실 말씀이 있다면 적어주세요."></b-form-input>
+    <br>
     <div>
        <b-button @click="onSubmit()">완료</b-button>
     </div>
