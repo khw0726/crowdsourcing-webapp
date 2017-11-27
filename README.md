@@ -22,12 +22,13 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## Code Description
 
-Main code for interface is located at ./src. Following are some of the notable files/directories:
+Main code for interface is located at ./src. Following are some of the notable files/directories:  
 
-./src/components/PostQuestion/ : Interface components for posting question
-./src/components/PostAnswer/ : Interface components for posting answers
-./src/components/charts, ./src/components/coreui, ./src/components/dashboard : Interface components for visualizing statistics
-./kakao/app.js : Backend code handling KakaoTalk messages and issuing push notifications
+./src/components/PostQuestion/ : Interface components for posting question  
+./src/components/PostAnswer/ : Interface components for posting answers  
+./src/components/charts, ./src/components/coreui, ./src/components/dashboard : Interface components for visualizing statistics  
+./src/components/ : Other interface components for login, question lists, user stats, and sign-in  
+./kakao/app.js : Backend code handling KakaoTalk messages and issuing push notifications  
 
 ## Firebase DB
 
@@ -47,13 +48,15 @@ age : string,
 gender : string,
 interest : [] of string,
 pushSubscribed : bool,
-pushToken : string
+pushToken : string,
+answers : [] of questionID
 }
 
 answers : {
 questionID : (FOREIGN) questions[“.key”],
 name : (FOREIGN) users/~~~~/name,
 isYes : bool,
-answer : string
+answer : string,
+date : date
 }
 ```
