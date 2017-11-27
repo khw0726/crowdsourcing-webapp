@@ -51,11 +51,11 @@ admin.database().ref('questions').on('child_changed', function (snapshot) {
         console.log(question.category)
         // console.log(question['.key'])
         // console.log(question.key)
-        const topic = categoryKey[question.category]
+        const topic = question.category
         const payload = {
             notification: {
                 title: '눈치백단',
-                body: topic + ' 분야의 새로운 질문이 등록되었습니다. 확인해주세요.',
+                body: categoryKey[topic] + ' 분야의 새로운 질문이 등록되었습니다. 확인해주세요.',
                 click_action: 'https://crowdsourcing-664f1.firebaseapp.com/#/' + snapshot.key + '/postAnswer'
             },
         }    
