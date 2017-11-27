@@ -215,8 +215,8 @@
         </div>
       </v-tab>
     </vue-tabs>
-  {{this.userAnswers}}
-  {{this.totalCorrect}}
+  <!-- {{this.userAnswers}}
+  {{this.totalCorrect}} -->
   </div>
 
 </template>
