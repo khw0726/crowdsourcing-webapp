@@ -132,7 +132,7 @@ app.post('/message',function (req, res) {
     else{
       message = {
         "message": {
-            "text": '궁금한 채팅을 캡쳐해 보내보세요.'
+            "text": '속 뜻이 궁금한 대화 내용을 캡쳐하신 후, 사진을 저에게 보내주세요.'
         },
         "keyboard": {
             "type": "text"

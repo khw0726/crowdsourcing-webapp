@@ -13,7 +13,7 @@
      <br>
      <b-form-input v-model="answer"
                    type="text"
-                   placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
+                   placeholder="추가로 하실 말씀이 있다면 적어주세요."></b-form-input>
     <div>
        <b-button @click="onSubmit()">완료</b-button>
     </div>
