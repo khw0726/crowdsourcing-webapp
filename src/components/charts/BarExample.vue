@@ -10,7 +10,7 @@ export default {
       labels: ['연애', '직장', '친구', '가족', '그 외'],
       datasets: [
         {
-          label: '누적 답변 수 ',
+          label: '사람들과 유사도',
           backgroundColor: '#f87979',
           data: this.numbers
         }
