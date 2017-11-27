@@ -1,9 +1,10 @@
 <template>
   <div>
     <h3>답변을 기다리는 질문</h3>
+    <h6>질문을 누르시면 답변을 달아주실 수 있습니다.</h6>
     <question v-for="q in unansweredQuestions" :key="q['.key']" :question="q"></question>
   </div>
-</template>
+</template>수
 
 <script>
 import fb from "@/fb.js"
