@@ -104,7 +104,7 @@ export default {
               // Show permission request.
               console.log('No Instance ID token available. Request permission to generate one.');
               // Show permission UI.
-              alert('알림 구독에 실패했습니다. 다시 시도해주세요.')
+              alert('No Instance ID token available. Request permission to generate one.')
             }
           })
           .catch(function(err) {
@@ -115,6 +115,8 @@ export default {
       })
       .catch(function(err) {
         console.log('Unable to get permission to notify.', err);
+        alert('Unable to get permission to notify.', err)
+
       });
     }
   }

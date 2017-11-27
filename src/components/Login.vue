@@ -6,6 +6,7 @@
       <b-form-input id="exampleInput1" :state="isValidName" type="text" v-model="name" required placeholder="아이디를 입력해주세요"></b-form-input>
     </b-form-group>
     <b-button type="submit" variant="primary">로그인</b-button>
+    <b-button variant="secondary" @click="$router.push({name: 'Join'})">회원가입</b-button>
   </b-form>
 </div>
 </template>
