@@ -32,10 +32,12 @@ export default{
     //   }
     // },
     unansweredQuestions: function () {
-      if(this.questions && this.users && this.users.length !== 0 && this.questions.length !== 0){
+      if(this.questions && this.user && this.user.questions && this.questions.length !== 0){
         return this.questions.filter((q) => {
           return !(this.user.questions.includes(q['.key']))
         })
+      } else if (this.user && !this.user.questions) {
+        return this.questions
       } else {
         return []
       }
@@ -45,7 +47,7 @@ export default{
     this.$emit('questionsChecked')
     console.log(document.cookie)
     var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")
-    if ((!this.$store.state.answererInfo.name)&(!cookieValue)){
+    if ((!this.$store.state.answererInfo.name)&&(!cookieValue)){
       alert("Please Log-in")
       console.log("dddd");
       this.$router.push({path:'/Login'});
@@ -62,7 +64,7 @@ export default{
               this.$store.commit('setAnswererInfo', users[user])
             }
           }
-        })
+      })
     }
   }
 }

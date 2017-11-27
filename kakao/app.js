@@ -15,7 +15,9 @@ admin.initializeApp({
 
 admin.database().ref('users').on('child_added', function(snapshot) {
     // subscribe
+    console.log('child_added')
     const user = snapshot.val()
+    console.log(user)
     if(user.pushSubscribed === true && user.interest && user.interest.length !==0) {
         const registrationToken = user.pushToken
         user.interest.forEach(function(topic){
@@ -24,6 +26,9 @@ admin.database().ref('users').on('child_added', function(snapshot) {
               // See the MessagingTopicManagementResponse reference documentation
               // for the contents of response.
               console.log("Successfully subscribed to topic:", response);
+              if(response.errorCount !== 0){
+                console.log(response.errors[0])
+              }
             })
             .catch(function(error) {
               console.log("Error subscribing to topic:", error);
@@ -34,8 +39,8 @@ admin.database().ref('users').on('child_added', function(snapshot) {
 
 admin.database().ref('questions').on('child_changed', function (snapshot) {
     const question = snapshot.val()
-    if(question.category && question.answers && question.answers !== 0) {
-        // console.log(question.category)
+    if(question.category && question.answers === 0) {
+        console.log(question.category)
         // console.log(question['.key'])
         // console.log(question.key)
         const topic = question.category
@@ -43,7 +48,7 @@ admin.database().ref('questions').on('child_changed', function (snapshot) {
             notification: {
                 title: '눈치백단',
                 body: topic + ' 분야의 새로운 질문이 등록되었습니다. 확인해주세요.',
-                click_action: 'http://localhost:8090/#/' + snapshot.key + '/postAnswer'
+                click_action: 'https://crowdsourcing-664f1.firebaseapp.com/#/' + snapshot.key + '/postAnswer'
             },
         }    
         admin.messaging().sendToTopic(topic, payload)
@@ -72,7 +77,7 @@ console.log(makeid());
 
 function writeUserData(id, response) {
   console.log("here3");
-  console.log(response);
+//   console.log(response);
   admin.database().ref('questions/' + id).set({
 
     'img' : response
@@ -117,7 +122,7 @@ app.post('/message',function (req, res) {
         writeUserData(id, string);});
       message = {
         "message": {
-            "text": '이 곳에서 마저 질문을 작성해 보세요.\nhttps://34.208.245.104:8090/#/'+id+'/postQuestion'
+            "text": '\nhttps://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/postQuestion 에 접속하셔서 질문을 남겨주세요.\n 등록된 답변은 https://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/answerView 에서 확인하실 수 있습니다.'
         },
         "keyboard": {
             "type": "text"
@@ -127,7 +132,7 @@ app.post('/message',function (req, res) {
     else{
       message = {
         "message": {
-            "text": '궁금한 채팅을 캡쳐해 보내보세요.'
+            "text": '속 뜻이 궁금한 대화 내용을 캡쳐하신 후, 사진을 저에게 보내주세요.'
         },
         "keyboard": {
             "type": "text"
@@ -135,9 +140,9 @@ app.post('/message',function (req, res) {
       };
     }
     
-    console.log(_obj.content)
-    console.log(_obj.user_key)
-    console.log(_obj.type)
+    // console.log(_obj.content)
+    // console.log(_obj.user_key)
+    // console.log(_obj.type)
     res.set({
     	'content-type': 'application/json'
       }).send(JSON.stringify(message));

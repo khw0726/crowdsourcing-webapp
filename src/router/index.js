@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Join from '@/components/Join'
 import Login from '@/components/Login'
 import Gate from '@/components/Gate'
 import QuestionList from '@/components/QuestionList'
@@ -21,18 +21,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: HelloWorld
+      name: 'Gate',
+      component: Gate
+    },
+    {
+      path: '/join',
+      name: 'Join',
+      component: Join
     },
     {
       path: '/login',
       name: 'Login',
       component: Login
-    },
-    {
-      path: '/Gate',
-      name: 'Gateway',
-      component: Gate
     },
     {
       path: '/questionList',

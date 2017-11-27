@@ -13,7 +13,7 @@
      <br>
      <b-form-input v-model="answer"
                    type="text"
-                   placeholder="다른 의견이 있다면 말씀해주세요"></b-form-input>
+                   placeholder="추가로 하실 말씀이 있다면 적어주세요."></b-form-input>
     <div>
        <b-button @click="onSubmit()">완료</b-button>
     </div>
@@ -57,7 +57,7 @@ export default {
   mounted() {
     console.log(document.cookie)
     var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")
-    if ((!this.$store.state.answererInfo.name)&(!cookieValue)){
+    if ((!this.$store.state.answererInfo.name)&&(!cookieValue)){
       alert("Please Log-in")
       console.log("dddd");
       this.$router.push({path:'/Login'});

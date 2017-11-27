@@ -616,7 +616,7 @@ export default {
   created() {
     console.log(document.cookie)
     var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1")
-    if ((!this.$store.state.answererInfo.name)&(!cookieValue)){
+    if ((!this.$store.state.answererInfo.name)&&(!cookieValue)){
       alert("Please Log-in")
       console.log("dddd");
       this.$router.push({path:'/Login'});
