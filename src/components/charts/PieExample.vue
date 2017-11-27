@@ -14,7 +14,7 @@ export default {
             '#E46651',
             '#00D8FF',
             '#DD1B16',
-            '#DD1B16'
+            '#E46651'
           ],
           data: this.numbers
         }
