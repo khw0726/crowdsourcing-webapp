@@ -25,20 +25,11 @@
             <div class="row">
               <div class="col-sm-5">
                 <h4 class="card-title mb-0">답변 수</h4>
-                <div class="small text-muted">November 2017</div>
+                <div class="small text-muted">from 26th November 2017 </div>
               </div><!--/.col-->
-              <div class="col-sm-7 d-none d-md-block">
-                <b-button type="button" variant="primary" class="float-right"><i class="icon-cloud-download"></i></b-button>
-                <b-button-toolbar class="float-right" aria-label="Toolbar with button groups">
-                  <b-button-group class="mr-3" aria-label="First group">
-                    <b-button variant="outline-secondary">Day</b-button>
-                    <b-button variant="outline-secondary" :pressed="true">Month</b-button>
-                    <b-button variant="outline-secondary">Year</b-button>
-                  </b-button-group>
-                </b-button-toolbar>
-              </div><!--/.col-->
+            
             </div><!--/.row-->
-            <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" height="300"></main-chart-example>
+            <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" v-bind:userAnswers="userAnswers"></main-chart-example>
           </b-card>
           <div class="row">
             <div class="col-sm-6 col-lg-3">
