@@ -2,7 +2,7 @@
   <div>
     <br>
     <h3 class="ui header">내 답변 현황</h3>
-    사람들의 생각을 {{totalCorrect}}% 맞추셨습니다.
+    <!--사람들의 생각을 {{totalCorrect}}% 맞추셨습니다.-->
     <vue-tabs>
       <v-tab title="답변 분석">
         <div class="animated fadeIn">
@@ -11,7 +11,7 @@
               <b-card class="bg-warning" :no-body="true">
                 <div class="card-body pb-0">
                   <h4 class="mb-0">
-                    25%
+                    {{totalCorrect}}%
                     <!-- TODO: 비율 -->
                   </h4>
                   <p>당신과 같은 의견을 가진 사람의 비율</p>
@@ -262,15 +262,31 @@ export default {
       return answers
     },
     totalCorrect: function () {
-      //for(let a in this.userAnswers){
-      //  let question = this.questions.find(question => {
-      //    return (question[".key"] === this.userAnswers[a].questionID)
-      //  })
-      //  let answers = []
-      
-      //  }
-      //  
-      //}
+      var accurate = 0
+      for(let a in this.userAnswers){
+        let question = this.questions.find(question => {
+          console.log(this.userAnswers[a])
+          return (question[".key"] === this.userAnswers[a].questionID)
+        })
+        let answers = question.answers
+        var ycount = 0
+        var ncount = 0
+        for ( var i = 0; i < answers.length; i++ ) {
+          if (answers[i] ===true){
+            ycount ++
+          }
+          else{
+            ncount ++
+          }
+        }
+        let majority = ycount >= ncount ? true : false
+        if (this.userAnswers[a].isYes == majority){
+          accurate ++
+        }
+        
+      }
+      console.log(this.myTotalCount)
+      return accurate/this.myTotalCount*100
     },
     myTotalCount: function () {
       return this.answers.filter((a) => {
