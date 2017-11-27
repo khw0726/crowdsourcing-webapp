@@ -21,7 +21,7 @@ export default {
     onClick: function(category) {
       this.$store.commit('setCategory', category)
       this.$router.push({
-        name: 'writeQuestion'
+        name: 'annotate'
       })
     }
   }

@@ -5,7 +5,7 @@
       <p>
         “눈치백단”은 채팅 중, 속 뜻이 이해가 되지 않는 부분을 사람들에게 물어볼 수 있는 서비스입니다.
         어떤 질문이 올라오는 지 보고 싶으시다면, 제대로 찾아오셨습니다. 로그인을 해주세요.
-        질문을 남기시려면 카카오톡 플러스친구 '눈치백단'을 찾아주세요. 
+        질문을 남기시려면 카카오톡 플러스친구에서 "눈치백단"을 찾아주세요. 
       </p>
       <b-button variant="primary" @click="$router.push({name: 'logIn'})">로그인</b-button>
       <b-button variant="secondary" @click="$router.push({name: 'Join'})">회원가입</b-button>

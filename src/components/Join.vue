@@ -21,6 +21,7 @@
     <b-button v-if="isPushAvailable && !form.pushSubscribed" @click="registerNotification">
       관심 카테고리의 질문에 대한 알림을 받겠습니다.
     </b-button>
+    <!-- <span v-if="!isPushAvailable">이 기기에서는 푸시 알림이 지원되지 않습니다.</span> -->
     <!-- <b-form-checkbox id="checkbox1" @click="registerNotification" v-model="form.selected" value="accepted" unchecked-value="not_accepted">
       관심 카테고리의 질문에 대한 알림을 받겠습니다.
     </b-form-checkbox> -->
@@ -103,12 +104,12 @@ export default {
               // Show permission request.
               console.log('No Instance ID token available. Request permission to generate one.');
               // Show permission UI.
-              alert('알림 구독을 실패했습니다. 다시 시도해주세요.')
+              alert('알림 구독에 실패했습니다. 다시 시도해주세요.')
             }
           })
           .catch(function(err) {
             console.log(err)
-            alert('알림 구독을 실패했습니다. 다시 시도해주세요.')
+            alert('알림 구독에 실패했습니다. 다시 시도해주세요.')
           });
         });
       })
