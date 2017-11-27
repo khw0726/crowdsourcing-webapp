@@ -8,6 +8,14 @@ var base64 = require('node-base64-image');
 var admin = require('firebase-admin')
 var serviceAccount = require('../crowdsourcing-664f1-firebase-adminsdk-pj0tv-5b39ddf8c3.json')
 
+var categoryKey = {
+    'friend': '친구',
+    'business': '직장',
+    'love': '연애',
+    'family': '가족',
+    'etc': '그 외'
+  }
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://crowdsourcing-664f1.firebaseio.com/"
@@ -47,7 +55,7 @@ admin.database().ref('questions').on('child_changed', function (snapshot) {
         const payload = {
             notification: {
                 title: '눈치백단',
-                body: topic + ' 분야의 새로운 질문이 등록되었습니다. 확인해주세요.',
+                body: categoryKey[topic] + ' 분야의 새로운 질문이 등록되었습니다. 확인해주세요.',
                 click_action: 'https://crowdsourcing-664f1.firebaseapp.com/#/' + snapshot.key + '/postAnswer'
             },
         }    
