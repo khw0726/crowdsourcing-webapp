@@ -412,9 +412,9 @@
             <div class="col-md-12">
               <b-card header="답변 유사도">
                 <div class="row">
-                  <div class="chart-wrapper">
-                    <bar-example style="height:300px;margin-top:40px;" :numbers="[loveCorrect, businessCorrect, friendCorrect, familyCorrect, etcCorrect]"/>
-                  </div>
+                  <!-- <div class="chart-wrapper"> -->
+                    <!-- <bar-example class="chart-wrapper" style="width:300px;height:300px;margin-top:40px;" :numbers="[loveCorrect, businessCorrect, friendCorrect, familyCorrect, etcCorrect]"/> -->
+                  <!-- </div> -->
                   <div class="col-sm-12 col-lg-4">
                     <ul class="horizontal-bars">
                       <li>
@@ -422,8 +422,8 @@
                           연애
                         </div>
                         <div class="bars">
-                          <b-progress class="progress-xs" :value="34" variant="info"></b-progress>
-                          <b-progress class="progress-xs" :value="66" variant="danger"></b-progress>
+                          <b-progress class="progress-xs" :value="loveCorrect" variant="info"></b-progress>
+                          <!-- <b-progress class="progress-xs" :value="66" variant="danger"></b-progress> -->
                         </div>
                       </li>
                       <li>
@@ -431,8 +431,8 @@
                           직장
                         </div>
                         <div class="bars">
-                          <b-progress class="progress-xs" :value="56" variant="info"></b-progress>
-                          <b-progress class="progress-xs" :value="44" variant="danger"></b-progress>
+                          <b-progress class="progress-xs" :value="businessCorrect" variant="info"></b-progress>
+                          <!-- <b-progress class="progress-xs" :value="44" variant="danger"></b-progress> -->
                         </div>
                       </li>
                       <li>
@@ -440,8 +440,8 @@
                           친구
                         </div>
                         <div class="bars">
-                          <b-progress class="progress-xs" :value="88" variant="info"></b-progress>
-                          <b-progress class="progress-xs" :value="12" variant="danger"></b-progress>
+                          <b-progress class="progress-xs" :value="friendCorrect" variant="info"></b-progress>
+                          <!-- <b-progress class="progress-xs" :value="12" variant="danger"></b-progress> -->
                         </div>
                       </li>
                       <li>
@@ -449,8 +449,17 @@
                           가족
                         </div>
                         <div class="bars">
-                          <b-progress class="progress-xs" :value="43" variant="info"></b-progress>
-                          <b-progress class="progress-xs" :value="57" variant="danger"></b-progress>
+                          <b-progress class="progress-xs" :value="familyCorrect" variant="info"></b-progress>
+                          <!-- <b-progress class="progress-xs" :value="57" variant="danger"></b-progress> -->
+                        </div>
+                      </li>
+                      <li>
+                        <div class="title">
+                          그 외
+                        </div>
+                        <div class="bars">
+                          <b-progress class="progress-xs" :value="ectCorrect" variant="info"></b-progress>
+                          <!-- <b-progress class="progress-xs" :value="57" variant="danger"></b-progress> -->
                         </div>
                       </li>
                       <li>
@@ -458,12 +467,13 @@
                           평균
                         </div>
                         <div class="bars">
-                          <b-progress class="progress-xs" :value="73" variant="info"></b-progress>
-                          <b-progress class="progress-xs" :value="22" variant="danger"></b-progress>
+                          <b-progress class="progress-xs" :value="totalCorrect" variant="info"></b-progress>
+                          <!-- <b-progress class="progress-xs" :value="22" variant="danger"></b-progress> -->
                         </div>
                       </li>
                       <li class="legend">
-                        <b-badge pill variant="info"></b-badge> <small>다수와 일치</small> &nbsp; <b-badge pill variant="danger"></b-badge> <small>소수의견</small>
+                        <b-badge pill variant="info"></b-badge> <small>다수와 일치</small> 
+                        <!-- &nbsp; <b-badge pill variant="danger"></b-badge> <small>소수의견</small> -->
                       </li>
                     </ul>
                   </div><!--/.col-->
@@ -474,7 +484,7 @@
           <div class="card-columns cols-2">
             <b-card header="카테고리별 누적 답변">
               <div class="chart-wrapper">
-                <pie-example style="height:300px;margin-top:40px;" :numbers="[myLoveCount, myBusinessCount, myFriendCount, myFamilyCount]"/>
+                <pie-example style="height:300px;margin-top:40px;" :numbers="[myLoveCount, myBusinessCount, myFriendCount, myFamilyCount, myEtcCount]"/>
                 <!-- <line-example style="height:300px;margin-top:40px;" /> -->
               </div>
             </b-card>
