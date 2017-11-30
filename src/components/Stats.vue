@@ -301,7 +301,6 @@
             </ul>
           </div><!--/.col-->
           <div class="col-sm-6 col-lg-4">
->>>>>>> Stashed changes
             <div class="row">
               <div class="col-sm-5">
                 <h4 class="card-title mb-0">답변 수</h4>
@@ -481,6 +480,7 @@
             </b-card>
             <b-card header="내 도전 과제">
               <img style="width: 80%;" src="/static/badges.png">
+              <img src="https://drive.google.com/open?id=1a5KLLsmTuP8HHK0ReLLtY6lp09Su7C_J">
             </b-card>
           </div>
         </div>
