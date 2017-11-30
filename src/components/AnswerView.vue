@@ -17,7 +17,7 @@
     <div>
       이 질문과 관련해 추가로 다음과 같은 의견을 남겼습니다.
       <ul>
-        <li v-for="comment in comments" :key="comment">{{comment}}</li>
+        <li v-for="comment in comments" :key="comment"><span :class="isYes ?'yes':'no'">{{isYes ? '그렇다' : '아니다'}}</span> - {{comment}}</li>
       </ul>
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
       const totalYesCount = this.answers.reduce(function(prevValue, curElement) {
         return prevValue + curElement.isYes ? 1 : 0
       }, 0)
-      return Math.round(totalYesCount/totalAnswersCount * 100) + '%(' + totalAnswersCount + '명 중 ' + totalYesCount + ' 명)'
+      return Math.round(totalYesCount/totalAnswersCount * 100 || 0) + '%(' + totalAnswersCount + '명 중 ' + totalYesCount + ' 명)'
     },
     comments: function () {
       if(this.answers){
@@ -100,5 +100,13 @@ export default {
 #answer {
   font-size: 1.5em;
   color: #16ab39;
+}
+
+.yes {
+  color: #16ab39; 
+}
+
+.no {
+  color: #d01919;
 }
 </style>
