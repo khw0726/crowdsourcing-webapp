@@ -1,9 +1,10 @@
 <template>
   <div>
     <h3>답변을 기다리는 질문</h3>
+    <h6>질문을 누르시면 답변을 달아주실 수 있습니다.</h6>
     <question v-for="q in unansweredQuestions" :key="q['.key']" :question="q"></question>
   </div>
-</template>
+</template>수
 
 <script>
 import fb from "@/fb.js"
@@ -35,6 +36,14 @@ export default{
       if(this.questions && this.user && this.user.questions && this.questions.length !== 0){
         return this.questions.filter((q) => {
           return q.question && (!(this.user.questions.includes(q['.key']))) 
+        }).sort(function(a, b){
+          if(a.answers === 0 ){
+            return -1
+          } else if(b.answers === 0){
+            return 1
+          } else {
+            return b.answers.length - a.answers.length
+          }
         })
       } else if (this.user && !this.user.questions) {
         return this.questions.filter((q) => {

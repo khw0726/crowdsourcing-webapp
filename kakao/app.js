@@ -55,7 +55,7 @@ admin.database().ref('questions').on('child_changed', function (snapshot) {
         const payload = {
             notification: {
                 title: '눈치백단',
-                body: categoryKey[topic] + ' 분야의 새로운 질문이 등록되었습니다. 확인해주세요.',
+                body: categoryKey[topic] + ' 분야의 새로운 질문이 등록되었습니다. 알림을 터치하시면 새로 온 질문에 답하실 수 있습니다.',
                 click_action: 'https://crowdsourcing-664f1.firebaseapp.com/#/' + snapshot.key + '/postAnswer'
             },
         }    
@@ -130,7 +130,7 @@ app.post('/message',function (req, res) {
         writeUserData(id, string);});
       message = {
         "message": {
-            "text": '\nhttps://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/postQuestion 에 접속하셔서 질문을 남겨주세요.\n 등록된 답변은 https://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/answerView 에서 확인하실 수 있습니다.'
+            "text": 'https://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/postQuestion \n에 접속하셔서 질문을 남겨주세요.\n 등록된 답변은 https://crowdsourcing-664f1.firebaseapp.com/#/'+id+'/answerView \n에서 확인하실 수 있습니다.'
         },
         "keyboard": {
             "type": "text"

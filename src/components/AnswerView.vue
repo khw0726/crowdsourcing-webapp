@@ -9,13 +9,13 @@
         <h5>{{question}}</h5>
         <!-- </div> -->
       <br>
-      이 질문에 대해
+      남겨주신 이 질문에 대해
       <span id="proportion">{{proportion}}</span>의 사람들이
       <br>
       <span id="answer">그렇다</span>라고 대답했습니다.
     </div>
     <div>
-      추가로, 다음과 같은 의견을 남겼습니다.
+      이 질문과 관련해 추가로 다음과 같은 의견을 남겼습니다.
       <ul>
         <li v-for="comment in comments" :key="comment">{{comment}}</li>
       </ul>

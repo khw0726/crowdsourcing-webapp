@@ -2,8 +2,8 @@
 
   <div>
     <br>
-    <h3 class="ui header">내 답변 현황</h3>
-    사람들의 생각을 {{totalCorrect}}% 맞추셨습니다.
+    <h3>내 답변 현황</h3>
+    <!--사람들의 생각을 {{totalCorrect}}% 맞추셨습니다.-->
     <vue-tabs>
       <v-tab title="답변 분석">
         <div class="animated fadeIn">
@@ -12,7 +12,7 @@
               <b-card class="bg-warning" :no-body="true">
                 <div class="card-body pb-0">
                   <h4 class="mb-0">
-                    25%
+                    {{totalCorrect}}%
                     <!-- TODO: 비율 -->
                   </h4>
                   <p>당신과 같은 의견을 가진 사람의 비율</p>
@@ -305,20 +305,11 @@
             <div class="row">
               <div class="col-sm-5">
                 <h4 class="card-title mb-0">답변 수</h4>
-                <div class="small text-muted">November 2017</div>
+                <div class="small text-muted">from 26th November 2017 </div>
               </div><!--/.col-->
-              <div class="col-sm-7 d-none d-md-block">
-                <b-button type="button" variant="primary" class="float-right"><i class="icon-cloud-download"></i></b-button>
-                <b-button-toolbar class="float-right" aria-label="Toolbar with button groups">
-                  <b-button-group class="mr-3" aria-label="First group">
-                    <b-button variant="outline-secondary">Day</b-button>
-                    <b-button variant="outline-secondary" :pressed="true">Month</b-button>
-                    <b-button variant="outline-secondary">Year</b-button>
-                  </b-button-group>
-                </b-button-toolbar>
-              </div><!--/.col-->
+            
             </div><!--/.row-->
-            <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" height="300"></main-chart-example>
+            <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" v-bind:userAnswers="userAnswers"></main-chart-example>
           </b-card>
           <div class="row">
             <div class="col-sm-6 col-lg-3">
@@ -422,6 +413,9 @@
             <div class="col-md-12">
               <b-card header="답변 유사도">
                 <div class="row">
+                  <div class="chart-wrapper">
+                    <bar-example style="height:300px;margin-top:40px;" :numbers="[loveCorrect, businessCorrect, friendCorrect, familyCorrect, etcCorrect]"/>
+                  </div>
                   <div class="col-sm-12 col-lg-4">
                     <ul class="horizontal-bars">
                       <li>
@@ -481,7 +475,8 @@
           <div class="card-columns cols-2">
             <b-card header="카테고리별 누적 답변">
               <div class="chart-wrapper">
-                <pie-example :numbers="[myLoveCount, myBusinessCount, myFriendCount, myFamilyCount, myEtcCount]"/>
+                <pie-example style="height:300px;margin-top:40px;" :numbers="[myLoveCount, myBusinessCount, myFriendCount, myFamilyCount]"/>
+                <!-- <line-example style="height:300px;margin-top:40px;" /> -->
               </div>
             </b-card>
             <b-card header="내 도전 과제">
@@ -491,8 +486,8 @@
         </div>
       </v-tab>
     </vue-tabs>
-  {{this.userAnswers}}
-  {{this.totalCorrect}}
+  <!-- {{this.userAnswers}}
+  {{this.totalCorrect}} -->
   </div>
 
 </template>
@@ -501,6 +496,7 @@
 // DB-TODO: Connect with ranking system
 
 import PieExample from "./charts/PieExample";
+import BarExample from "./charts/BarExample";
 import LineExample from "./charts/LineExample";
 import MainChartExample from "./dashboard/MainChartExample";
 import { Callout } from "./coreui";
@@ -511,6 +507,7 @@ export default {
   components: {
     LineExample,
     PieExample,
+    BarExample,
     MainChartExample
   },
   firebase: {
@@ -521,36 +518,256 @@ export default {
   computed: {
     userInfo: function(){
       console.log(this.name)
-      let userInfo = this.users.find(user=> {
-
-        return user.name === this.name
-      })
-      return userInfo
-
+      if(this.users){
+        let userInfo = this.users.find(user=> {
+          return user.name === this.name
+        })
+        return userInfo
+      }
+      else {
+        return null
+      }
     },
     userAnswers: function() {
       console.log("ddd")
       console.log(this.userInfo)
+      console.log('name', this.name)
       let answers = []
-      for(let q in this.userInfo.questions){
-        console.log(this.userInfo.questions[q])
-        let answer = this.answers.find(answer => {
-          return (answer.name === this.name && answer.questionID === this.userInfo.questions[q])
+      if(this.userInfo){
+        return this.answers.filter((a) => {
+          return this.userInfo.questions.includes(a.questionID) && a.name === this.userInfo.name
         })
-        answers.push(answer)
-      }      
-      return answers
+        // for(let q in this.userInfo.questions){
+        //   console.log('userAnswers', this.userInfo.questions[q])
+        //   let answer = this.answers.find(answer => {
+        //     console.log(this.name)
+        //     return (answer.name === this.name && answer.questionID === this.userInfo.questions[q])
+        //   })
+        //   console.log(this.answers)
+        //   console.log('userAnswers', answer)
+        //   answers.push(answer)
+        // }      
+        // return answers
+      }
+      else {
+        return []
+      }
     },
     totalCorrect: function () {
-      //for(let a in this.userAnswers){
-      //  let question = this.questions.find(question => {
-      //    return (question[".key"] === this.userAnswers[a].questionID)
-      //  })
-      //  let answers = []
-      
-      //  }
-      //  
-      //}
+      var accurate = 0
+      if(this.myTotalCount === 0){
+        return 0
+      }
+      if(this.userAnswers.length !== 0) {
+        for(let a in this.userAnswers){
+          let question = this.questions.find(question => {
+            console.log('totalcorrect', this.userAnswers)
+            console.log('totalcorrect', this.userAnswers[a])
+            return (question[".key"] === this.userAnswers[a].questionID)
+          })
+          let answers = question.answers
+          var ycount = 0
+          var ncount = 0
+          for ( var i = 0; i < answers.length; i++ ) {
+            if (answers[i] ===true){
+              ycount ++
+            }
+            else{
+              ncount ++
+            }
+          }
+          let majority = ycount >= ncount ? true : false
+          if (this.userAnswers[a].isYes == majority){
+            accurate ++
+          }
+          
+        }
+        console.log(this.myTotalCount)
+        return accurate/this.myTotalCount*100
+      }
+      else {
+        return 0
+      }
+    },
+    loveCorrect: function () {
+      var accurate = 0
+      if(this.myLoveCount === 0){
+        return 0
+      }
+      if(this.userAnswers.length !== 0) {
+        for(let a in this.userAnswers.filter((a) => a.category === 'love')){
+          let question = this.questions.find(question => {
+            console.log('totalcorrect', this.userAnswers)
+            console.log('totalcorrect', this.userAnswers[a])
+            return (question[".key"] === this.userAnswers[a].questionID)
+          })
+          let answers = question.answers
+          var ycount = 0
+          var ncount = 0
+          for ( var i = 0; i < answers.length; i++ ) {
+            if (answers[i] ===true){
+              ycount ++
+            }
+            else{
+              ncount ++
+            }
+          }
+          let majority = ycount >= ncount ? true : false
+          if (this.userAnswers[a].isYes == majority){
+            accurate ++
+          }
+          
+        }
+        console.log(this.myTotalCount)
+        return accurate/this.myLoveCount*100
+      }
+      else {
+        return 0
+      }
+    },
+    familyCorrect: function () {
+      var accurate = 0
+      if(this.myFamliyCount === 0){
+        return 0
+      }
+      if(this.userAnswers.length !== 0) {
+        for(let a in this.userAnswers.filter((a) => a.category === 'business')){
+          let question = this.questions.find(question => {
+            console.log('totalcorrect', this.userAnswers)
+            console.log('totalcorrect', this.userAnswers[a])
+            return (question[".key"] === this.userAnswers[a].questionID)
+          })
+          let answers = question.answers
+          var ycount = 0
+          var ncount = 0
+          for ( var i = 0; i < answers.length; i++ ) {
+            if (answers[i] ===true){
+              ycount ++
+            }
+            else{
+              ncount ++
+            }
+          }
+          let majority = ycount >= ncount ? true : false
+          if (this.userAnswers[a].isYes == majority){
+            accurate ++
+          }
+          
+        }
+        console.log(this.myTotalCount)
+        return accurate/this.myFamilyCount*100
+      }
+      else {
+        return 0
+      }
+    },
+    businessCorrect: function () {
+      var accurate = 0
+      if(this.myBusinessCount === 0){
+        return 0
+      }
+      if(this.userAnswers.length !== 0) {
+        for(let a in this.userAnswers.filter((a) => a.category === 'family')){
+          let question = this.questions.find(question => {
+            console.log('totalcorrect', this.userAnswers)
+            console.log('totalcorrect', this.userAnswers[a])
+            return (question[".key"] === this.userAnswers[a].questionID)
+          })
+          let answers = question.answers
+          var ycount = 0
+          var ncount = 0
+          for ( var i = 0; i < answers.length; i++ ) {
+            if (answers[i] ===true){
+              ycount ++
+            }
+            else{
+              ncount ++
+            }
+          }
+          let majority = ycount >= ncount ? true : false
+          if (this.userAnswers[a].isYes == majority){
+            accurate ++
+          }
+          
+        }
+        console.log(this.myTotalCount)
+        return accurate/this.myFamilyCount*100
+      }
+      else {
+        return 0
+      }
+    },
+    friendCorrect: function () {
+      var accurate = 0
+      if(this.myFriendCount === 0){
+        return 0
+      }
+      if(this.userAnswers.length !== 0) {
+        for(let a in this.userAnswers.filter((a) => a.category === 'friend')){
+          let question = this.questions.find(question => {
+            console.log('totalcorrect', this.userAnswers)
+            console.log('totalcorrect', this.userAnswers[a])
+            return (question[".key"] === this.userAnswers[a].questionID)
+          })
+          let answers = question.answers
+          var ycount = 0
+          var ncount = 0
+          for ( var i = 0; i < answers.length; i++ ) {
+            if (answers[i] ===true){
+              ycount ++
+            }
+            else{
+              ncount ++
+            }
+          }
+          let majority = ycount >= ncount ? true : false
+          if (this.userAnswers[a].isYes == majority){
+            accurate ++
+          }
+          
+        }
+        console.log(this.myTotalCount)
+        return accurate/this.myFriendCount*100
+      }
+      else {
+        return 0
+      }
+    },
+    etcCorrect: function () {
+      var accurate = 0
+      if(this.myEtcCount === 0){
+        return 0
+      }
+      if(this.userAnswers.length !== 0) {
+        for(let a in this.userAnswers.filter((a) => a.category === 'etc')){
+          let question = this.questions.find(question => {
+            console.log('totalcorrect', this.userAnswers)
+            console.log('totalcorrect', this.userAnswers[a])
+            return (question[".key"] === this.userAnswers[a].questionID)
+          })
+          let answers = question.answers
+          var ycount = 0
+          var ncount = 0
+          for ( var i = 0; i < answers.length; i++ ) {
+            if (answers[i] ===true){
+              ycount ++
+            }
+            else{
+              ncount ++
+            }
+          }
+          let majority = ycount >= ncount ? true : false
+          if (this.userAnswers[a].isYes == majority){
+            accurate ++
+          }
+          
+        }
+        console.log(this.myTotalCount)
+        return accurate/this.myEtcCount*100
+      }
+      else {
+        return 0
+      }
     },
     myTotalCount: function () {
       return this.answers.filter((a) => {
@@ -606,12 +823,10 @@ export default {
       return this.answers.filter((a) => {
         return a.category === 'etc'
       }).length
+    },
+    name: function () {
+      return this.$store.state.answererInfo.name
     }
-  },
-  data: function() {
-    return {
-      name: this.$store.state.answererInfo.name
-    };
   },
   created() {
     console.log(document.cookie)

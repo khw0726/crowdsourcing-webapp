@@ -2,6 +2,7 @@
 import {
   Line
 } from 'vue-chartjs'
+import fb from "@/fb.js";
 
 // const brandPrimary = '#20a8d8'
 const brandSuccess = '#4dbd74'
@@ -24,20 +25,22 @@ function random(min, max) {
 
 export default {
   extends: Line,
-  props: ['height'],
+  props: ['userAnswers'],
+  
   mounted() {
     var elements = 27
-    var data1 = []
+    var data1 = Array(27).fill(0)
     var data2 = []
     var data3 = []
 
-    for (var i = 0; i <= elements; i++) {
-      data1.push(random(50, 200))
-      data2.push(random(80, 100))
-      data3.push(65)
+    let timebase = 1511654400000
+    console.log(this.userAnswers)
+    for ( var i = 0; i < this.userAnswers.length; i++ ){
+      data1[(Date.parse(this.userAnswers[i].date)-timebase)/86400000]++
     }
+    console.log(data1)
     this.renderChart({
-      labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
+      labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S'],
       datasets: [{
           label: 'My Answer',
           backgroundColor: convertHex(brandInfo, 10),
@@ -79,8 +82,8 @@ export default {
           ticks: {
             beginAtZero: true,
             maxTicksLimit: 5,
-            stepSize: Math.ceil(250 / 5),
-            max: 250
+            stepSize: Math.ceil(10 / 5),
+            max: 10
           },
           gridLines: {
             display: true
