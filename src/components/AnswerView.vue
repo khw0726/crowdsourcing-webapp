@@ -17,7 +17,7 @@
     <div>
       이 질문과 관련해 추가로 다음과 같은 의견을 남겼습니다.
       <ul>
-        <li v-for="comment in comments" :key="comment"><span :class="isYes ?'yes':'no'">{{isYes ? '그렇다' : '아니다'}}</span> - {{comment}}</li>
+        <li v-for="comment in comments" :key="comment.answer"><span :class="comment.isYes ?'yes':'no'">{{comment.isYes ? '그렇다' : '아니다'}}</span> - {{comment.answer}}</li>
       </ul>
     </div>
   </div>
@@ -59,7 +59,7 @@ export default {
     comments: function () {
       if(this.answers){
         return this.answers.map(function(a) {
-          return a.answer
+          return {answer: a.answer, isYes: a.isYes}
         })
       } else {
         return []
