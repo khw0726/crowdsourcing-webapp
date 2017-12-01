@@ -1,25 +1,13 @@
 <script>
-import { Pie } from 'vue-chartjs'
+import { Pie, mixins } from 'vue-chartjs'
 
 export default {
-  extends: Pie,
-  props: ['numbers'],
+  extends: Pie,    
+  mixins: [mixins.reactiveProp],
+  props: ['chartData'],
   mounted () {
-    this.renderChart({
-      labels: ['연애', '직장', '친구', '가족', '그 외'],
-      datasets: [
-        {
-          backgroundColor: [
-            '#41B883',
-            '#E46651',
-            '#00D8FF',
-            '#DD1B16',
-            '#E46651'
-          ],
-          data: this.numbers
-        }
-      ]
-    }, {responsive: true, maintainAspectRatio: false})
+    // console.log(this.numbers)
+    this.renderChart(this.chartData, {responsive: true, maintainAspectRatio: false})
   }
 }
 </script>

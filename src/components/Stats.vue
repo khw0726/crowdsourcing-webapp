@@ -29,7 +29,7 @@
               </div><!--/.col-->
             
             </div><!--/.row-->
-            <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" v-bind:userAnswers="userAnswers"></main-chart-example>
+            <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" :chartData="mainChartData"></main-chart-example>
           </b-card>
           <div class="row">
             <div class="col-sm-6 col-lg-3">
@@ -205,7 +205,7 @@
           <div class="card-columns cols-2">
             <b-card header="카테고리별 누적 답변">
               <div class="chart-wrapper">
-                <pie-example style="height:300px;margin-top:40px;" :numbers="[myLoveCount, myBusinessCount, myFriendCount, myFamilyCount, myEtcCount]"/>
+                <pie-example style="height:300px;margin-top:40px;" :chartData="pieChartData"/>
                 <!-- <line-example style="height:300px;margin-top:40px;" /> -->
               </div>
             </b-card>
@@ -264,11 +264,11 @@ export default {
       }
     },
     userAnswers: function() {
-      console.log("ddd")
-      console.log(this.userInfo)
-      console.log('name', this.name)
+      // console.log("ddd")
+      // console.log(this.userInfo)
+      // console.log('name', this.name)
       let answers = []
-      if(this.userInfo.questions){
+      if(this.userInfo && this.userInfo.questions){
         return this.answers.filter((a) => {
           return this.userInfo.questions.includes(a.questionID) && a.name === this.userInfo.name
         })
@@ -296,8 +296,8 @@ export default {
       if(this.userAnswers.length !== 0) {
         for(let a in this.userAnswers){
           let question = this.questions.find(question => {
-            console.log('totalcorrect', this.userAnswers)
-            console.log('totalcorrect', this.userAnswers[a])
+            // console.log('totalcorrect', this.userAnswers)
+            // console.log('totalcorrect', this.userAnswers[a])
             return (question[".key"] === this.userAnswers[a].questionID)
           })
           let answers = question.answers
@@ -332,8 +332,8 @@ export default {
       if(this.userAnswers.length !== 0) {
         for(let a in this.userAnswers.filter((a) => a.category === 'love')){
           let question = this.questions.find(question => {
-            console.log('totalcorrect', this.userAnswers)
-            console.log('totalcorrect', this.userAnswers[a])
+            // console.log('totalcorrect', this.userAnswers)
+            // console.log('totalcorrect', this.userAnswers[a])
             return (question[".key"] === this.userAnswers[a].questionID)
           })
           let answers = question.answers
@@ -368,8 +368,8 @@ export default {
       if(this.userAnswers.length !== 0) {
         for(let a in this.userAnswers.filter((a) => a.category === 'business')){
           let question = this.questions.find(question => {
-            console.log('totalcorrect', this.userAnswers)
-            console.log('totalcorrect', this.userAnswers[a])
+            // console.log('totalcorrect', this.userAnswers)
+            // console.log('totalcorrect', this.userAnswers[a])
             return (question[".key"] === this.userAnswers[a].questionID)
           })
           let answers = question.answers
@@ -404,8 +404,8 @@ export default {
       if(this.userAnswers.length !== 0) {
         for(let a in this.userAnswers.filter((a) => a.category === 'family')){
           let question = this.questions.find(question => {
-            console.log('totalcorrect', this.userAnswers)
-            console.log('totalcorrect', this.userAnswers[a])
+            // console.log('totalcorrect', this.userAnswers)
+            // console.log('totalcorrect', this.userAnswers[a])
             return (question[".key"] === this.userAnswers[a].questionID)
           })
           let answers = question.answers
@@ -440,8 +440,8 @@ export default {
       if(this.userAnswers.length !== 0) {
         for(let a in this.userAnswers.filter((a) => a.category === 'friend')){
           let question = this.questions.find(question => {
-            console.log('totalcorrect', this.userAnswers)
-            console.log('totalcorrect', this.userAnswers[a])
+            // console.log('totalcorrect', this.userAnswers)
+            // console.log('totalcorrect', this.userAnswers[a])
             return (question[".key"] === this.userAnswers[a].questionID)
           })
           let answers = question.answers
@@ -476,8 +476,8 @@ export default {
       if(this.userAnswers.length !== 0) {
         for(let a in this.userAnswers.filter((a) => a.category === 'etc')){
           let question = this.questions.find(question => {
-            console.log('totalcorrect', this.userAnswers)
-            console.log('totalcorrect', this.userAnswers[a])
+            // console.log('totalcorrect', this.userAnswers)
+            // console.log('totalcorrect', this.userAnswers[a])
             return (question[".key"] === this.userAnswers[a].questionID)
           })
           let answers = question.answers
@@ -562,19 +562,54 @@ export default {
     name: function () {
       return this.$store.state.answererInfo.name
     },
-    // loveFileNames: function () {
-    //   if(this.myLoveCount < 10) {
-    //     return ['static/love10_de.png', 'static/love30_de.png', 'static/love70_de.png', 'static/loveM_de.png']
-    //   } else if(this.myLoveCount < 30) {
-    //     return ['static/love10.png', 'static/love30_de.png', 'static/love70_de.png', 'static/loveM_de.png']
-    //   } else if(this.myLoveCount < 70) {
-    //     return ['static/love10.png', 'static/love30.png', 'static/love70_de.png', 'static/loveM_de.png']
-    //   } else if (this.myLoveCount < 100) {
-    //     return ['static/love10.png', 'static/love30.png', 'static/love70.png', 'static/loveM_de.png']
-    //   } else {
-    //     return ['static/love10.png', 'static/love30.png', 'static/love70.png', 'static/loveM_C.png']
-    //   }
-    // }
+    pieChartData: function () {
+      return {
+        labels: ['연애', '직장', '친구', '가족', '그 외'],
+        datasets: [
+          {
+            backgroundColor: [
+              '#41B883',
+              '#E46651',
+              '#00D8FF',
+              '#DD1B16',
+              '#E46651'
+            ],
+            data: [this.myLoveCount, this.myBusinessCount, this.myFriendCount, this.myFamilyCount, this.myEtcCount]
+          }
+        ]
+      }
+    },
+    mainChartData: function () {
+      function convertHex(hex, opacity) {
+        hex = hex.replace('#', '')
+        const r = parseInt(hex.substring(0, 2), 16)
+        const g = parseInt(hex.substring(2, 4), 16)
+        const b = parseInt(hex.substring(4, 6), 16)
+
+        const result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')'
+        return result
+      }
+      const d = Array(27).fill(0)
+      let timebase = 1511654400000
+      // console.log(this.userAnswers)
+      if(this.userAnswers){
+        for ( var i = 0; i < this.userAnswers.length; i++ ){
+          d[(Date.parse(this.userAnswers[i].date)-timebase)/86400000]++
+        }
+      }
+      return {
+        labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S'],
+        datasets: [{
+            label: 'My Answer',
+            backgroundColor: convertHex('#63c2de', 10),
+            borderColor: '#63c2de',
+            pointHoverBackgroundColor: '#fff',
+            borderWidth: 2,
+            data: d
+          }
+        ]
+      }
+    }
   },
   created() {
     console.log(document.cookie)

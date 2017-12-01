@@ -1,6 +1,7 @@
 <script>
 import {
-  Line
+  Line,
+  mixins
 } from 'vue-chartjs'
 import fb from "@/fb.js";
 
@@ -25,49 +26,15 @@ function random(min, max) {
 
 export default {
   extends: Line,
-  props: ['userAnswers'],
-  
+  props: ['chartData'],
+  mixins: [mixins.reactiveProp],
   mounted() {
     var elements = 27
-    var data1 = Array(27).fill(0)
+    // this.data1 = Array(27).fill(0)
     var data2 = []
     var data3 = []
-
-    let timebase = 1511654400000
-    console.log(this.userAnswers)
-    for ( var i = 0; i < this.userAnswers.length; i++ ){
-      data1[(Date.parse(this.userAnswers[i].date)-timebase)/86400000]++
-    }
-    console.log(data1)
-    this.renderChart({
-      labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S'],
-      datasets: [{
-          label: 'My Answer',
-          backgroundColor: convertHex(brandInfo, 10),
-          borderColor: brandInfo,
-          pointHoverBackgroundColor: '#fff',
-          borderWidth: 2,
-          data: data1
-        },
-        {
-          label: 'Other Users',
-          backgroundColor: 'transparent',
-          borderColor: brandSuccess,
-          pointHoverBackgroundColor: '#fff',
-          borderWidth: 2,
-          data: data2
-        },
-        {
-          label: 'Baseline',
-          backgroundColor: 'transparent',
-          borderColor: brandDanger,
-          pointHoverBackgroundColor: '#fff',
-          borderWidth: 1,
-          borderDash: [8, 5],
-          data: data3
-        }
-      ]
-    }, {
+    // console.log('data1', data1)
+    this.renderChart(this.chartData, {
       maintainAspectRatio: false,
       legend: {
         display: false
