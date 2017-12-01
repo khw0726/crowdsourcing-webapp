@@ -91,7 +91,7 @@ export default {
       var date = new Date().toISOString().slice(0,10); 
 
       const answerObj = {
-        isYes: this.Toggle1,
+        isYes: this.yActive,
         answer: this.answer,
         name: this.$store.state.answererInfo.name,
         questionID: this.imgID,

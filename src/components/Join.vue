@@ -19,7 +19,7 @@
     </b-form-checkbox-group>
 
     <b-button v-if="isPushAvailable && !form.pushSubscribed" @click="registerNotification">
-      관심 카테고리의 질문에 대한 알림을 받으시려면 이 버튼을 눌러주세요.
+      관심 질문에 대한 알림을 받으시려면 여기를 눌러주세요.
     </b-button>
     <!-- <span v-if="!isPushAvailable">이 기기에서는 푸시 알림이 지원되지 않습니다.</span> -->
     <!-- <b-form-checkbox id="checkbox1" @click="registerNotification" v-model="form.selected" value="accepted" unchecked-value="not_accepted">

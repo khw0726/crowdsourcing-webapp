@@ -50,8 +50,9 @@ export default {
     },
     proportion: function () {
       const totalAnswersCount = this.answers.length
+      console.log(this.answers.length)
       const totalYesCount = this.answers.reduce(function(prevValue, curElement) {
-        return prevValue + curElement.isYes ? 1 : 0
+        return prevValue + (curElement.isYes ? 1 : 0)
       }, 0)
       return Math.round(totalYesCount/totalAnswersCount * 100 || 0) + '%(' + totalAnswersCount + '명 중 ' + totalYesCount + ' 명)'
     },

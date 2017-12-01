@@ -205,7 +205,7 @@
           <div class="card-columns cols-2">
             <b-card header="카테고리별 누적 답변">
               <div class="chart-wrapper">
-                <pie-example style="height:300px;margin-top:40px;" :numbers="[myLoveCount, myBusinessCount, myFriendCount, myFamilyCount]"/>
+                <pie-example style="height:300px;margin-top:40px;" :numbers="[myLoveCount, myBusinessCount, myFriendCount, myFamilyCount, myEtcCount]"/>
                 <!-- <line-example style="height:300px;margin-top:40px;" /> -->
               </div>
             </b-card>
@@ -268,7 +268,7 @@ export default {
       console.log(this.userInfo)
       console.log('name', this.name)
       let answers = []
-      if(this.userInfo){
+      if(this.userInfo.questions){
         return this.answers.filter((a) => {
           return this.userInfo.questions.includes(a.questionID) && a.name === this.userInfo.name
         })
