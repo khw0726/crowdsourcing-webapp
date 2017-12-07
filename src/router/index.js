@@ -14,6 +14,7 @@ import PostFinished from '@/components/PostQuestion/PostFinished'
 import AnswerView from '@/components/AnswerView'
 import AnswerComplete from '@/components/PostAnswer/AnswerComplete'
 import Stats from '@/components/Stats'
+import NewAnswerView from '@/components/NewAnswerView'
 
 Vue.use(Router)
 
@@ -82,6 +83,12 @@ export default new Router({
       path: '/:imgID/answerView',
       name: 'answerView',
       component: AnswerView,
+      props: true
+    },
+    {
+      path: '/:imgID/newAnswerView',
+      name: 'newAnswerView',
+      component: NewAnswerView,
       props: true
     },
     {

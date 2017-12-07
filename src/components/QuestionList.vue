@@ -3,6 +3,7 @@
     <h3>답변을 기다리는 질문</h3>
     <h6>질문을 누르시면 답변을 달아주실 수 있습니다.</h6>
     <question v-for="q in unansweredQuestions" :key="q['.key']" :question="q"></question>
+    <a href="http://pf.kakao.com/_gqVmxl" target="_blank"><img src="static/kakaotalk.png"/></a>
   </div>
 </template>수
 
@@ -84,5 +85,8 @@ export default{
 <style scoped>
 h3 {
   margin-top: 1em
+}
+img {
+  max-width: 100%;
 }
 </style>

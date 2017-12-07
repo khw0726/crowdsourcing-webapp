@@ -140,7 +140,7 @@
                     <ul class="horizontal-bars">
                       <li>
                         <div class="title">
-                          연애
+                          연애: {{Math.round(loveCorrect)}}%
                         </div>
                         <div class="bars">
                           <b-progress class="progress-xs" :value="loveCorrect" variant="info"></b-progress>
@@ -149,7 +149,7 @@
                       </li>
                       <li>
                         <div class="title">
-                          직장
+                          직장: {{Math.round(businessCorrect)}}%
                         </div>
                         <div class="bars">
                           <b-progress class="progress-xs" :value="businessCorrect" variant="info"></b-progress>
@@ -158,7 +158,7 @@
                       </li>
                       <li>
                         <div class="title">
-                          친구
+                          친구: {{Math.round(friendCorrect)}}%
                         </div>
                         <div class="bars">
                           <b-progress class="progress-xs" :value="friendCorrect" variant="info"></b-progress>
@@ -167,7 +167,7 @@
                       </li>
                       <li>
                         <div class="title">
-                          가족
+                          가족: {{Math.round(familyCorrect)}}%
                         </div>
                         <div class="bars">
                           <b-progress class="progress-xs" :value="familyCorrect" variant="info"></b-progress>
@@ -176,7 +176,7 @@
                       </li>
                       <li>
                         <div class="title">
-                          그 외
+                          그 외: {{Math.round(etcCorrect)}}%
                         </div>
                         <div class="bars">
                           <b-progress class="progress-xs" :value="etcCorrect" variant="info"></b-progress>
@@ -185,7 +185,7 @@
                       </li>
                       <li>
                         <div class="title">
-                          평균
+                          평균: {{Math.round(totalCorrect)}}%
                         </div>
                         <div class="bars">
                           <b-progress class="progress-xs" :value="totalCorrect" variant="info"></b-progress>
@@ -221,6 +221,9 @@
           </div>
         </div>
       </v-tab>
+      <v-tab title="답한 질문">
+        <new-question v-for="question in answeredQuestions" :question="question" :key="question['.key']"></new-question>
+      </v-tab>
     </vue-tabs>
   <!-- {{this.userAnswers}}
   {{this.totalCorrect}} -->
@@ -234,6 +237,7 @@ import PieExample from "./charts/PieExample";
 import BarExample from "./charts/BarExample";
 import LineExample from "./charts/LineExample";
 import MainChartExample from "./dashboard/MainChartExample";
+import NewQuestion from '@/components/NewQuestion'
 import { Callout } from "./coreui";
 import fb from "@/fb.js";
 
@@ -243,7 +247,8 @@ export default {
     LineExample,
     PieExample,
     BarExample,
-    MainChartExample
+    MainChartExample,
+    NewQuestion
   },
   firebase: {
     questions: fb.db.ref("questions"),
@@ -261,6 +266,15 @@ export default {
       }
       else {
         return null
+      }
+    },
+    answeredQuestions: function () {
+      if(this.questions && this.userInfo && this.userInfo.questions){
+        return this.questions.filter((q) => {
+          return this.userInfo.questions.includes(q['.key'])
+        })
+      } else {
+        return []
       }
     },
     userAnswers: function() {
@@ -318,7 +332,7 @@ export default {
           
         }
         console.log(this.myTotalCount)
-        return accurate/this.myTotalCount*100
+        return Math.round(accurate/this.myTotalCount*100)
       }
       else {
         return 0
@@ -366,7 +380,7 @@ export default {
         return 0
       }
       if(this.userAnswers.length !== 0) {
-        for(let a in this.userAnswers.filter((a) => a.category === 'business')){
+        for(let a in this.userAnswers.filter((a) => a.category === 'family')){
           let question = this.questions.find(question => {
             // console.log('totalcorrect', this.userAnswers)
             // console.log('totalcorrect', this.userAnswers[a])
@@ -402,7 +416,7 @@ export default {
         return 0
       }
       if(this.userAnswers.length !== 0) {
-        for(let a in this.userAnswers.filter((a) => a.category === 'family')){
+        for(let a in this.userAnswers.filter((a) => a.category === 'business')){
           let question = this.questions.find(question => {
             // console.log('totalcorrect', this.userAnswers)
             // console.log('totalcorrect', this.userAnswers[a])
@@ -426,7 +440,7 @@ export default {
           
         }
         console.log(this.myTotalCount)
-        return accurate/this.myFamilyCount*100
+        return accurate/this.myBusinessCount*100
       }
       else {
         return 0
@@ -564,15 +578,15 @@ export default {
     },
     pieChartData: function () {
       return {
-        labels: ['연애', '직장', '친구', '가족', '그 외'],
+        labels: ['Love', 'Work', 'Friend', 'Family', 'Etc.'],
         datasets: [
           {
             backgroundColor: [
-              '#41B883',
-              '#E46651',
-              '#00D8FF',
-              '#DD1B16',
-              '#E46651'
+              '#573366',
+              '#CB231A',
+              '#277256',
+              '#1B6C98',
+              '#E1AA05'
             ],
             data: [this.myLoveCount, this.myBusinessCount, this.myFriendCount, this.myFamilyCount, this.myEtcCount]
           }
